@@ -1,0 +1,12 @@
+.link {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    text-decoration: none;
+
+}
+
+.name {
+    margin: 0;
+}
+
