@@ -25,15 +25,5 @@
 }
 
 .profil_position {
-  justify-self: end;
   padding-left: 288px;
-}
-
-
-.name_active {
-  color: #F2F2F3;
-}
-
-.name_defaul {
-  color: #8585AD;
 }

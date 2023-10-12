@@ -10,7 +10,7 @@ import {
 import NavLink from "../nav-link/nav-link.jsx";
 
 function AppHeader() {
-  const [typeIcon, setTypeIcon] = React.useState("/order");
+  const [currentLink, setCurrentLink] = useState("/");
 
   return (
     <header className={`${styles.header} pb-4 pt-4`}>
@@ -19,36 +19,37 @@ function AppHeader() {
           <li className="pr-2">
             <NavLink
               icon={
-                <BurgerIcon type={typeIcon === "/" ? "primary" : "secondary"} />
+                <BurgerIcon
+                  type={currentLink === "/" ? "primary" : "secondary"}
+                />
               }
-              btnName="Конструктор"
               navLink="/"
-              isActiveText = {typeIcon === "/" ? styles.name_active : styles.name_default}
+              linkName="Конструктор"
             />
           </li>
           <li className="pr-25">
             <NavLink
               icon={
-                <ListIcon type={typeIcon === "/order" ? "primary" : "secondary"} />
+                <ListIcon
+                  type={currentLink === "/order" ? "primary" : "secondary"}
+                />
               }
-              btnName="Лента заказов"
               navLink="/orders"
-              isActiveText = {typeIcon === "/orders" ? styles.name_active : styles.name_default}
+              linkName="Лента заказов"
             />
           </li>
-          <li className={styles.logo_container}>
+          <li className={`${styles.logo_container} pl-3`}>
             <Logo />
           </li>
           <li className={styles.profil_position}>
             <NavLink
               icon={
                 <ProfileIcon
-                  type={typeIcon === "/profile" ? "primary" : "secondary"}
+                  type={currentLink === "/profile" ? "primary" : "secondary"}
                 />
               }
-              btnName="Личный кабинет"
               navLink="/profile"
-              isActiveText = {typeIcon === "/profile" ? styles.name_active : styles.name_default}
+              linkName="Личный кабинет"
             />
           </li>
         </ul>
