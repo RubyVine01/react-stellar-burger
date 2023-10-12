@@ -1,0 +1,7 @@
+.text {margin: 0;}
+
+.item_box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 24px;
+}
