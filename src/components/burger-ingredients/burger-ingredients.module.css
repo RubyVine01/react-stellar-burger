@@ -9,9 +9,9 @@
 
 .ingredients {
   overflow: auto;
-  max-height: calc(100vh - 288px - 10px);
+  max-height: calc(100vh - 288px - 15px);
   /*288px - высота всех остальных элементов, кроме ingredients
-  10px- отступ снизу*/
+  15px- отступ снизу*/
   display: flex;
   flex-direction: column;
   row-gap: 40px;

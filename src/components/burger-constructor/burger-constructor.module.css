@@ -1,4 +1,4 @@
-.section {
+.burger_constructor {
   padding-top: 100px;
   padding-left: 16px;
   height: calc(100% - 100px - 10px);
@@ -6,12 +6,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  row-gap: 40px;
+  row-gap: 30px;
   align-content: start;
   align-items: center;
 }
 
-.elenent_list {
+.ingredient_list {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -29,8 +29,8 @@
   justify-content: flex-end;
 }
 
-.scroll {
-  max-height: calc(100vh - 504px);
+.filling {
+  max-height: calc(100vh - 475px);
   overflow: auto;
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@
   background-color: #8585ad;
 }
 
-.price {
+.order_price {
   padding-left: 180px;
   display: flex;
   justify-content: center;

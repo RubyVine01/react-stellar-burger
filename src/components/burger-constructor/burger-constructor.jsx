@@ -9,9 +9,9 @@ import {
 
 function BurgerConstructor() {
   return (
-    <section className={styles.section}>
-      <ul className={`${styles.elenent_list} mr-4`}>
-        <li className={styles.elenent}>
+    <section className={styles.burger_constructor }>
+      <ul className={`${styles.ingredient_list} mr-4`}>
+        <li className={`${styles.elenent} pr-4`}>
           <ConstructorElement
             type="top"
             isLocked={true}
@@ -20,8 +20,8 @@ function BurgerConstructor() {
             thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
           />
         </li>
-        <div className={styles.scroll}>
-          <li className={styles.elenent}>
+        <div className={`${styles.filling} ${styles.scroll} `} >
+          <li className={`${styles.elenent} pr-2`}>
             <DragIcon />
             <ConstructorElement
               text="Краторная булка N-200i"
@@ -87,7 +87,7 @@ function BurgerConstructor() {
           </li>
         </div>
 
-        <li className={`${styles.elenent} `}>
+        <li className={`${styles.elenent} pr-4`}>
           <ConstructorElement
             type="bottom"
             isLocked={true}
@@ -97,7 +97,7 @@ function BurgerConstructor() {
           />
         </li>
       </ul>
-      <div className={`${styles.price} pr-10`}>
+      <div className={`${styles.order_price} pr-10`}>
         <span className="text_type_digits-medium">1234</span>
         <img src={CurrencyIconLarge} alt="Валюта" />
       </div>
