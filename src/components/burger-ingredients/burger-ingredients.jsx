@@ -1,6 +1,8 @@
 import styles from "./burger-ingredients.module.css";
 import IngredientsTabs from "../ingredients-tabs/ingredients-tabs.jsx";
 import IngredientsSet from "../ingredients-set/ingredients-set.jsx";
+import PropTypes from "prop-types";
+import { ingredientPropType } from "../../utils/prop-types.js";
 
 function BurgerIngredients({ ingredients }) {
   const bunSet = ingredients.filter((item) => {
@@ -31,5 +33,8 @@ function BurgerIngredients({ ingredients }) {
 }
 
 // возможно с точки зрения синтемантики стоит вместо div использовать ul
+BurgerIngredients.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
+};
 
 export default BurgerIngredients;
