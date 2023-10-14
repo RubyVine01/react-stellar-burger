@@ -5,6 +5,8 @@ import BurgerConstructor from "../burger-constructor/burger-constructor.jsx";
 import { urlIngredientsData } from "../../utils/const.js";
 import { request } from "../../utils/api.js";
 import React, { useState, useEffect } from "react";
+import Modal from "../modal/modal.jsx"
+import ModalOverlay from "../modal-overlay/modal-overlay.jsx"
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -28,6 +30,8 @@ function App() {
         <BurgerIngredients ingredients={ingredients} />
         <BurgerConstructor />
       </main>
+      <ModalOverlay/>
+      <Modal/>
     </div>
   );
 }
