@@ -12,7 +12,7 @@ function IngredientsItem({ imgLink, itemPrice, itemName }) {
       {count > 0 && (
         <Counter
           count={count}
-          size={count < 99 ? "default" : "small"}
+          size={count < 100 ? "default" : "small"}
           extraClass="m-1"
         />
       )}
@@ -21,7 +21,7 @@ function IngredientsItem({ imgLink, itemPrice, itemName }) {
         <span className="text_type_digits-default">{itemPrice}</span>
         <CurrencyIcon type="primary" />
       </div>
-      <p className={`${styles.item_name} text_type_main-default`}>{itemName}</p>
+      <p className={`text text_type_main-default`}>{itemName}</p>
     </div>
   );
 }

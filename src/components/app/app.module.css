@@ -6,6 +6,10 @@
   color: #f2f2f3;
 }
 
+.text {
+  margin: 0;
+}
+
 .content {
   display: flex;
   height: calc(100vh - 88px);

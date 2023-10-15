@@ -19,9 +19,7 @@ function BurgerIngredients({ ingredients }) {
 
   return (
     <section className={styles.section}>
-      <h1 className={`${styles.title} text_type_main-large pt-10`}>
-        Соберите бургер
-      </h1>
+      <h1 className={`text text_type_main-large pt-10`}>Соберите бургер</h1>
       <IngredientsTabs />
       <div className={`${styles.ingredients} ${styles.scroll} mt-10`}>
         <IngredientsSet headline="Булки" ingredients={bunSet} />

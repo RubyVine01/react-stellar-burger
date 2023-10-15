@@ -1,5 +1,5 @@
-import styles from "./burger-constructor.module.css"; 
-import CurrencyIconLarge from "../../images/currency-icon-36px.svg"
+import styles from "./burger-constructor.module.css";
+import CurrencyIconLarge from "../../images/currency-icon-36px.svg";
 import {
   Button,
   ConstructorElement,
@@ -9,7 +9,7 @@ import {
 
 function BurgerConstructor() {
   return (
-    <section className={styles.burger_constructor }>
+    <section className={styles.burger_constructor}>
       <ul className={`${styles.ingredient_list} mr-4`}>
         <li className={`${styles.elenent} pr-4`}>
           <ConstructorElement
@@ -20,7 +20,7 @@ function BurgerConstructor() {
             thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
           />
         </li>
-        <div className={`${styles.filling} ${styles.scroll} `} >
+        <div className={`${styles.filling} ${styles.scroll} `}>
           <li className={`${styles.elenent} pr-2`}>
             <DragIcon />
             <ConstructorElement

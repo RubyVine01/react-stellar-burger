@@ -10,32 +10,40 @@ function IngredientDetails() {
 
   return (
     <div className={styles.ingredient_details}>
-      <img className='pb-4' src={`${imgLink}`} alt="" />
-      <p className={`${styles.name} pb-8 text_type_main-medium`}>{itemName}</p>
+      <img className="pb-4" src={`${imgLink}`} alt="" />
+      <p className={`text pb-8 text_type_main-medium`}>{itemName}</p>
       <ul className={styles.list}>
         <li className={styles.list_item}>
-          <p className={`${styles.nutrients} text_type_main-default`}>
+          <p className={`text text_type_main-default text_color_inactive `}>
             Калории,ккал
           </p>
-          <p className={`${styles.nutrients} text_type_digits-default`}>{calories}</p>
+          <p className={`text text_type_digits-default text_color_inactive `}>
+            {calories}
+          </p>
         </li>
         <li className={styles.list_item}>
-          <p className={`${styles.nutrients} text_type_main-default`}>
+          <p className={`text text_type_main-default text_color_inactive `}>
             Белки, г
           </p>
-          <p className={`${styles.nutrients} text_type_digits-default`}>{proteins}</p>
+          <p className={`text text_type_digits-default text_color_inactive `}>
+            {proteins}
+          </p>
         </li>
         <li className={styles.list_item}>
-          <p className={`${styles.nutrients} text_type_main-default`}>
+          <p className={`text text_type_main-default text_color_inactive `}>
             Жиры, г
           </p>
-          <p className={`${styles.nutrients} text_type_digits-default`}>{fat}</p>
+          <p className={`text text_type_digits-default text_color_inactive `}>
+            {fat}
+          </p>
         </li>
         <li className={styles.list_item}>
-          <p className={`${styles.nutrients} text_type_main-default`}>
+          <p className={`text text_type_main-default text_color_inactive `}>
             Углеводы, г
           </p>
-          <p className={`${styles.nutrients} text_type_digits-default`}>{carbohydrates}</p>
+          <p className={`text text_type_digits-default text_color_inactive `}>
+            {carbohydrates}
+          </p>
         </li>
       </ul>
     </div>

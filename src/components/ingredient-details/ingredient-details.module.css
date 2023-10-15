@@ -1,32 +1,22 @@
-.ingredient_details{
-display: flex;
-flex-direction: column;
-align-items: center;
-}
-
-.nutrients {
-    color: #8585AD;
-    margin: 0;
-}
-
-
-.name {
-    margin: 0;
+.ingredient_details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .list {
-    margin: 0;
-    padding-left: 0;
-    list-style: none;
-    display: flex;
-    column-gap: 20px;
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  column-gap: 20px;
 }
 
 .list_item {
-    width: 120px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    row-gap: 8px;
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 8px;
 }
