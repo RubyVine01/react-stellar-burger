@@ -68,24 +68,7 @@ function BurgerConstructor({ onClick }) {
               thumbnail="https://code.s3.yandex.net/react/code/core.png"
             />
           </li>
-          <li className={styles.elenent}>
-            <DragIcon />
-            <ConstructorElement
-              text="Краторная булка N-200i"
-              price={50}
-              thumbnail="https://code.s3.yandex.net/react/code/core.png"
-            />
-          </li>
-          <li className={styles.elenent}>
-            <DragIcon />
-            <ConstructorElement
-              text="Краторная булка N-200i"
-              price={50}
-              thumbnail="https://code.s3.yandex.net/react/code/core.png"
-            />
-          </li>
         </div>
-
         <li className={`${styles.elenent} pr-4`}>
           <ConstructorElement
             type="bottom"
@@ -100,7 +83,7 @@ function BurgerConstructor({ onClick }) {
         <span className="text_type_digits-medium">1234</span>
         <img src={CurrencyIconLarge} alt="Валюта" />
       </div>
-      <Button htmlType="button" type="primary" size="medium" onClick={onClick} >
+      <Button htmlType="button" type="primary" size="medium" onClick={onClick}>
         Оформить заказ
       </Button>
     </section>

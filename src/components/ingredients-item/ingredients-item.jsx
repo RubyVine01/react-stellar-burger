@@ -8,10 +8,7 @@ function IngredientsItem({ onClick, ingredient }) {
   const count = 1;
 
   return (
-    <div
-      className={styles.card}
-      onClick={(event) => onClick(event, ingredient)}
-    >
+    <li className={styles.card} onClick={() => onClick(ingredient)}>
       <img
         className={styles.image}
         src={ingredient.image_large}
@@ -30,7 +27,7 @@ function IngredientsItem({ onClick, ingredient }) {
         <CurrencyIcon type="primary" />
       </div>
       <p className={`text text_type_main-default`}>{ingredient.name}</p>
-    </div>
+    </li>
   );
 }
 

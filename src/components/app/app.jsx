@@ -8,12 +8,12 @@ import { request } from "../../utils/api.js";
 import Modal from "../modal/modal.jsx";
 import OrderDetails from "../order-details/order-details.jsx";
 import IngredientDetails from "../ingredient-details/ingredient-details.jsx";
+import { orderData } from "../../utils/data.js"; //тестовые данные
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
-  const [element, setElement] = useState();
-  const [openOrderModal, setOrderOpenModal] = useState();
-  const [openIngredientsModal, setOpenIngredientModal] = useState();
+  const [orderModal, setOrderModal] = useState(false);
+  const [ingredientModal, setIngredientModal] = useState(null);
 
   useEffect(() => {
     request(urlIngredientsData)
@@ -27,10 +27,18 @@ function App() {
       });
   }, []);
 
-  const handleElementModal = (event, element) => {
-    setOpenIngredientModal(!openIngredientsModal);
-    setElement(element);
-  };
+  function closeModal() {
+    setOrderModal(false);
+    setIngredientModal(null);
+  }
+
+  function openOrderModal() {
+    setOrderModal(true);
+  }
+
+  function openIngredientModal(ingredient) {
+    setIngredientModal(ingredient);
+  }
 
   return (
     <div className={styles.app}>
@@ -38,22 +46,18 @@ function App() {
       <main className={styles.content}>
         <BurgerIngredients
           ingredients={ingredients}
-          onClick={handleElementModal}
+          onClick={openIngredientModal}
         />
-        <BurgerConstructor />
+        <BurgerConstructor onClick={openOrderModal} />
       </main>
-      {!!openIngredientsModal && (
-        <Modal
-          onClose={() => setOpenIngredientModal(false)}
-          title="Детали ингредиента"
-        >
-          <IngredientDetails ingredient={element} />
+      {ingredientModal && (
+        <Modal onClose={closeModal} title="Детали ингредиента">
+          <IngredientDetails ingredient={ingredientModal} />
         </Modal>
       )}
-
-      {!!openOrderModal && (
-        <Modal onClose={() => setOrderOpenModal(false)}>
-          <OrderDetails />
+      {orderModal && (
+        <Modal onClose={closeModal}>
+          <OrderDetails order={orderData} />
         </Modal>
       )}
     </div>
