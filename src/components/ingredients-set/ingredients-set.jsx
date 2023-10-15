@@ -22,3 +22,4 @@ function IngredientsSet({ headline, ingredients, onClick }) {
 }
 
 export default IngredientsSet;
+ 

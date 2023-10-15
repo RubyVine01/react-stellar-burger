@@ -1,9 +1,8 @@
 import styles from "./ingredient-details.module.css";
 
-function IngredientDetails({ingredient}) {
-
+function IngredientDetails({ ingredient }) {
   if (!ingredient) {
-    return null
+    return null;
   }
 
   return (

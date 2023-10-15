@@ -4,6 +4,7 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay.jsx";
 
 function Modal({ children, title, onClose }) {
+  
   useEffect(() => {
     function onKeyDown(event) {
       if (event.key === "Escape") {
@@ -17,8 +18,8 @@ function Modal({ children, title, onClose }) {
   }, []);
 
   return (
-    <div>
-      <ModalOverlay />
+    <>
+      <ModalOverlay onClose={onClose} />
       <div className={`${styles.modal} pr-10 pl-10`}>
         <div className={`${styles.modal_head} `}>
           <h2 className={`text text_type_main-large `}>{title}</h2>
@@ -28,7 +29,7 @@ function Modal({ children, title, onClose }) {
         </div>
         {children}
       </div>
-    </div>
+    </>
   );
 }
 

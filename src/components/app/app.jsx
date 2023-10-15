@@ -11,11 +11,9 @@ import IngredientDetails from "../ingredient-details/ingredient-details.jsx";
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
-//
   const [element, setElement] = useState();
   const [openOrderModal, setOrderOpenModal] = useState();
   const [openIngredientsModal, setOpenIngredientModal] = useState();
-//
 
   useEffect(() => {
     request(urlIngredientsData)
@@ -29,14 +27,10 @@ function App() {
       });
   }, []);
 
-  
-//
   const handleElementModal = (event, element) => {
     setOpenIngredientModal(!openIngredientsModal);
     setElement(element);
   };
-//
-
 
   return (
     <div className={styles.app}>

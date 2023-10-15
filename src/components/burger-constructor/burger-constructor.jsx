@@ -4,10 +4,9 @@ import {
   Button,
   ConstructorElement,
   DragIcon,
-  CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function BurgerConstructor() {
+function BurgerConstructor({ onClick }) {
   return (
     <section className={styles.burger_constructor}>
       <ul className={`${styles.ingredient_list} mr-4`}>
@@ -101,7 +100,7 @@ function BurgerConstructor() {
         <span className="text_type_digits-medium">1234</span>
         <img src={CurrencyIconLarge} alt="Валюта" />
       </div>
-      <Button htmlType="button" type="primary" size="medium">
+      <Button htmlType="button" type="primary" size="medium" onClick={onClick} >
         Оформить заказ
       </Button>
     </section>

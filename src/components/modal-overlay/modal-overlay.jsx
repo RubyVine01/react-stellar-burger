@@ -1,7 +1,14 @@
 import styles from "./modal-overlay.module.css";
 
-function ModalOverlay() {
-  return (<div className={styles.overlay}></div>);
+function ModalOverlay({onClose}) {
+  
+  const closeModalOverlay = (event) => {
+    if (event.target.classList.contains(styles.overlay)) {
+      onClose();
+    }
+  };
+
+  return (<div className={styles.overlay} onClick={closeModalOverlay}></div>);
 }
 
 export default ModalOverlay;
