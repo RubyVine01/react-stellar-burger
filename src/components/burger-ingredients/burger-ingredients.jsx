@@ -4,7 +4,7 @@ import IngredientsSet from "../ingredients-set/ingredients-set.jsx";
 import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types.js";
 
-function BurgerIngredients({ ingredients }) {
+function BurgerIngredients({ ingredients, onClick }) {
   const bunSet = ingredients.filter((item) => {
     return item.type === "bun";
   });
@@ -22,9 +22,9 @@ function BurgerIngredients({ ingredients }) {
       <h1 className={`text text_type_main-large pt-10`}>Соберите бургер</h1>
       <IngredientsTabs />
       <div className={`${styles.ingredients} ${styles.scroll} mt-10`}>
-        <IngredientsSet headline="Булки" ingredients={bunSet} />
-        <IngredientsSet headline="Соусы" ingredients={sauceSet} />
-        <IngredientsSet headline="Начинки" ingredients={mainSet} />
+        <IngredientsSet headline="Булки" ingredients={bunSet} onClick={onClick} />
+        <IngredientsSet headline="Соусы" ingredients={sauceSet} onClick={onClick}/>
+        <IngredientsSet headline="Начинки" ingredients={mainSet} onClick={onClick}/>
       </div>
     </section>
   );

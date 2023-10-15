@@ -4,11 +4,12 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function IngredientsItem({ imgLink, itemPrice, itemName }) {
+function IngredientsItem({onClick, ingredient}) {
   const count = 1;
+
   return (
-    <div className={styles.card}>
-      <img className={styles.image} src={imgLink} />
+    <div className={styles.card}  onClick={(event) => onClick(event, ingredient)} >
+      <img className={styles.image} src={ingredient.image_large} />
       {count > 0 && (
         <Counter
           count={count}
@@ -18,10 +19,10 @@ function IngredientsItem({ imgLink, itemPrice, itemName }) {
       )}
 
       <div className={styles.price}>
-        <span className="text_type_digits-default">{itemPrice}</span>
+        <span className="text_type_digits-default">{ingredient.price}</span>
         <CurrencyIcon type="primary" />
       </div>
-      <p className={`text text_type_main-default`}>{itemName}</p>
+      <p className={`text text_type_main-default`}>{ingredient.name}</p>
     </div>
   );
 }
