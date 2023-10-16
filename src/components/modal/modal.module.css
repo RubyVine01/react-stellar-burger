@@ -1,0 +1,29 @@
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  width: 640px;
+  border-radius: 40px;
+  background-color: #1c1c21;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, -50%);
+}
+
+.modal_head {
+  width: 640px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+.btn_close {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}

@@ -1,0 +1,18 @@
+.link {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  text-decoration: none;
+}
+
+.name {
+  margin: 0;
+}
+
+.name_active {
+  color: #f2f2f3;
+}
+
+.name_default {
+  color: #8585ad;
+}
