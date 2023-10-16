@@ -8,7 +8,7 @@ import { request } from "../../utils/api.js";
 import Modal from "../modal/modal.jsx";
 import OrderDetails from "../order-details/order-details.jsx";
 import IngredientDetails from "../ingredient-details/ingredient-details.jsx";
-import { orderData } from "../../utils/data.js"; //тестовые данные
+import { orderData, burgerFilling } from "../../utils/data.js"; //тестовые данные
 
 function App() {
   const [ingredients, setIngredients] = useState([]);
@@ -22,9 +22,7 @@ function App() {
           setIngredients(data);
         }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch(console.error);
   }, []);
 
   function closeModal() {
@@ -48,7 +46,10 @@ function App() {
           ingredients={ingredients}
           onClick={openIngredientModal}
         />
-        <BurgerConstructor onClick={openOrderModal} />
+        <BurgerConstructor
+          onClick={openOrderModal}
+          burgerFilling={burgerFilling}
+        />
       </main>
       {ingredientModal && (
         <Modal onClose={closeModal} title="Детали ингредиента">

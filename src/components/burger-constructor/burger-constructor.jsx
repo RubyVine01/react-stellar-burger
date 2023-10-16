@@ -6,8 +6,9 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
+import { ingredientType } from "../../utils/prop-types.js";
 
-function BurgerConstructor({ onClick }) {
+function BurgerConstructor({ onClick, burgerFilling }) {
   return (
     <section className={styles.burger_constructor}>
       <ul className={`${styles.ingredient_list} mr-4`}>
@@ -21,54 +22,18 @@ function BurgerConstructor({ onClick }) {
           />
         </li>
         <div className={`${styles.filling} ${styles.scroll} `}>
-          <li className={`${styles.elenent} pr-2`}>
-            <DragIcon />
-            <ConstructorElement
-              text="Краторная булка N-200i"
-              price={50}
-              thumbnail="https://code.s3.yandex.net/react/code/core.png"
-            />
-          </li>
-          <li className={styles.elenent}>
-            <DragIcon />
-            <ConstructorElement
-              text="Краторная булка N-200i"
-              price={50}
-              thumbnail="https://code.s3.yandex.net/react/code/core.png"
-            />
-          </li>
-          <li className={styles.elenent}>
-            <DragIcon />
-            <ConstructorElement
-              text="Краторная булка N-200i"
-              price={50}
-              thumbnail="https://code.s3.yandex.net/react/code/core.png"
-            />
-          </li>
-          <li className={styles.elenent}>
-            <DragIcon />
-            <ConstructorElement
-              text="Краторная булка N-200i"
-              price={50}
-              thumbnail="https://code.s3.yandex.net/react/code/core.png"
-            />
-          </li>
-          <li className={styles.elenent}>
-            <DragIcon />
-            <ConstructorElement
-              text="Краторная булка N-200i"
-              price={50}
-              thumbnail="https://code.s3.yandex.net/react/code/core.png"
-            />
-          </li>
-          <li className={styles.elenent}>
-            <DragIcon />
-            <ConstructorElement
-              text="Краторная булка N-200i"
-              price={50}
-              thumbnail="https://code.s3.yandex.net/react/code/core.png"
-            />
-          </li>
+          {burgerFilling.map((ingredient) => {
+            return (
+              <li className={`${styles.elenent} pr-2`} key={ingredient._id}>
+                <DragIcon />
+                <ConstructorElement
+                  text={ingredient.name}
+                  price={ingredient.price}
+                  thumbnail={ingredient.image}
+                />
+              </li>
+            );
+          })}
         </div>
         <li className={`${styles.elenent} pr-4`}>
           <ConstructorElement
@@ -93,6 +58,7 @@ function BurgerConstructor({ onClick }) {
 
 BurgerConstructor.propTypes = {
   onClick: PropTypes.func.isRequired,
+  burgerFilling: PropTypes.arrayOf(ingredientType).isRequired,
 };
 
 export default BurgerConstructor;

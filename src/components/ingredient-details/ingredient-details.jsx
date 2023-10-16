@@ -8,7 +8,11 @@ function IngredientDetails({ ingredient }) {
 
   return (
     <div className={styles.ingredient_details}>
-      <img className="pb-4" src={`${ingredient.image_large}`} alt="" />
+      <img
+        className="pb-4"
+        src={`${ingredient.image_large}`}
+        alt={ingredient.name}
+      />
       <p className={`text pb-8 text_type_main-medium`}>{ingredient.name}</p>
       <ul className={styles.list}>
         <li className={styles.list_item}>
