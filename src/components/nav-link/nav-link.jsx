@@ -1,4 +1,5 @@
 import styles from "./nav-link.module.css";
+import PropTypes from "prop-types";
 
 function NavLink({ icon, navLink, linkName }) {
   const typeIcon = icon.props.type;
@@ -15,5 +16,11 @@ function NavLink({ icon, navLink, linkName }) {
     </a>
   );
 }
+
+NavLink.propTypes = {
+  icon: PropTypes.element.isRequired,
+  navLink: PropTypes.string.isRequired,
+  linkName: PropTypes.string.isRequired,
+};
 
 export default NavLink;

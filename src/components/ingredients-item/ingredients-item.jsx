@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+import { ingredientType } from "../../utils/prop-types.js";
 import styles from "./ingredients-item.module.css";
 import {
   Counter,
@@ -30,5 +32,10 @@ function IngredientsItem({ onClick, ingredient }) {
     </li>
   );
 }
+
+IngredientsItem.propTypes = {
+  ingredient: ingredientType.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
 
 export default IngredientsItem;

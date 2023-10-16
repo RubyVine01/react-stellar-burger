@@ -5,6 +5,7 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from "prop-types";
 
 function BurgerConstructor({ onClick }) {
   return (
@@ -89,5 +90,9 @@ function BurgerConstructor({ onClick }) {
     </section>
   );
 }
+
+BurgerConstructor.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 export default BurgerConstructor;

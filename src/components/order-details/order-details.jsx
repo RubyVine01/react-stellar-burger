@@ -1,5 +1,7 @@
 import styles from "./order-details.module.css";
 import OrderAccpetedDone from "../../images/order-accpeted-done.svg";
+import PropTypes from "prop-types";
+import { orderType } from "../../utils/prop-types.js";
 
 function OrderDetails({ order }) {
   return (
@@ -15,4 +17,7 @@ function OrderDetails({ order }) {
   );
 }
 
+OrderDetails.propTypes = {
+  order: PropTypes.arrayOf(orderType).isRequired,
+};
 export default OrderDetails;

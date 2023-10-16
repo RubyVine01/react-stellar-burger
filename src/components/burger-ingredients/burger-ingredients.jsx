@@ -2,7 +2,7 @@ import styles from "./burger-ingredients.module.css";
 import IngredientsTabs from "../ingredients-tabs/ingredients-tabs.jsx";
 import IngredientsSet from "../ingredients-set/ingredients-set.jsx";
 import PropTypes from "prop-types";
-import { ingredientPropType } from "../../utils/prop-types.js";
+import { ingredientType } from "../../utils/prop-types.js";
 
 function BurgerIngredients({ ingredients, onClick }) {
   return (
@@ -34,7 +34,7 @@ function BurgerIngredients({ ingredients, onClick }) {
 }
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientPropType).isRequired,
+  ingredients: PropTypes.arrayOf(ingredientType).isRequired,
 };
 
 export default BurgerIngredients;

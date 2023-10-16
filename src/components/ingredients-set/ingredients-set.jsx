@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+import { ingredientType } from "../../utils/prop-types.js";
 import styles from "./ingredients-set.module.css";
 import IngredientsItem from "../ingredients-item/ingredients-item.jsx";
 
@@ -23,5 +25,12 @@ function IngredientsSet({ headline, ingredients, onClick, type }) {
     </li>
   );
 }
+
+IngredientsSet.propTypes = {
+  ingredients: PropTypes.arrayOf(ingredientType).isRequired,
+  onClick: PropTypes.func.isRequired,
+  headline: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+};
 
 export default IngredientsSet;
