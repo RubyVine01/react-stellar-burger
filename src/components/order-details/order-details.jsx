@@ -20,12 +20,12 @@ function OrderDetails({ order }) {
   );
 }
 
-OrderDetails.propTypes = {
-  order: PropTypes.shape({
-    number: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
-  }).isRequired,
-};
+// OrderDetails.propTypes = {
+//   order: PropTypes.shape({
+//     number: PropTypes.string.isRequired,
+//     message: PropTypes.string.isRequired,
+//     status: PropTypes.string.isRequired,
+//   }).isRequired,
+// };
 
 export default OrderDetails;

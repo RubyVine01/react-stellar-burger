@@ -10,7 +10,7 @@ function IngredientsItem({ onClick, ingredient }) {
   const count = 1;
 
   return (
-    <li className={styles.card} onClick={() => onClick(ingredient)}>
+    <li className={styles.card} >
       <img
         className={styles.image}
         src={ingredient.image_large}
@@ -33,9 +33,12 @@ function IngredientsItem({ onClick, ingredient }) {
   );
 }
 
-IngredientsItem.propTypes = {
-  ingredient: ingredientType.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
+// IngredientsItem.propTypes = {
+//   ingredient: ingredientType.isRequired,
+//   onClick: PropTypes.func.isRequired,
+// };
 
 export default IngredientsItem;
+
+
+//onClick={() => onClick(ingredient)}

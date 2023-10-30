@@ -1,6 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import  ingredientsReducer from "./reducers/ingredients-data-slice.js";
+import ingredientsReducer from "./reducers/ingredients-data-slice.js";
+import ingredientDetailsReducer from "./reducers/ingredient-details-slice.js";
+import modalReducer from "./reducers/modal-slice.js";
 
 export const store = configureStore({
-  reducer: { ingredients: ingredientsReducer },
+  reducer: {
+    ingredients: ingredientsReducer,
+    ingredientDetails: ingredientDetailsReducer,
+    modal: modalReducer,
+  },
 });

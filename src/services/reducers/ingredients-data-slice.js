@@ -30,4 +30,3 @@ const ingredientsDataSlice = createSlice({
 
 export default ingredientsDataSlice.reducer;
 
-// export const {  } =  ingredientsDataSlice.actions;

@@ -6,8 +6,7 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 
-function BurgerIngredients({ onClick }) {
-  // console.log(getIngredients())
+function BurgerIngredients() {
   const ingredients = useSelector(getIngredients);
   
 
@@ -19,19 +18,19 @@ function BurgerIngredients({ onClick }) {
         <IngredientsSet
           headline="Булки"
           ingredients={ingredients}
-          onClick={onClick}
+          // onClick={onClick}
           type="bun"
         />
         <IngredientsSet
           headline="Соусы"
           ingredients={ingredients}
-          onClick={onClick}
+          // onClick={onClick}
           type="sauce"
         />
         <IngredientsSet
           headline="Начинки"
           ingredients={ingredients}
-          onClick={onClick}
+          // onClick={onClick}
           type="main"
         />
       </ul>
