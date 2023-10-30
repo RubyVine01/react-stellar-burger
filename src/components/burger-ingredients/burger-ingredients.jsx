@@ -2,9 +2,15 @@ import styles from "./burger-ingredients.module.css";
 import IngredientsTabs from "../ingredients-tabs/ingredients-tabs.jsx";
 import IngredientsSet from "../ingredients-set/ingredients-set.jsx";
 import PropTypes from "prop-types";
-import { ingredientType } from "../../utils/prop-types.js";
+//import { ingredientType } from "../../utils/prop-types.js";
+import { useSelector } from "react-redux";
+import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 
-function BurgerIngredients({ ingredients, onClick }) {
+function BurgerIngredients({ onClick }) {
+  // console.log(getIngredients())
+  const ingredients = useSelector(getIngredients);
+  
+
   return (
     <section className={styles.section}>
       <h1 className={`text text_type_main-large pt-10`}>Соберите бургер</h1>
@@ -33,9 +39,8 @@ function BurgerIngredients({ ingredients, onClick }) {
   );
 }
 
-BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredientType).isRequired,
-  onClick: PropTypes.func.isRequired,
-};
+// BurgerIngredients.propTypes = {
+//   onClick: PropTypes.func.isRequired,
+// };
 
 export default BurgerIngredients;

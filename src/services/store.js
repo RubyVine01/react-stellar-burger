@@ -1,8 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-//import reducer from "./payload.js";
+import  ingredientsReducer from "./reducers/ingredients-data-slice.js";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: { ingredients: ingredientsReducer },
 });
-
-//reducer: { key: reducer },
