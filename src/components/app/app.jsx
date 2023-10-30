@@ -1,4 +1,4 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./app.module.css";
 import AppHeader from "../app-header/app-header.jsx";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients.jsx";
@@ -6,19 +6,23 @@ import BurgerConstructor from "../burger-constructor/burger-constructor.jsx";
 // import Modal from "../modal/modal.jsx";
 // import OrderDetails from "../order-details/order-details.jsx";
 // import IngredientDetails from "../ingredient-details/ingredient-details.jsx";
-import {  burgerFilling } from "../../utils/data.js"; //тестовые данные
+import { burgerFilling } from "../../utils/data.js"; //тестовые данные
 import { fetchIngredients } from "../../services/middleware/ingredients-data-thunk";
-import { useDispatch } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getOrder } from "../../services/selectors/order-details-selector";
+import { fetchOrder } from "../../services/middleware/order-details-thunk";
 
 function App() {
+  // const order = useSelector(getOrder);
+  // console.log(order);
 
   // const [orderModal, setOrderModal] = useState(false);
   // const [ingredientModal, setIngredientModal] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchIngredients())
+    dispatch(fetchIngredients());
+    // dispatch(fetchOrder());
   }, []);
 
   // function closeModal() {
@@ -39,11 +43,9 @@ function App() {
       <AppHeader />
       <main className={styles.content}>
         <BurgerIngredients
-          // onClick={openIngredientModal}
+        // onClick={openIngredientModal}
         />
-        <BurgerConstructor
-          burgerFilling={burgerFilling}
-        />
+        <BurgerConstructor burgerFilling={burgerFilling} />
       </main>
       {/* {ingredientModal && (
         <Modal onClose={closeModal} title="Детали ингредиента">
