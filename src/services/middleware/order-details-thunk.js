@@ -12,7 +12,6 @@ export const fetchOrder = createAsyncThunk("order/get", async (_, thunkAPI) => {
   try {
     const res = await fetch(url, options);
     const data = await res.json();
-    // console.log(data);
     return data;
   } catch (err) {
     console.log({ err });

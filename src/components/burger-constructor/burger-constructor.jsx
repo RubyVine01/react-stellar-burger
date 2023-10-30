@@ -16,12 +16,19 @@ import { closeModal, openModal } from "../../services/reducers/modal-slice";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { orderData } from "../../utils/data";
+import {
+  getCartBun,
+  getCartList,
+} from "../../services/selectors/burger-constructor-selector";
 
-function BurgerConstructor({ burgerFilling }) {
+function BurgerConstructor() {
   const isOpen = useSelector(getStatusModal);
   const modalType = useSelector(getTypeModal);
 
   const dispatch = useDispatch();
+
+  const listIngr = useSelector(getCartList);
+  const bun = useSelector(getCartBun);
 
   const onOrder = () => {
     dispatch(openModal("order"));
@@ -39,15 +46,16 @@ function BurgerConstructor({ burgerFilling }) {
             <ConstructorElement
               type="top"
               isLocked={true}
-              text="Краторная булка N-200i (верх)"
-              price={1234}
-              thumbnail="https://code.s3.yandex.net/react/code/bun-02.png"
+              text={bun.name}
+              price={bun.price}
+              thumbnail={bun.image}
             />
           </li>
           <div className={`${styles.filling} ${styles.scroll} `}>
-            {burgerFilling.map((ingredient) => {
+            {listIngr.map((ingredient, index) => {
+              console.log(index);
               return (
-                <li className={`${styles.elenent} pr-2`} key={ingredient._id}>
+                <li className={`${styles.element} pr-2`} key={index}>
                   <DragIcon />
                   <ConstructorElement
                     text={ingredient.name}
@@ -84,10 +92,9 @@ function BurgerConstructor({ burgerFilling }) {
 
       {isOpen && modalType === "order" && (
         <Modal title="" handleClose={onClose}>
-           <OrderDetails order={orderData} />
+          <OrderDetails order={orderData} />
         </Modal>
       )}
-
 
       {/* {orderModal && (
         <Modal onClose={closeModal}>
