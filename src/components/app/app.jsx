@@ -11,76 +11,12 @@ import {
   getCartList,
   getCartListBun,
 } from "../../services/selectors/burger-constructor-selector";
-import {
-  addToCart,
-  clearCart,
-  deleteFromCart,
-} from "../../services/reducers/burger-constructor-slice";
 
-const ingr = {
-  _id: "60666c42cc7b410027a1a9bb",
-  name: "Хрустящие минеральные кольца",
-  type: "main",
-  proteins: 808,
-  fat: 689,
-  carbohydrates: 609,
-  calories: 986,
-  price: 300,
-  image: "https://code.s3.yandex.net/react/code/mineral_rings.png",
-  image_mobile:
-    "https://code.s3.yandex.net/react/code/mineral_rings-mobile.png",
-  image_large: "https://code.s3.yandex.net/react/code/mineral_rings-large.png",
-  __v: 0,
-};
 
-const ingr2 = {
-  _id: "2",
-  name: "Хрустящие минеральные кольца",
-  type: "main",
-  proteins: 808,
-  fat: 689,
-  carbohydrates: 609,
-  calories: 986,
-  price: 300,
-  image: "https://code.s3.yandex.net/react/code/mineral_rings.png",
-  image_mobile:
-    "https://code.s3.yandex.net/react/code/mineral_rings-mobile.png",
-  image_large: "https://code.s3.yandex.net/react/code/mineral_rings-large.png",
-  __v: 0,
-};
 
-const ingr3 = {
-  _id: "3",
-  name: "Хрустящие минеральные кольца",
-  type: "bun",
-  proteins: 808,
-  fat: 689,
-  carbohydrates: 609,
-  calories: 986,
-  price: 300,
-  image: "https://code.s3.yandex.net/react/code/mineral_rings.png",
-  image_mobile:
-    "https://code.s3.yandex.net/react/code/mineral_rings-mobile.png",
-  image_large: "https://code.s3.yandex.net/react/code/mineral_rings-large.png",
-  __v: 0,
-};
 
 function App() {
   const dispatch = useDispatch();
-
-  dispatch(addToCart(ingr));
-  dispatch(addToCart(ingr));
-  dispatch(addToCart(ingr2));
-  dispatch(addToCart(ingr3));
-  // dispatch(deleteFromCart(ingr3));
-  
-  const cart1 = useSelector(getCartList);
-  // const cart1= useSelector(getCartListBun);
-  // console.log(cart1);
-  console.log(cart1);
-
-  // dispatch(deleteFromCart(cart[1]));
-
   useEffect(() => {
     dispatch(fetchIngredients());
   }, []);
