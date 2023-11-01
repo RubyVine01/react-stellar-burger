@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import { ingredientType } from "../../utils/prop-types.js";
+// import PropTypes from "prop-types";
+// import { ingredientType } from "../../utils/prop-types.js";
 import styles from "./ingredients-set.module.css";
 import IngredientsItem from "../ingredients-item/ingredients-item.jsx";
 import { useSelector } from "react-redux";

@@ -23,9 +23,9 @@ const constructorSlice = createSlice({
     },
 
     sortCart: (state, action) => {
-      const { indexFrom, indexTo, ingridient } = action.payload;
+      const { indexFrom, indexTo, ingredient } = action.payload;
       state.cartList.splice(indexFrom, 1);
-      state.cartList.splice(indexTo, 0, ingridient );
+      state.cartList.splice(indexTo, 0, ingredient);
     },
 
     clearCart: (state) => {

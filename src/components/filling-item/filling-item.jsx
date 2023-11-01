@@ -6,7 +6,10 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { deleteFromCart, sortCart } from "../../services/reducers/burger-constructor-slice";
+import {
+  deleteFromCart,
+  sortCart,
+} from "../../services/reducers/burger-constructor-slice";
 //import PropTypes from "prop-types";
 
 function FillingItem({ ingredient, index }) {
@@ -15,29 +18,29 @@ function FillingItem({ ingredient, index }) {
 
   const [{ isDragging }, dragRef] = useDrag({
     type: "sort",
-    item: { item:  ingredient},
+    item: { item: ingredient },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
 
-  const findIndex = (el) => {
-    return fillingList.indexOf(el);
+  const findIndex = (item) => {
+    return fillingList.indexOf(item);
   };
 
   const [, dropRef] = useDrop({
     accept: "sort",
     hover({ item }) {
-      if (!item ||item.uid === ingredient.uid) return;
-      dispatch(sortCart({
-        indexFrom: findIndex(item),
-        indexTo: index,
-        ingredient: item,
-      }));
+      if (!item || item.uid === ingredient.uid) return;
+      dispatch(
+        sortCart({
+          indexFrom: findIndex(item),
+          indexTo: index,
+          ingredient: item,
+        })
+      );
     },
   });
-
- 
 
   return (
     <li
@@ -62,5 +65,3 @@ function FillingItem({ ingredient, index }) {
 // };
 
 export default FillingItem;
-
-

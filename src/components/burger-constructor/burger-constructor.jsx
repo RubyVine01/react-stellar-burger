@@ -20,12 +20,10 @@ import {
   getCartList,
 } from "../../services/selectors/burger-constructor-selector";
 import { useDrop } from "react-dnd";
-import {
-  addToCart,
-} from "../../services/reducers/burger-constructor-slice";
+import { addToCart } from "../../services/reducers/burger-constructor-slice";
 import uuid from "react-uuid";
 import FillingItem from "../filling-item/filling-item";
-import { useMemo } from "react";
+// import { useMemo } from "react";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -35,12 +33,11 @@ function BurgerConstructor() {
 
   const bun = useSelector(getCartBun);
   const allCart = useSelector(getAllCart);
-  console.log(fillingList);
-  const totolPrice =  useMemo(() => {allCart.reduce((previousValue, item) => {
+
+  const totolPrice = allCart.reduce((previousValue, item) => {
     return previousValue + item.price;
   }, 0);
-}, [allCart])
-  
+
   const onOrder = () => {
     dispatch(openModal("order"));
   };

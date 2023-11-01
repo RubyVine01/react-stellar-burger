@@ -1,5 +1,5 @@
-import PropTypes from "prop-types";
-import { ingredientType } from "../../utils/prop-types.js";
+// import PropTypes from "prop-types";
+// import { ingredientType } from "../../utils/prop-types.js";
 import styles from "./ingredients-item.module.css";
 import {
   Counter,
@@ -10,10 +10,9 @@ import { useSelector } from "react-redux";
 import { getAllCart } from "../../services/selectors/burger-constructor-selector.js";
 
 function IngredientsItem({ ingredient }) {
-
   const allCart = useSelector(getAllCart);
-  console.log (allCart)
-  const count =  allCart.filter((item) =>item._id === ingredient._id).length
+
+  const count = allCart.filter((item) => item._id === ingredient._id).length;
 
   const [, dragRef] = useDrag({
     type: "ingredient",
