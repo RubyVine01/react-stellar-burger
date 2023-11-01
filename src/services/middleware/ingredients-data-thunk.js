@@ -6,15 +6,10 @@ export const fetchIngredients = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await fetch(urlIngredientsData);
-      const data= await res.json();
-      //console.log(data.data)
+      const data = await res.json();
       return data;
     } catch (err) {
       console.log({ err });
     }
   }
 );
-
-
-
-

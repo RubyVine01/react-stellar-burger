@@ -16,16 +16,18 @@ const constructorSlice = createSlice({
         state.cartList.push(action.payload);
       }
     },
-    // deleteFromCart: (state, action) => {
-    //     if (action.payload.type !== "bun") {
-    //         state.cartList.filter((element) => element.id !== action.element.id)
-    //       }
-    // },
+    deleteFromCart: (state, action) => {
+      state.cartList = state.cartList.filter(
+        (element) => element.uid !== action.payload.uid
+      );
+    },
 
     sortCart: (state, action) => {
-     
+      const { indexFrom, indexTo, ingridient } = action.payload;
+      state.cartList.splice(indexFrom, 1);
+      state.cartList.splice(indexTo, 0, ingridient );
     },
-    
+
     clearCart: (state) => {
       state.cartList = [];
       state.cartBun = null;

@@ -3,7 +3,6 @@ import CurrencyIconLarge from "../../images/currency-icon-36px.svg";
 import {
   Button,
   ConstructorElement,
-  DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 // import { ingredientType } from "../../utils/prop-types.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,23 +19,28 @@ import {
   getCartBun,
   getCartList,
 } from "../../services/selectors/burger-constructor-selector";
+import { useDrop } from "react-dnd";
+import {
+  addToCart,
+} from "../../services/reducers/burger-constructor-slice";
+import uuid from "react-uuid";
+import FillingItem from "../filling-item/filling-item";
+import { useMemo } from "react";
 
 function BurgerConstructor() {
+  const dispatch = useDispatch();
   const isOpen = useSelector(getStatusModal);
   const modalType = useSelector(getTypeModal);
-  const fillingList= useSelector(getCartList);
+  const fillingList = useSelector(getCartList);
+
   const bun = useSelector(getCartBun);
   const allCart = useSelector(getAllCart);
-  const totolPrice = allCart.reduce((previousValue, item) => {
+  console.log(fillingList);
+  const totolPrice =  useMemo(() => {allCart.reduce((previousValue, item) => {
     return previousValue + item.price;
   }, 0);
-  // console.log(allCart);
-
-  // console.log(allCart);
-  // console.log(totolPrice);
-
-  const dispatch = useDispatch();
-
+}, [allCart])
+  
   const onOrder = () => {
     dispatch(openModal("order"));
   };
@@ -44,10 +48,19 @@ function BurgerConstructor() {
   const onClose = () => {
     dispatch(closeModal);
   };
+
+  const [, dropRef] = useDrop({
+    accept: "ingredient",
+    drop(ingredient) {
+      const uid = uuid();
+      dispatch(addToCart({ ...ingredient, uid }));
+    },
+  });
+
   return (
     <>
       <section className={styles.burger_constructor}>
-        <ul className={`${styles.ingredient_list} mr-4`}>
+        <ul className={`${styles.ingredient_list} mr-4`} ref={dropRef}>
           {!(allCart.length > 0) ? (
             <div className={`${styles.start_place} mt-4 mr-16`}>
               <p className={`text_type_main-medium ml-2 mr-2`}>
@@ -79,22 +92,17 @@ function BurgerConstructor() {
                 {!(fillingList.length > 0) ? (
                   <li className={`${styles.element} pr-2`}>
                     <div className={`${styles.empty_element}`}>
-                      <p className={`text_type_main-default`}>
-                        Выбери начинку
-                      </p>
+                      <p className={`text_type_main-default`}>Выбери начинку</p>
                     </div>
                   </li>
                 ) : (
                   fillingList.map((ingredient, index) => {
                     return (
-                      <li className={`${styles.element} pr-2`} key={index}>
-                        <DragIcon />
-                        <ConstructorElement
-                          text={ingredient.name}
-                          price={ingredient.price}
-                          thumbnail={ingredient.image}
-                        />
-                      </li>
+                      <FillingItem
+                        key={ingredient.uid}
+                        ingredient={ingredient}
+                        index={index}
+                      />
                     );
                   })
                 )}
@@ -129,7 +137,7 @@ function BurgerConstructor() {
           type="primary"
           size="medium"
           onClick={onOrder}
-          disabled={!fillingList || !bun}
+          disabled={!fillingList.length || !bun}
         >
           Оформить заказ
         </Button>

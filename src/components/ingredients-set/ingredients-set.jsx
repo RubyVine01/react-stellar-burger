@@ -21,6 +21,7 @@ function IngredientsSet({ headline,  type }) {
               <IngredientsItem
                 key={ingredient._id}
                 ingredient={ingredient}
+                
               />
             );
           })}

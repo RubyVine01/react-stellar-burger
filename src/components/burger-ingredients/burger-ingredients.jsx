@@ -2,6 +2,7 @@ import styles from "./burger-ingredients.module.css";
 import IngredientsTabs from "../ingredients-tabs/ingredients-tabs.jsx";
 import IngredientsSet from "../ingredients-set/ingredients-set.jsx";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useDrop } from "react-dnd";
 
 function BurgerIngredients() {
  
@@ -25,7 +26,16 @@ function BurgerIngredients() {
     }
   }, []);
 
-  
+
+
+
+
+
+
+
+
+
+
 
   return (
     <section className={styles.section}>

@@ -5,12 +5,23 @@ import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useDrag } from "react-dnd";
+import { useSelector } from "react-redux";
+import { getAllCart } from "../../services/selectors/burger-constructor-selector.js";
 
-function IngredientsItem({ingredient}) {
-  const count = 1;
-// console.log(ingredient.image_larg);
+function IngredientsItem({ ingredient }) {
+
+  const allCart = useSelector(getAllCart);
+  console.log (allCart)
+  const count =  allCart.filter((item) =>item._id === ingredient._id).length
+
+  const [, dragRef] = useDrag({
+    type: "ingredient",
+    item: ingredient,
+  });
+
   return (
-    <li className={styles.card}>
+    <li className={styles.card} ref={dragRef}>
       <img
         className={styles.image}
         src={ingredient.image_large}

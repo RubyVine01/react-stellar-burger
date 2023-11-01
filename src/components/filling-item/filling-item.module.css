@@ -1,0 +1,11 @@
+.element {
+    display: flex;
+    width: 584px;
+    align-items: center;
+    column-gap: 9px;
+    justify-content: flex-end;
+  }
+  
+  .element_dragged {
+    opacity: 0.5;
+  }
