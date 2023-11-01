@@ -13,7 +13,7 @@ const orderDetailsSlice = createSlice({
   reducers: {},
   extraReducers: {
     [fetchOrder.fulfilled.type]: (state, action) => {
-      state.orderDetails = action.payload;
+      state.orderDetails = action.payload.order;
       state.isloading = false;
       state.error = "";
     },
@@ -29,3 +29,4 @@ const orderDetailsSlice = createSlice({
 });
 
 export default orderDetailsSlice.reducer;
+ 

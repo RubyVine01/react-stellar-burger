@@ -4,8 +4,15 @@ import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay.jsx";
 import { createPortal } from 'react-dom';
+import { useDispatch } from "react-redux";
+import { closeModal } from "../../services/reducers/modal-slice";
 
-function Modal({ children, title, onClose }) {
+function Modal({ children, title }) {
+  const dispatch = useDispatch();
+
+  const onClose = () => {
+    dispatch(closeModal())
+  }
   useEffect(() => {
     function onKeyDown(event) {
       if (event.key === "Escape") {
@@ -38,9 +45,8 @@ function Modal({ children, title, onClose }) {
 }
 
 Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
   title: PropTypes.string,
   children: PropTypes.element,
-};
+}; 
 
 export default Modal;

@@ -1,50 +1,47 @@
 import styles from "./burger-constructor.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
+import uuid from "react-uuid";
+
 import CurrencyIconLarge from "../../images/currency-icon-36px.svg";
 import {
   Button,
   ConstructorElement,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-// import { ingredientType } from "../../utils/prop-types.js";
-import { useDispatch, useSelector } from "react-redux";
+import Modal from "../modal/modal";
+import OrderDetails from "../order-details/order-details";
+import FillingItem from "../filling-item/filling-item";
+
 import {
   getStatusModal,
   getTypeModal,
 } from "../../services/selectors/modal-selector";
-import { closeModal, openModal } from "../../services/reducers/modal-slice";
-import Modal from "../modal/modal";
-import OrderDetails from "../order-details/order-details";
-import { orderData } from "../../utils/data";
 import {
   getAllCart,
   getCartBun,
   getCartList,
 } from "../../services/selectors/burger-constructor-selector";
-import { useDrop } from "react-dnd";
-import { addToCart } from "../../services/reducers/burger-constructor-slice";
-import uuid from "react-uuid";
-import FillingItem from "../filling-item/filling-item";
-// import { useMemo } from "react";
+import { getError, getIsloading, getOrder } from "../../services/selectors/order-details-selector";
+import {
+  addToCart,
+  clearCart,
+} from "../../services/reducers/burger-constructor-slice";
+
+import { openModal } from "../../services/reducers/modal-slice";
+import { fetchOrder } from "../../services/middleware/order-details-thunk";
+
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
   const isOpen = useSelector(getStatusModal);
   const modalType = useSelector(getTypeModal);
   const fillingList = useSelector(getCartList);
-
   const bun = useSelector(getCartBun);
   const allCart = useSelector(getAllCart);
 
   const totolPrice = allCart.reduce((previousValue, item) => {
     return previousValue + item.price;
   }, 0);
-
-  const onOrder = () => {
-    dispatch(openModal("order"));
-  };
-
-  const onClose = () => {
-    dispatch(closeModal);
-  };
 
   const [, dropRef] = useDrop({
     accept: "ingredient",
@@ -53,6 +50,32 @@ function BurgerConstructor() {
       dispatch(addToCart({ ...ingredient, uid }));
     },
   });
+
+  const ingrList = allCart.map((item) => item._id);
+  //console.log(ingrList)
+
+  const orderData = useSelector(getOrder);
+  //console.log(orderData)
+
+  const options = (array) => {
+    return {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ingredients: array }),
+    };
+  };
+
+  const optionsWithArray = options(ingrList);
+  const orderError = useSelector(getError);
+  const orderIsloading = useSelector(getIsloading)
+
+  const handleOpenOrderModal = () => {
+    dispatch(fetchOrder(optionsWithArray));
+    if (orderData !== null && !orderError ) {
+      dispatch(clearCart());
+      dispatch(openModal("order"));
+    }
+  };
 
   return (
     <>
@@ -133,7 +156,7 @@ function BurgerConstructor() {
           htmlType="button"
           type="primary"
           size="medium"
-          onClick={onOrder}
+          onClick={handleOpenOrderModal}
           disabled={!fillingList.length || !bun}
         >
           Оформить заказ
@@ -141,23 +164,12 @@ function BurgerConstructor() {
       </section>
 
       {isOpen && modalType === "order" && (
-        <Modal title="" handleClose={onClose}>
-          <OrderDetails order={orderData} />
+        <Modal title="">
+          <OrderDetails />
         </Modal>
       )}
-
-      {/* {orderModal && (
-        <Modal onClose={closeModal}>
-          <OrderDetails order={orderData} />
-        </Modal>
-      )} */}
     </>
   );
 }
-
-// BurgerConstructor.propTypes = {
-//   // onClick: PropTypes.func.isRequired,
-//   //burgerFilling: PropTypes.arrayOf(ingredientType).isRequired,
-// };
 
 export default BurgerConstructor;

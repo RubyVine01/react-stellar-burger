@@ -1,8 +1,14 @@
 import styles from "./order-details.module.css";
 import OrderAccpetedDone from "../../images/order-accpeted-done.svg";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { getOrder } from "../../services/selectors/order-details-selector";
 
-function OrderDetails({ order }) {
+function OrderDetails() {
+
+  const order = useSelector(getOrder);
+
+
   return (
     <div className={`${styles.order_details} pt-4 pb-15`}>
       <span className={`text text_type_digits-large`}>{order.number}</span>
@@ -12,7 +18,7 @@ function OrderDetails({ order }) {
         src={OrderAccpetedDone}
         alt="Значек успешно оформленного заказа"
       />
-      <p className={`text text_type_main-default pt-15`}>{order.status}</p>
+      <p className={`text text_type_main-default pt-15`}>Ваш заказ начали готовить</p>
       <p className={`text text_type_main-default text_color_inactive pt-2`}>
         {order.message}
       </p>
