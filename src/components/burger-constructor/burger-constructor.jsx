@@ -30,10 +30,10 @@ function BurgerConstructor() {
   const totolPrice = allCart.reduce((previousValue, item) => {
     return previousValue + item.price;
   }, 0);
-  console.log(allCart);
+  // console.log(allCart);
 
-  console.log(allCart);
-  console.log(totolPrice);
+  // console.log(allCart);
+  // console.log(totolPrice);
 
   const dispatch = useDispatch();
 
@@ -50,9 +50,9 @@ function BurgerConstructor() {
         <ul className={`${styles.ingredient_list} mr-4`}>
           {!(allCart.length > 0) ? (
             <div className={`${styles.start_place} mt-4 mr-16`}>
-              <p className={`text_type_main-medium`}>
+              <p className={`text_type_main-medium ml-2 mr-2`}>
                 {" "}
-                Просто кликните на ингредиент и перенесите его сюда{" "}
+                Просто кликни на ингредиент и перенеси его сюда{" "}
               </p>
             </div>
           ) : (
@@ -62,7 +62,7 @@ function BurgerConstructor() {
                   <div
                     className={`${styles.empty_element} ${styles.empty_element_top}`}
                   >
-                    <p className={`text_type_main-default`}>Выберите булочку</p>
+                    <p className={`text_type_main-default`}>Выбери булочку</p>
                   </div>
                 ) : (
                   <ConstructorElement
@@ -80,7 +80,7 @@ function BurgerConstructor() {
                   <li className={`${styles.element} pr-2`}>
                     <div className={`${styles.empty_element}`}>
                       <p className={`text_type_main-default`}>
-                        Выберите начинку
+                        Выбери начинку
                       </p>
                     </div>
                   </li>
@@ -104,7 +104,7 @@ function BurgerConstructor() {
                   <div
                     className={`${styles.empty_element} ${styles.empty_element_bottom}`}
                   >
-                    <p className={`text_type_main-default`}>Выберите булочку</p>
+                    <p className={`text_type_main-default`}>Выбери булочку</p>
                   </div>
                 ) : (
                   <ConstructorElement

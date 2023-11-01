@@ -6,11 +6,11 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function IngredientsItem({ onClick, ingredient }) {
+function IngredientsItem({ingredient}) {
   const count = 1;
-
+// console.log(ingredient.image_larg);
   return (
-    <li className={styles.card} >
+    <li className={styles.card}>
       <img
         className={styles.image}
         src={ingredient.image_large}
@@ -39,6 +39,5 @@ function IngredientsItem({ onClick, ingredient }) {
 // };
 
 export default IngredientsItem;
-
 
 //onClick={() => onClick(ingredient)}

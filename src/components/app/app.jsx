@@ -3,20 +3,12 @@ import styles from "./app.module.css";
 import AppHeader from "../app-header/app-header.jsx";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients.jsx";
 import BurgerConstructor from "../burger-constructor/burger-constructor.jsx";
-
-import { burgerFilling } from "../../utils/data.js"; //тестовые данные
 import { fetchIngredients } from "../../services/middleware/ingredients-data-thunk";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getCartList,
-  getCartListBun,
-} from "../../services/selectors/burger-constructor-selector";
-
-
-
+import { useDispatch } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchIngredients());
   }, []);

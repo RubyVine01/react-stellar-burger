@@ -2,8 +2,12 @@ import PropTypes from "prop-types";
 import { ingredientType } from "../../utils/prop-types.js";
 import styles from "./ingredients-set.module.css";
 import IngredientsItem from "../ingredients-item/ingredients-item.jsx";
+import { useSelector } from "react-redux";
+import { getIngredients } from "../../services/selectors/ingredients-data-selector.js";
 
-function IngredientsSet({ headline, ingredients,  type }) {
+function IngredientsSet({ headline,  type }) {
+
+  const ingredients = useSelector(getIngredients);
   return (
     <li>
       <h2 className={`text text_type_main-medium pb-6`}>{headline}</h2>
@@ -17,7 +21,6 @@ function IngredientsSet({ headline, ingredients,  type }) {
               <IngredientsItem
                 key={ingredient._id}
                 ingredient={ingredient}
-                // onClick={onClick}
               />
             );
           })}
