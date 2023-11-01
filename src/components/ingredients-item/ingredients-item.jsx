@@ -6,8 +6,12 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getAllCart } from "../../services/selectors/burger-constructor-selector.js";
+import { getStatusModal, getTypeModal } from "../../services/selectors/modal-selector";
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
+import { openModal } from "../../services/reducers/modal-slice";
 
 function IngredientsItem({ ingredient }) {
   const allCart = useSelector(getAllCart);
@@ -19,27 +23,45 @@ function IngredientsItem({ ingredient }) {
     item: ingredient,
   });
 
-  return (
-    <li className={styles.card} ref={dragRef}>
-      <img
-        className={styles.image}
-        src={ingredient.image_large}
-        alt={ingredient.name}
-      />
-      {count > 0 && (
-        <Counter
-          count={count}
-          size={count < 100 ? "default" : "small"}
-          extraClass="m-1"
-        />
-      )}
+  
 
-      <div className={styles.price}>
-        <span className="text_type_digits-default">{ingredient.price}</span>
-        <CurrencyIcon type="primary" />
-      </div>
-      <p className={`text text_type_main-default`}>{ingredient.name}</p>
-    </li>
+  const dispatch = useDispatch();
+
+  const onOpen = () => {
+    dispatch(openModal())
+  }
+
+  const isOpen = useSelector(getStatusModal);
+  const modalType = useSelector(getTypeModal);
+  
+  return (
+    <>
+      <li className={styles.card} ref={dragRef} onClick={onOpen}>
+        <img
+          className={styles.image}
+          src={ingredient.image_large}
+          alt={ingredient.name}
+        />
+        {count > 0 && (
+          <Counter
+            count={count}
+            size={count < 100 ? "default" : "small"}
+            extraClass="m-1"
+          />
+        )}
+
+        <div className={styles.price}>
+          <span className="text_type_digits-default">{ingredient.price}</span>
+          <CurrencyIcon type="primary" />
+        </div>
+        <p className={`text text_type_main-default`}>{ingredient.name}</p>
+      </li>
+      {isOpen && modalType === "ingredient" && (
+        <Modal title="Детали ингредиента">
+          <IngredientDetails ingredient={ingredient} />
+        </Modal>
+      )}
+    </>
   );
 }
 
