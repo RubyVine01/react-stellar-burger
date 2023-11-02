@@ -30,32 +30,3 @@ function App() {
 
 export default App;
 
-// import Modal from "../modal/modal.jsx";
-// import OrderDetails from "../order-details/order-details.jsx";
-// import IngredientDetails from "../ingredient-details/ingredient-details.jsx";
-// const [orderModal, setOrderModal] = useState(false);
-// const [ingredientModal, setIngredientModal] = useState(null);
-
-// function closeModal() {
-//   setOrderModal(false);
-//   setIngredientModal(null);
-// }
-
-// function openOrderModal() {
-//   setOrderModal(true);
-// }
-
-// function openIngredientModal(ingredient) {
-//   setIngredientModal(ingredient);
-// }
-
-// {/* {ingredientModal && (
-//       <Modal onClose={closeModal} title="Детали ингредиента">
-//         <IngredientDetails ingredient={ingredientModal} />
-//       </Modal>
-//     )}
-//     {orderModal && (
-//       <Modal onClose={closeModal}>
-//         <OrderDetails order={orderData} />
-//       </Modal>
-//     )} */}
