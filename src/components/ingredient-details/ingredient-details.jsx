@@ -1,11 +1,16 @@
+import { useSelector } from "react-redux";
 import { ingredientType } from "../../utils/prop-types.js";
 import styles from "./ingredient-details.module.css";
+import { getIngredientDetails } from "../../services/selectors/ingredient-details-selector.js";
 
-function IngredientDetails({ ingredient }) {
-  if (!ingredient) {
+function IngredientDetails() {
+
+  const ingredient = useSelector(getIngredientDetails)
+
+  if (ingredient === null) {
     return null;
   }
-
+  
   return (
     <div className={styles.ingredient_details}>
       <img

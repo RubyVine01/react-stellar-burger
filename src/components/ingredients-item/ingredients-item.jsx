@@ -1,42 +1,48 @@
-// import PropTypes from "prop-types";
-// import { ingredientType } from "../../utils/prop-types.js";
 import styles from "./ingredients-item.module.css";
+import { ingredientType } from "../../utils/prop-types";
+
+import { DragPreviewImage, useDrag } from "react-dnd";
+import { useDispatch, useSelector } from "react-redux";
+
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details";
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDrag } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllCart } from "../../services/selectors/burger-constructor-selector.js";
-import { getStatusModal, getTypeModal } from "../../services/selectors/modal-selector";
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
+
+
 import { openModal } from "../../services/reducers/modal-slice";
+import { setIngredientDetails } from "../../services/reducers/ingredient-details-slice";
+
+import {
+  getStatusModal,
+  getTypeModal,
+} from "../../services/selectors/modal-selector";
+import { getAllCart } from "../../services/selectors/burger-constructor-selector.js";
+
 
 function IngredientsItem({ ingredient }) {
+  const dispatch = useDispatch();
+  const isOpen = useSelector(getStatusModal);
+  const modalType = useSelector(getTypeModal);
   const allCart = useSelector(getAllCart);
-
   const count = allCart.filter((item) => item._id === ingredient._id).length;
 
-  const [, dragRef] = useDrag({
+  const [, dragRef, preview] = useDrag({
     type: "ingredient",
     item: ingredient,
   });
 
-  
-
-  const dispatch = useDispatch();
-
   const onOpen = () => {
-    dispatch(openModal())
-  }
+    dispatch(setIngredientDetails(ingredient));
+    dispatch(openModal("ingredient"));
+  };
 
-  const isOpen = useSelector(getStatusModal);
-  const modalType = useSelector(getTypeModal);
-  
   return (
     <>
       <li className={styles.card} ref={dragRef} onClick={onOpen}>
+        <DragPreviewImage connect={preview} src={ingredient.image} />
         <img
           className={styles.image}
           src={ingredient.image_large}
@@ -58,18 +64,15 @@ function IngredientsItem({ ingredient }) {
       </li>
       {isOpen && modalType === "ingredient" && (
         <Modal title="Детали ингредиента">
-          <IngredientDetails ingredient={ingredient} />
+          <IngredientDetails />
         </Modal>
       )}
     </>
   );
 }
 
-// IngredientsItem.propTypes = {
-//   ingredient: ingredientType.isRequired,
-//   onClick: PropTypes.func.isRequired,
-// };
+IngredientsItem.propTypes = {
+  ingredient: ingredientType.isRequired,
+};
 
 export default IngredientsItem;
-
-//onClick={() => onClick(ingredient)}

@@ -8,11 +8,11 @@ const ingredientDetailsSlice = createSlice({
   name: "ingredientDetails",
   initialState,
   reducers: {
-    setIngredientDetails: (state, action) => {
-      state.ingredientArray = action.payload;
+    setIngredientDetails: (state, action) => { 
+      state.ingredientDetails = action.payload;
     },
     deleteIngredientDetails: (state) => {
-      state.ingredientArray = null;
+      state.ingredientDetails = null;
     },
   },
 });
