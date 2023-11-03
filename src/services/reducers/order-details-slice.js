@@ -29,4 +29,3 @@ const orderDetailsSlice = createSlice({
 });
 
 export default orderDetailsSlice.reducer;
- 

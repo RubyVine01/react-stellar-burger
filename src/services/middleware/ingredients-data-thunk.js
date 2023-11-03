@@ -3,7 +3,7 @@ import { urlIngredientsData } from "../../utils/const.js";
 
 export const fetchIngredients = createAsyncThunk(
   "ingredients/get",
-  async (_, thunkAPI) => {
+  async () => {
     try {
       const res = await fetch(urlIngredientsData);
       const data = await res.json();

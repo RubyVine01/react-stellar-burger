@@ -1,7 +1,10 @@
-import PropTypes from "prop-types";
 import styles from "./ingredients-set.module.css";
-import IngredientsItem from "../ingredients-item/ingredients-item.jsx";
+
+import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
+
+import IngredientsItem from "../ingredients-item/ingredients-item.jsx";
+
 import { getIngredients } from "../../services/selectors/ingredients-data-selector.js";
 
 function IngredientsSet({ headline,  type , persRef }) {

@@ -1,6 +1,7 @@
 import styles from "./order-details.module.css";
-import OrderAccpetedDone from "../../images/order-accpeted-done.svg";
 import { useSelector } from "react-redux";
+import OrderAccpetedDone from "../../images/order-accpeted-done.svg";
+
 import {
   getError,
   getIsloading,
@@ -15,15 +16,16 @@ function OrderDetails() {
   return (
     <div className={`${styles.order_details} pt-4 pb-15`}>
       {orderIsloading === true ? (
-        <p className={`text text_type_main-large pt-10`}>Заказ обрабатывается</p>
+        <p className={`text text_type_main-large pt-10`}>
+          Заказ обрабатывается...
+        </p>
       ) : orderError === true ? (
         <p className={`text text_type_main-large pt-10`}>
-          Ошибка при создании заказа, оформите заказ позже или обатитесь в
+          Ошибка при создании заказа, оформите заказ позже или обратитесь в
           службу поддержки
         </p>
       ) : (
         <>
-          {" "}
           <span className={`text text_type_digits-large`}>{order.number}</span>
           <p className={`text text_type_main-medium pt-8`}>
             идентификатор заказа
@@ -44,7 +46,5 @@ function OrderDetails() {
     </div>
   );
 }
-
-
 
 export default OrderDetails;

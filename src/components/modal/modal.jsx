@@ -1,25 +1,27 @@
+import styles from "./modal.module.css";
+
 import PropTypes from "prop-types";
 import { useEffect } from "react";
-import styles from "./modal.module.css";
+import { createPortal } from "react-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay.jsx";
-import { createPortal } from 'react-dom';
-import { useDispatch, useSelector } from "react-redux";
+
 import { closeModal } from "../../services/reducers/modal-slice";
 import { getTypeModal } from "../../services/selectors/modal-selector";
 import { deleteIngredientDetails } from "../../services/reducers/ingredient-details-slice";
 
 function Modal({ children, title }) {
-
-  const typeModal = useSelector(getTypeModal)
   const dispatch = useDispatch();
+  const typeModal = useSelector(getTypeModal);
 
   const onClose = () => {
     dispatch(closeModal());
     if (typeModal === "ingredient") {
       dispatch(deleteIngredientDetails());
     }
-  }
+  };
   useEffect(() => {
     function onKeyDown(event) {
       if (event.key === "Escape") {
@@ -33,20 +35,18 @@ function Modal({ children, title }) {
   }, []);
 
   return createPortal(
-    (
-      <>
-        <ModalOverlay onClose={onClose} />
-        <div className={`${styles.modal} pr-10 pl-10`}>
-          <div className={`${styles.modal_head} `}>
-            <h2 className={`text text_type_main-large `}>{title}</h2>
-            <button className={styles.btn_close} onClick={onClose}>
-              <CloseIcon type="primary" />
-            </button>
-          </div>
-          {children}
+    <>
+      <ModalOverlay onClose={onClose} />
+      <div className={`${styles.modal} pr-10 pl-10`}>
+        <div className={`${styles.modal_head} `}>
+          <h2 className={`text text_type_main-large `}>{title}</h2>
+          <button className={styles.btn_close} onClick={onClose}>
+            <CloseIcon type="primary" />
+          </button>
         </div>
-      </>
-    ),
+        {children}
+      </div>
+    </>,
     document.getElementById("modals")
   );
 }
@@ -54,6 +54,6 @@ function Modal({ children, title }) {
 Modal.propTypes = {
   title: PropTypes.string,
   children: PropTypes.element,
-}; 
+};
 
 export default Modal;

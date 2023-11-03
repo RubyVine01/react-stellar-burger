@@ -8,7 +8,7 @@ const ingredientDetailsSlice = createSlice({
   name: "ingredientDetails",
   initialState,
   reducers: {
-    setIngredientDetails: (state, action) => { 
+    setIngredientDetails: (state, action) => {
       state.ingredientDetails = action.payload;
     },
     deleteIngredientDetails: (state) => {
@@ -17,6 +17,7 @@ const ingredientDetailsSlice = createSlice({
   },
 });
 
-export const { setIngredientDetails, deleteIngredientDetails } = ingredientDetailsSlice.actions;
+export const { setIngredientDetails, deleteIngredientDetails } =
+  ingredientDetailsSlice.actions;
 
 export default ingredientDetailsSlice.reducer;

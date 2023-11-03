@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { ingredientType } from "../../utils/prop-types.js";
 import styles from "./ingredient-details.module.css";
 import { getIngredientDetails } from "../../services/selectors/ingredient-details-selector.js";
 

@@ -29,4 +29,3 @@ const ingredientsDataSlice = createSlice({
 });
 
 export default ingredientsDataSlice.reducer;
-

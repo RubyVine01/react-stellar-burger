@@ -29,10 +29,6 @@
   justify-content: flex-end;
 }
 
-.element_dragged {
-  opacity: 0.5;
-}
-
 .filling {
   max-height: calc(100vh - 475px);
   overflow: auto;

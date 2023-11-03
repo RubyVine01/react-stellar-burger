@@ -1,4 +1,6 @@
 import styles from "./burger-constructor.module.css";
+import { optionsOrder } from "../../utils/api";
+
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import uuid from "react-uuid";
@@ -22,18 +24,12 @@ import {
   getCartList,
 } from "../../services/selectors/burger-constructor-selector";
 import {
-  getError,
-  getIsloading,
-  getOrder,
-} from "../../services/selectors/order-details-selector";
-import {
   addToCart,
   clearCart,
 } from "../../services/reducers/burger-constructor-slice";
 
 import { openModal } from "../../services/reducers/modal-slice";
 import { fetchOrder } from "../../services/middleware/order-details-thunk";
-import { optionsOrder } from "../../utils/api";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -42,7 +38,8 @@ function BurgerConstructor() {
   const fillingList = useSelector(getCartList);
   const bun = useSelector(getCartBun);
   const allCart = useSelector(getAllCart);
-
+  const ingrList = allCart.map((item) => item._id);
+  const options = optionsOrder(ingrList);
   const totolPrice = allCart.reduce((previousValue, item) => {
     return previousValue + item.price;
   }, 0);
@@ -54,12 +51,6 @@ function BurgerConstructor() {
       dispatch(addToCart({ ...ingredient, uid }));
     },
   });
-
-  const ingrList = allCart.map((item) => item._id);
-
-  const orderData = useSelector(getOrder);
-
-  const options = optionsOrder(ingrList);
 
   const handleOpenOrderModal = () => {
     dispatch(openModal("order"));
