@@ -29,9 +29,11 @@ import {
 
 import { openModal } from "../../services/reducers/modal-slice";
 import { fetchOrder } from "../../services/middleware/order-details-thunk";
+import { optionsOrder } from "../../utils/api";
 
 
 function BurgerConstructor() {
+  
   const dispatch = useDispatch();
   const isOpen = useSelector(getStatusModal);
   const modalType = useSelector(getTypeModal);
@@ -52,25 +54,16 @@ function BurgerConstructor() {
   });
 
   const ingrList = allCart.map((item) => item._id);
-  //console.log(ingrList)
 
   const orderData = useSelector(getOrder);
-  //console.log(orderData)
 
-  const options = (array) => {
-    return {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ingredients: array }),
-    };
-  };
+  const options = optionsOrder(ingrList)
 
-  const optionsWithArray = options(ingrList);
   const orderError = useSelector(getError);
   const orderIsloading = useSelector(getIsloading)
 
   const handleOpenOrderModal = () => {
-    dispatch(fetchOrder(optionsWithArray));
+    dispatch(fetchOrder(options));
     if (orderData !== null && !orderError ) {
       dispatch(clearCart());
       dispatch(openModal("order"));

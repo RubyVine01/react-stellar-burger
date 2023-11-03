@@ -7,7 +7,7 @@ function IngredientDetails() {
 
   const ingredient = useSelector(getIngredientDetails)
 
-  if (ingredient === null) {
+  if (!ingredient) {
     return null;
   }
   
@@ -56,9 +56,5 @@ function IngredientDetails() {
     </div>
   );
 }
-
-IngredientDetails.propTypes = {
-  ingredient: ingredientType.isRequired,
-};
 
 export default IngredientDetails;

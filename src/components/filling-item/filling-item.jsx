@@ -1,18 +1,23 @@
-import { useDrag, useDrop } from "react-dnd";
 import styles from "./filling-item.module.css";
-import { getCartList } from "../../services/selectors/burger-constructor-selector";
+import { ingredientType } from "../../utils/prop-types";
+
 import { useDispatch, useSelector } from "react-redux";
+import { useDrag, useDrop } from "react-dnd";
+import PropTypes from "prop-types";
+
 import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+
+import { getCartList } from "../../services/selectors/burger-constructor-selector";
 import {
   deleteFromCart,
   sortCart,
 } from "../../services/reducers/burger-constructor-slice";
-//import PropTypes from "prop-types";
 
 function FillingItem({ ingredient, index }) {
+
   const dispatch = useDispatch();
   const fillingList = useSelector(getCartList);
 
@@ -60,8 +65,9 @@ function FillingItem({ ingredient, index }) {
   );
 }
 
-// ModalOverlay.propTypes = {
-//   onClose: PropTypes.func.isRequired,
-// };
+FillingItem.propTypes = {
+  ingredient: ingredientType.isRequired,
+ index: PropTypes.number.isRequired,
+};
 
 export default FillingItem;

@@ -1,12 +1,10 @@
-// import PropTypes from "prop-types";
-// import { ingredientType } from "../../utils/prop-types.js";
+import PropTypes from "prop-types";
 import styles from "./ingredients-set.module.css";
 import IngredientsItem from "../ingredients-item/ingredients-item.jsx";
 import { useSelector } from "react-redux";
 import { getIngredients } from "../../services/selectors/ingredients-data-selector.js";
 
 function IngredientsSet({ headline,  type , persRef }) {
-
   const ingredients = useSelector(getIngredients);
   return (
     <li> 
@@ -21,7 +19,6 @@ function IngredientsSet({ headline,  type , persRef }) {
               <IngredientsItem
                 key={ingredient._id}
                 ingredient={ingredient}
-                
               />
             );
           })}
@@ -30,9 +27,10 @@ function IngredientsSet({ headline,  type , persRef }) {
   );
 }
 
-// IngredientsSet.propTypes = {
-//   headline: PropTypes.string.isRequired,
-//   type: PropTypes.string.isRequired,
-// };
+IngredientsSet.propTypes = {
+  headline: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  persRef: PropTypes.object.isRequired,
+};
 
 export default IngredientsSet;

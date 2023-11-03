@@ -1,16 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const url = "https://norma.nomoreparties.space/api/orders";
-//const array = ["643d69a5c3f7b9001cfa093c", "643d69a5c3f7b9001cfa093e"];
-// const options = (array) =>{return {
-//   method: "POST",
-//   headers: { "Content-Type": "application/json" },
-//   body: JSON.stringify({ ingredients: array }),
-// }};
+import { urlOrder} from "../../utils/const.js";
+
 
 export const fetchOrder = createAsyncThunk("order/get", async ( options, thunkAPI) => {
   try {
-    const res = await fetch(url, options );
+    const res = await fetch(urlOrder, options );
     const data = await res.json();
     return data;
   } catch (err) {

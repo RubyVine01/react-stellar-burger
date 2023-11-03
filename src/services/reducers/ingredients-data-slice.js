@@ -3,8 +3,8 @@ import { fetchIngredients } from "../middleware/ingredients-data-thunk.js";
 
 const initialState = {
   ingredientArray: [],
-  isloading: false,
-  error: "",
+  isLoading: false,
+  error: false,
 };
 
 const ingredientsDataSlice = createSlice({
@@ -12,18 +12,18 @@ const ingredientsDataSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchIngredients.fulfilled.type]: (state, action) => {
+    [fetchIngredients.fulfilled]: (state, action) => {
       state.ingredientArray = action.payload.data;
-      state.isloading = false;
-      state.error = "";
+      state.isLoading = false;
+      state.error = false;
     },
-    [fetchIngredients.pending.type]: (state) => {
-      state.isloading = true;
-      state.error = "";
+    [fetchIngredients.pending]: (state) => {
+      state.isLoading = true;
+      state.error = false;
     },
-    [fetchIngredients.rejected.type]: (state, action) => {
-      state.isloading = false;
-      state.error = action.payload;
+    [fetchIngredients.rejected]: (state) => {
+      state.isLoading = false;
+      state.error = true;
     },
   },
 });

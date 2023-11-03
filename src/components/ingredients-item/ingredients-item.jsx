@@ -11,7 +11,6 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-
 import { openModal } from "../../services/reducers/modal-slice";
 import { setIngredientDetails } from "../../services/reducers/ingredient-details-slice";
 
@@ -20,7 +19,6 @@ import {
   getTypeModal,
 } from "../../services/selectors/modal-selector";
 import { getAllCart } from "../../services/selectors/burger-constructor-selector.js";
-
 
 function IngredientsItem({ ingredient }) {
   const dispatch = useDispatch();

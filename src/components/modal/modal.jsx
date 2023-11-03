@@ -4,14 +4,21 @@ import styles from "./modal.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay.jsx";
 import { createPortal } from 'react-dom';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../services/reducers/modal-slice";
+import { getTypeModal } from "../../services/selectors/modal-selector";
+import { deleteIngredientDetails } from "../../services/reducers/ingredient-details-slice";
 
 function Modal({ children, title }) {
+
+  const typeModal = useSelector(getTypeModal)
   const dispatch = useDispatch();
 
   const onClose = () => {
-    dispatch(closeModal())
+    dispatch(closeModal());
+    if (typeModal === "ingredient") {
+      dispatch(deleteIngredientDetails());
+    }
   }
   useEffect(() => {
     function onKeyDown(event) {
