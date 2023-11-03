@@ -21,7 +21,11 @@ import {
   getCartBun,
   getCartList,
 } from "../../services/selectors/burger-constructor-selector";
-import { getError, getIsloading, getOrder } from "../../services/selectors/order-details-selector";
+import {
+  getError,
+  getIsloading,
+  getOrder,
+} from "../../services/selectors/order-details-selector";
 import {
   addToCart,
   clearCart,
@@ -31,9 +35,7 @@ import { openModal } from "../../services/reducers/modal-slice";
 import { fetchOrder } from "../../services/middleware/order-details-thunk";
 import { optionsOrder } from "../../utils/api";
 
-
 function BurgerConstructor() {
-  
   const dispatch = useDispatch();
   const isOpen = useSelector(getStatusModal);
   const modalType = useSelector(getTypeModal);
@@ -57,17 +59,12 @@ function BurgerConstructor() {
 
   const orderData = useSelector(getOrder);
 
-  const options = optionsOrder(ingrList)
-
-  const orderError = useSelector(getError);
-  const orderIsloading = useSelector(getIsloading)
+  const options = optionsOrder(ingrList);
 
   const handleOpenOrderModal = () => {
+    dispatch(openModal("order"));
     dispatch(fetchOrder(options));
-    if (orderData !== null && !orderError ) {
-      dispatch(clearCart());
-      dispatch(openModal("order"));
-    }
+    dispatch(clearCart());
   };
 
   return (
