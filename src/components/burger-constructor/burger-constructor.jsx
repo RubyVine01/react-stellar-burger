@@ -27,7 +27,7 @@ import {
   clearCart,
 } from "../../services/reducers/burger-constructor-slice";
 
-import { openModal } from "../../services/reducers/modal-slice";
+import { closeModal, openModal } from "../../services/reducers/modal-slice";
 import { fetchOrder } from "../../services/thunks/order-details-thunk";
 
 function BurgerConstructor() {
@@ -54,6 +54,10 @@ function BurgerConstructor() {
     dispatch(openModal("order"));
     dispatch(fetchOrder(ingrList));
     dispatch(clearCart());
+  };
+
+  const onCloseOrderModal = () => {
+    dispatch(closeModal());
   };
 
   return (
@@ -143,7 +147,7 @@ function BurgerConstructor() {
       </section>
 
       {isOpen && modalType === "order" && (
-        <Modal title="">
+        <Modal title="" onClose={onCloseOrderModal}>
           <OrderDetails />
         </Modal>
       )}

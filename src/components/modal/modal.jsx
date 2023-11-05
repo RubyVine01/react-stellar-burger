@@ -3,26 +3,11 @@ import styles from "./modal.module.css";
 import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useDispatch, useSelector } from "react-redux";
-
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay.jsx";
 
-import { closeModal } from "../../services/reducers/modal-slice";
-import { getTypeModal } from "../../services/selectors/modal-selector";
-import { deleteIngredientDetails } from "../../services/reducers/ingredient-details-slice";
-
-function Modal({ children, title }) {
-  const dispatch = useDispatch();
-  const typeModal = useSelector(getTypeModal);
-
-  const onClose = () => {
-    dispatch(closeModal());
-    if (typeModal === "ingredient") {
-      dispatch(deleteIngredientDetails());
-    }
-  };
-  useEffect(() => {
+function Modal({ children, title, onClose }) {
+  useEffect(() => { 
     function onKeyDown(event) {
       if (event.key === "Escape") {
         onClose();
@@ -52,6 +37,7 @@ function Modal({ children, title }) {
 }
 
 Modal.propTypes = {
+  onClose: PropTypes.func.isRequired,
   title: PropTypes.string,
   children: PropTypes.element,
 };
