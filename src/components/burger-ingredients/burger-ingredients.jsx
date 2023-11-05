@@ -3,15 +3,22 @@ import styles from "./burger-ingredients.module.css";
 import { useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
+import Modal from "../modal/modal";
+import IngredientDetails from "../ingredient-details/ingredient-details"
+
 import IngredientsTabs from "../ingredients-tabs/ingredients-tabs.jsx";
-import IngredientsSet from "../ingredients-set/ingredients-set.jsx";
+import IngredientsSet from "../ingredients-set/ingredients-set.jsx"; 
 
 import {
   getErrorIngredients,
   getLoadingIngredients,
 } from "../../services/selectors/ingredients-data-selector";
+import { getStatusModal, getTypeModal } from "../../services/selectors/modal-selector";
 
 function BurgerIngredients() {
+  const isOpen = useSelector(getStatusModal);
+  const modalType = useSelector(getTypeModal);
+
   const isLoading = useSelector(getLoadingIngredients);
   const error = useSelector(getErrorIngredients);
 
@@ -78,8 +85,14 @@ function BurgerIngredients() {
             <IngredientsSet headline="Соусы" type="sauce" persRef={sauceRef} />
             <IngredientsSet headline="Начинки" type="main" persRef={mainRef} />
           </ul>
+          {isOpen && modalType === "ingredient" && (
+        <Modal title="Детали ингредиента">
+          <IngredientDetails />
+        </Modal>
+      )} 
         </>
       )}
+
     </section>
   );
 }

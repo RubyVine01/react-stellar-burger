@@ -4,8 +4,6 @@ import { ingredientType } from "../../utils/prop-types";
 import { DragPreviewImage, useDrag } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
 
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
 import {
   Counter,
   CurrencyIcon,
@@ -14,16 +12,10 @@ import {
 import { openModal } from "../../services/reducers/modal-slice";
 import { setIngredientDetails } from "../../services/reducers/ingredient-details-slice";
 
-import {
-  getStatusModal,
-  getTypeModal,
-} from "../../services/selectors/modal-selector";
 import { getAllCart } from "../../services/selectors/burger-constructor-selector.js";
 
 function IngredientsItem({ ingredient }) {
   const dispatch = useDispatch();
-  const isOpen = useSelector(getStatusModal);
-  const modalType = useSelector(getTypeModal);
   const allCart = useSelector(getAllCart);
   const count = allCart.filter((item) => item._id === ingredient._id).length;
 
@@ -60,11 +52,6 @@ function IngredientsItem({ ingredient }) {
         </div>
         <p className={`text text_type_main-default`}>{ingredient.name}</p>
       </li>
-      {isOpen && modalType === "ingredient" && (
-        <Modal title="Детали ингредиента">
-          <IngredientDetails />
-        </Modal>
-      )}
     </>
   );
 }
