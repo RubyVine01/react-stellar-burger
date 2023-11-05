@@ -7,11 +7,13 @@ import IngredientsItem from "../ingredients-item/ingredients-item.jsx";
 
 import { getIngredients } from "../../services/selectors/ingredients-data-selector.js";
 
-function IngredientsSet({ headline,  type , persRef }) {
+function IngredientsSet({ headline, type, persRef }) {
   const ingredients = useSelector(getIngredients);
   return (
-    <li> 
-      <h2 className={`text text_type_main-medium pb-6`}  ref={persRef}>{headline}</h2>
+    <li>
+      <h2 className={`text text_type_main-medium pb-6`} ref={persRef}>
+        {headline}
+      </h2>
       <ul className={styles.item_box}>
         {ingredients
           .filter((item) => {
@@ -19,10 +21,7 @@ function IngredientsSet({ headline,  type , persRef }) {
           })
           .map((ingredient) => {
             return (
-              <IngredientsItem
-                key={ingredient._id}
-                ingredient={ingredient}
-              />
+              <IngredientsItem key={ingredient._id} ingredient={ingredient} />
             );
           })}
       </ul>

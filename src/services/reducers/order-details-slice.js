@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchOrder } from "../middleware/order-details-thunk";
+import { fetchOrder } from "../thunks/order-details-thunk";
 
 const initialState = {
   orderDetails: null,

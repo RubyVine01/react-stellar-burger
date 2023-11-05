@@ -1,5 +1,4 @@
 import styles from "./burger-constructor.module.css";
-import { optionsOrder } from "../../utils/api";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
@@ -29,7 +28,7 @@ import {
 } from "../../services/reducers/burger-constructor-slice";
 
 import { openModal } from "../../services/reducers/modal-slice";
-import { fetchOrder } from "../../services/middleware/order-details-thunk";
+import { fetchOrder } from "../../services/thunks/order-details-thunk";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
@@ -39,7 +38,6 @@ function BurgerConstructor() {
   const bun = useSelector(getCartBun);
   const allCart = useSelector(getAllCart);
   const ingrList = allCart.map((item) => item._id);
-  const options = optionsOrder(ingrList);
   const totolPrice = allCart.reduce((previousValue, item) => {
     return previousValue + item.price;
   }, 0);
@@ -54,7 +52,7 @@ function BurgerConstructor() {
 
   const handleOpenOrderModal = () => {
     dispatch(openModal("order"));
-    dispatch(fetchOrder(options));
+    dispatch(fetchOrder(ingrList));
     dispatch(clearCart());
   };
 

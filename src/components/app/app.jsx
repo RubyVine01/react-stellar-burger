@@ -9,7 +9,7 @@ import AppHeader from "../app-header/app-header.jsx";
 import BurgerIngredients from "../burger-ingredients/burger-ingredients.jsx";
 import BurgerConstructor from "../burger-constructor/burger-constructor.jsx";
 
-import { fetchIngredients } from "../../services/middleware/ingredients-data-thunk";
+import { fetchIngredients } from "../../services/thunks/ingredients-data-thunk";
 
 function App() {
   const dispatch = useDispatch();

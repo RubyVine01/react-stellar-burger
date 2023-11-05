@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchIngredients } from "../middleware/ingredients-data-thunk.js";
+import { fetchIngredients } from "../thunks/ingredients-data-thunk.js";
 
 const initialState = {
   ingredientArray: [],
@@ -13,7 +13,7 @@ const ingredientsDataSlice = createSlice({
   reducers: {},
   extraReducers: {
     [fetchIngredients.fulfilled]: (state, action) => {
-      state.ingredientArray = action.payload.data;
+      state.ingredientArray = action.payload;
       state.isLoading = false;
       state.error = false;
     },
