@@ -1,16 +1,26 @@
 import {
   Button,
+  EmailInput,
   Input,
+  PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login-page.module.css";
+import { useState } from "react";
 
 function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <main className={styles.content}>
       <form className={styles.form}>
         <h1 className={`text text_type_main-medium`}>Вход</h1>
-        <Input type={"email"} placeholder={"E-mail"} />
-        <Input type={"password"} placeholder={"Пароль"} icon={"ShowIcon"} />
+        <EmailInput name={"email"} placeholder={"E-mail"} value={email} />
+        <PasswordInput
+          name={"password"}
+          placeholder={"Пароль"}
+          value={password}
+        />
         <Button htmlType="button" type="primary" size="medium">
           Войти
         </Button>
