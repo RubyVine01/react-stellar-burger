@@ -26,12 +26,11 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      {/* <UserProfilPage/> */}
-      <LoginPage />
+      <UserProfilPage/>
+      {/* <LoginPage />
       <ForgotPasswordPage />
-
       <RegistrationPage />
-      <NewPasswordPage />
+      <NewPasswordPage /> */}
       {/* <main className={styles.content}>
       <DndProvider backend={HTML5Backend}>
         <BurgerIngredients />
