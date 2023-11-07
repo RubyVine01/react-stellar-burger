@@ -7,7 +7,7 @@ import styles from "./login-page.module.css";
 function LoginPage() {
   return (
     <main className={styles.content}>
-      <form className={styles.login_form}>
+      <form className={styles.form}>
         <h1 className={`text text_type_main-medium`}>Вход</h1>
         <Input type={"email"} placeholder={"E-mail"} />
         <Input type={"password"} placeholder={"Пароль"} icon={"ShowIcon"} />

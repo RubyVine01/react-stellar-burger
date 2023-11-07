@@ -7,7 +7,7 @@ import styles from "./registration-page.module.css";
 function RegistrationPage() {
   return (
     <main className={styles.content}>
-      <form className={styles.login_form}>
+      <form className={styles.form}>
         <h1 className={`text text_type_main-medium`}>Регистрация</h1>
         <Input type={"text"} placeholder={"Имя"} />
         <Input type={"email"} placeholder={"E-mail"} />

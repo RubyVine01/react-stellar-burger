@@ -8,7 +8,7 @@
   padding-top: 180px;
 }
 
-.login_form {
+.form {
   display: flex;
   flex-direction: column;
   justify-content: center;
