@@ -15,6 +15,7 @@ import RegistrationPage from "../../pages/registration-page/registration-page";
 import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password-page";
 import NewPasswordPage from "../../pages/new-password-page/new-password-page";
 import UserProfilPage from "../../pages/user-profil-page/user-profil-page";
+import IngredientPage from "../../pages/ingredient-page/ingredient-page";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,17 +27,15 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <UserProfilPage/>
-      {/* <LoginPage />
-      <ForgotPasswordPage />
-      <RegistrationPage />
-      <NewPasswordPage /> */}
-      {/* <main className={styles.content}>
+       <main className={styles.content}>
       <DndProvider backend={HTML5Backend}>
         <BurgerIngredients />
         <BurgerConstructor />
       </DndProvider>
-    </main> */}
+    </main>
+      <IngredientPage />
+      <UserProfilPage/>
+      <LoginPage />
     </div>
   );
 }
