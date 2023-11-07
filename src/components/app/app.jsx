@@ -13,6 +13,7 @@ import { fetchIngredients } from "../../services/thunks/ingredients-data-thunk";
 import LoginPage from "../../pages/login-page/login-page";
 import RegistrationPage from "../../pages/registration-page/registration-page";
 import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password-page";
+import NewPasswordPage from "../../pages/new-password-page/new-password-page";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,11 +24,12 @@ function App() {
 
   return (
     <div className={styles.app}>
-    <AppHeader />
-    <LoginPage/>
-    <RegistrationPage/>
-    <ForgotPasswordPage/>
-    {/* <main className={styles.content}>
+      <AppHeader />
+      {/* <LoginPage/>
+  <RegistrationPage/>
+  <ForgotPasswordPage/>
+  <NewPasswordPage/> */}
+      {/* <main className={styles.content}>
       <DndProvider backend={HTML5Backend}>
         <BurgerIngredients />
         <BurgerConstructor />
