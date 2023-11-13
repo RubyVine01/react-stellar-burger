@@ -11,10 +11,7 @@
   margin: auto;
   display: flex;
   align-items: center;
-  list-style: none;
 }
-
-
 
 .logo_container {
   display: flex;
@@ -26,21 +23,19 @@
 }
 
 
-.link {
+.nav_link {
   display: flex;
   cursor: pointer;
   align-items: center;
   text-decoration: none;
 }
 
-.name {
-  margin: 0;
-}
 
-.name_active {
+
+.active {
   color: #f2f2f3;
 }
 
-.name_default {
+.default {
   color: #8585ad;
 }

@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import styles from "./app-header.module.css";
 import {
   Logo,
@@ -6,49 +5,64 @@ import {
   ListIcon,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useParams } from "react-router-dom";
-function AppHeader() {
-  const params = useParams();
-  console.log(params);
-  const [currentLink, setCurrentLink] = useState("/");
+import { NavLink, useParams } from "react-router-dom";
 
+function AppHeader() {
+
+
+  const linkClassName = ({ isActive }) =>
+    `${isActive ? styles.active : styles.default}`;
+
+    const iconType = ({ isActive }) => (isActive ? "primary" : "secondary");
+    
   return (
     <header className={`${styles.header} pb-4 pt-4`}>
       <nav className={styles.nav}>
-        <div  className="mr-2" to="/">
-          <BurgerIcon type={params === "/" ? "primary" : "secondary"} />
-          <p
-            className={`${styles.name} ${
-              params === "/" ? styles.name_active : styles.name_default
-            } text_type_main-default pl-2`}
-          >
-            "Конструктор"
-          </p>
-        </div>
-
-        {/* <NavLink
-          className="mr-25"
-          icon={
-            <ListIcon type={params === "/orders" ? "primary" : "secondary"} />
+        <NavLink
+          className={({ isActive }) =>
+            `mr-2 pt-4 pb-4 pr-5 pl-5 ${styles.nav_link} ${linkClassName({
+              isActive,
+            })}`
           }
-          navLink="/orders"
-          linkName="Лента заказов"
-        />
+          to="/"
+        >
+          <BurgerIcon type={iconType({ isActive })} />
+          <p className={`${styles.name} text text_type_main-default pl-2`}>
+            Конструктор
+          </p>
+        </NavLink>
+
+        <NavLink
+          className={({ isActive }) =>
+            `mr-2 pt-4 pb-4 pr-5 pl-5 ${styles.nav_link} ${linkClassName({
+              isActive,
+            })}`
+          }
+          to="/orders"
+        >
+          <ListIcon type={iconType({ isActive })} />
+          <p className={`${styles.name} text text_type_main-default pl-2`}>
+            Лента заказов
+          </p>
+        </NavLink>
 
         <div className={`${styles.logo_container} pl-3`}>
           <Logo />
         </div>
 
         <NavLink
-          className={styles.profil_position}
-          icon={
-            <ProfileIcon
-              type={params === "/profile" ? "primary" : "secondary"}
-            />
+          className={({ isActive }) =>
+            `mr-2 pt-4 pb-4 pr-5 pl-5 ${styles.profil_position} ${styles.nav_link} ${linkClassName({
+              isActive,
+            })}`
           }
-          navLink="/profile"
-          linkName="Личный кабинет"
-        /> */}
+          to="/profile"
+        >
+          <ProfileIcon type={iconType({ isActive })} />
+          <p className={`${styles.name} text text_type_main-default pl-2`}>
+            Личный кабинет
+          </p>
+        </NavLink>
       </nav>
     </header>
   );
