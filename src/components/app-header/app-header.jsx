@@ -5,16 +5,13 @@ import {
   ListIcon,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 function AppHeader() {
-
-
+  const { pathname } = useLocation();
   const linkClassName = ({ isActive }) =>
     `${isActive ? styles.active : styles.default}`;
 
-    const iconType = ({ isActive }) => (isActive ? "primary" : "secondary");
-    
   return (
     <header className={`${styles.header} pb-4 pt-4`}>
       <nav className={styles.nav}>
@@ -26,7 +23,7 @@ function AppHeader() {
           }
           to="/"
         >
-          <BurgerIcon type={iconType({ isActive })} />
+          <BurgerIcon type={pathname === "/" ? "primary" : "secondary"} />
           <p className={`${styles.name} text text_type_main-default pl-2`}>
             Конструктор
           </p>
@@ -40,7 +37,7 @@ function AppHeader() {
           }
           to="/orders"
         >
-          <ListIcon type={iconType({ isActive })} />
+          <ListIcon type={pathname === "/orders" ? "primary" : "secondary"} />
           <p className={`${styles.name} text text_type_main-default pl-2`}>
             Лента заказов
           </p>
@@ -52,13 +49,17 @@ function AppHeader() {
 
         <NavLink
           className={({ isActive }) =>
-            `mr-2 pt-4 pb-4 pr-5 pl-5 ${styles.profil_position} ${styles.nav_link} ${linkClassName({
+            `mr-2 pt-4 pb-4 pr-5 pl-5 ${styles.profil_position} ${
+              styles.nav_link
+            } ${linkClassName({
               isActive,
             })}`
           }
           to="/profile"
         >
-          <ProfileIcon type={iconType({ isActive })} />
+          <ProfileIcon
+            type={pathname === "/profile" ? "primary" : "secondary"}
+          />
           <p className={`${styles.name} text text_type_main-default pl-2`}>
             Личный кабинет
           </p>
