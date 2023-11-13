@@ -14,6 +14,9 @@ import LoginPage from "../../pages/login-page/login-page";
 import IngredientPage from "../../pages/ingredient-page/ingredient-page";
 import UserProfilPage from "../../pages/user-profil-page/user-profil-page";
 import Main from "../main/main";
+import { Route, Routes } from "react-router-dom";
+import OrdersPage from "../../pages/orders-page/orders-page";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -25,10 +28,13 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Main/>
-      <IngredientPage />
-      <UserProfilPage/>
-      <LoginPage />
+      <Routes>
+        <Route index element={<Main />} />
+        <Route path="/profile" element={<UserProfilPage />} />
+        <Route path="/orders" element={<OrdersPage />} />
+        {/* <Route path="/login" element={<LoginPage />} /> */}
+        {/* <Route path="*" element={<NotFound />} /> */}
+      </Routes>
     </div>
   );
 }

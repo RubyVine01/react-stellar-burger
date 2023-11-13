@@ -6,53 +6,49 @@ import {
   ListIcon,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
-import NavLink from "../nav-link/nav-link.jsx";
-
+import { useParams } from "react-router-dom";
 function AppHeader() {
+  const params = useParams();
+  console.log(params);
   const [currentLink, setCurrentLink] = useState("/");
 
   return (
     <header className={`${styles.header} pb-4 pt-4`}>
       <nav className={styles.nav}>
-        <ul className={styles.list}>
-          <li className="pr-2">
-            <NavLink
-              icon={
-                <BurgerIcon
-                  type={currentLink === "/" ? "primary" : "secondary"}
-                />
-              }
-              navLink="/"
-              linkName="Конструктор"
+        <div  className="mr-2" to="/">
+          <BurgerIcon type={params === "/" ? "primary" : "secondary"} />
+          <p
+            className={`${styles.name} ${
+              params === "/" ? styles.name_active : styles.name_default
+            } text_type_main-default pl-2`}
+          >
+            "Конструктор"
+          </p>
+        </div>
+
+        {/* <NavLink
+          className="mr-25"
+          icon={
+            <ListIcon type={params === "/orders" ? "primary" : "secondary"} />
+          }
+          navLink="/orders"
+          linkName="Лента заказов"
+        />
+
+        <div className={`${styles.logo_container} pl-3`}>
+          <Logo />
+        </div>
+
+        <NavLink
+          className={styles.profil_position}
+          icon={
+            <ProfileIcon
+              type={params === "/profile" ? "primary" : "secondary"}
             />
-          </li>
-          <li className="pr-25">
-            <NavLink
-              icon={
-                <ListIcon
-                  type={currentLink === "/order" ? "primary" : "secondary"}
-                />
-              }
-              navLink="/orders"
-              linkName="Лента заказов"
-            />
-          </li>
-          <li className={`${styles.logo_container} pl-3`}>
-            <Logo />
-          </li>
-          <li className={styles.profil_position}>
-            <NavLink
-              icon={
-                <ProfileIcon
-                  type={currentLink === "/profile" ? "primary" : "secondary"}
-                />
-              }
-              navLink="/profile"
-              linkName="Личный кабинет"
-            />
-          </li>
-        </ul>
+          }
+          navLink="/profile"
+          linkName="Личный кабинет"
+        /> */}
       </nav>
     </header>
   );

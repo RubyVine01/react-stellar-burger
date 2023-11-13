@@ -9,15 +9,12 @@
 .nav {
   width: 1280px;
   margin: auto;
-}
-
-.list {
   display: flex;
   align-items: center;
   list-style: none;
-  padding-left: 0;
-  margin: 0;
 }
+
+
 
 .logo_container {
   display: flex;
@@ -25,5 +22,25 @@
 }
 
 .profil_position {
-  padding-left: 288px;
+ margin-left: 288px;
+}
+
+
+.link {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  text-decoration: none;
+}
+
+.name {
+  margin: 0;
+}
+
+.name_active {
+  color: #f2f2f3;
+}
+
+.name_default {
+  color: #8585ad;
 }
