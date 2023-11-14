@@ -12,6 +12,7 @@ import UserProfilPage from "../../pages/user-profil-page/user-profil-page";
 import Main from "../main/main";
 import { Route, Routes } from "react-router-dom";
 import OrdersPage from "../../pages/orders-page/orders-page";
+import NotFound from "../../pages/not-found-page/not-found-page";
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
         <Route path="/profile" element={<UserProfilPage />} />
         <Route path="/orders" element={<OrdersPage />} />
         {/* <Route path="/login" element={<LoginPage />} /> */}
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
