@@ -6,6 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login-page.module.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
@@ -27,15 +28,18 @@ function LoginPage() {
       </form>
       <p className={`pt-20 text text_type_main-default text_color_inactive`}>
         Вы — новый пользователь?{" "}
-        <a href="#" className="text_color_accent">
+        <Link to="/register" className={`text_color_accent ${styles.link}`}>
           Зарегистрироваться
-        </a>
+        </Link>
       </p>
       <p className={`pt-4 text text_type_main-default text_color_inactive`}>
         Забыли пароль?{" "}
-        <a href="#" className="text_color_accent">
+        <Link
+          to="/forgot-password"
+          className={`text_color_accent ${styles.link}`}
+        >
           Восстановить пароль
-        </a>
+        </Link>
       </p>
     </main>
   );

@@ -5,6 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./new-password-page.module.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function NewPasswordPage() {
   const [password, setPassword] = useState("");
@@ -26,9 +27,9 @@ function NewPasswordPage() {
       </form>
       <p className={`pt-20 text text_type_main-default text_color_inactive`}>
         Вспомнили пароль?{" "}
-        <a href="#" className="text_color_accent">
+        <Link to="/login" className={`text_color_accent ${styles.link}`}>
           Войти
-        </a>
+        </Link>
       </p>
     </main>
   );

@@ -6,6 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./registration-page.module.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function RegistrationPage() {
   const [email, setEmail] = useState("");
@@ -28,9 +29,9 @@ function RegistrationPage() {
       </form>
       <p className={`pt-20 text text_type_main-default text_color_inactive`}>
         Уже зарегистрированы?{" "}
-        <a href="#" className="text_color_accent">
+        <Link to="/login" className={`text_color_accent ${styles.link}`}>
           Войти
-        </a>
+        </Link>
       </p>
     </main>
   );
