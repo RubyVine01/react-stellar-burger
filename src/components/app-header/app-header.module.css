@@ -11,31 +11,19 @@
   margin: auto;
   display: flex;
   align-items: center;
+  column-gap: 8px;
 }
 
 .logo_container {
   display: flex;
   align-items: center;
+  margin-right: 250px;
+  margin-left: 102px;
 }
-
-.profil_position {
- margin-left: 288px;
-}
-
 
 .nav_link {
   display: flex;
   cursor: pointer;
   align-items: center;
   text-decoration: none;
-}
-
-
-
-.active {
-  color: #f2f2f3;
-}
-
-.default {
-  color: #8585ad;
 }

@@ -10,19 +10,15 @@ import { NavLink, useLocation } from "react-router-dom";
 function AppHeader() {
   const { pathname } = useLocation();
   const linkClassName = ({ isActive }) =>
-    `${isActive ? styles.active : styles.default}`;
+    isActive
+      ? "text_color_primary  pt-4 pb-4 pr-5 pl-5" + " " + styles.nav_link
+      : "text_color_inactive  pt-4 pb-4 pr-5 pl-5" + " " + styles.nav_link;
+
 
   return (
     <header className={`${styles.header} pb-4 pt-4`}>
       <nav className={styles.nav}>
-        <NavLink
-          className={({ isActive }) =>
-            `mr-2 pt-4 pb-4 pr-5 pl-5 ${styles.nav_link} ${linkClassName({
-              isActive,
-            })}`
-          }
-          to="/"
-        >
+        <NavLink className={linkClassName} to="/">
           <BurgerIcon type={pathname === "/" ? "primary" : "secondary"} />
           <p className={`${styles.name} text text_type_main-default pl-2`}>
             Конструктор
@@ -30,11 +26,7 @@ function AppHeader() {
         </NavLink>
 
         <NavLink
-          className={({ isActive }) =>
-            `mr-2 pt-4 pb-4 pr-5 pl-5 ${styles.nav_link} ${linkClassName({
-              isActive,
-            })}`
-          }
+          className={linkClassName} 
           to="/orders"
         >
           <ListIcon type={pathname === "/orders" ? "primary" : "secondary"} />
@@ -48,13 +40,7 @@ function AppHeader() {
         </div>
 
         <NavLink
-          className={({ isActive }) =>
-            `mr-2 pt-4 pb-4 pr-5 pl-5 ${styles.profil_position} ${
-              styles.nav_link
-            } ${linkClassName({
-              isActive,
-            })}`
-          }
+          className={linkClassName} 
           to="/profile"
         >
           <ProfileIcon
