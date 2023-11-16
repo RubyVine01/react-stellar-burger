@@ -3,11 +3,11 @@ import {
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./new-password-page.module.css";
+import styles from "./reset-password-page.module.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function NewPasswordPage() {
+function ResetPasswordPage() {
   const [password, setPassword] = useState("");
   const [code, setCode] = useState("");
 
@@ -21,7 +21,7 @@ function NewPasswordPage() {
           value={password}
         />
         <Input type={"text"} placeholder={"Введите код из письма"} value={code}/>
-        <Button htmlType="button" type="primary" size="medium">
+        <Button htmlType="button" type="primary" size="medium" >
           Сохранить
         </Button>
       </form>
@@ -35,4 +35,4 @@ function NewPasswordPage() {
   );
 }
 
-export default NewPasswordPage;
+export default ResetPasswordPage;

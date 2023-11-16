@@ -1,4 +1,4 @@
-import { 
+import {
   Button,
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -8,6 +8,19 @@ import { Link } from "react-router-dom";
 
 function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(false);
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const onChange = (e) => {
+    const emailValue = e.target.value;
+    setEmail(emailValue);
+    setIsEmailValid(emailRegex.test(emailValue));
+  };
+
+  const resetPassword = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <main className={styles.content}>
@@ -17,8 +30,16 @@ function ForgotPasswordPage() {
           name={"email"}
           placeholder={"Укажите e-mail"}
           value={email}
+          onChange={onChange}
+          errorText={"Email должен быть в формате user@domain.com."}
         />
-        <Button htmlType="button" type="primary" size="medium">
+        <Button
+          htmlType="button"
+          type="primary"
+          size="medium"
+          onClick={resetPassword}
+          disabled={!isEmailValid}
+        >
           Восстановить
         </Button>
       </form>

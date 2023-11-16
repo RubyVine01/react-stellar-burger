@@ -59,12 +59,10 @@ function UserProfilPage() {
           icon="EditIcon"
         />
         <div className={styles.btn_place}>
-          <Link
-            to="/"
-            className={`text_color_accent  text text_type_main-default  ${styles.link}`}
-          >
+          <Button htmlType="button" type="secondary" size="medium">
             Отмена
-          </Link>
+          </Button>
+
           <Button htmlType="button" type="primary" size="medium">
             Сохранить
           </Button>
