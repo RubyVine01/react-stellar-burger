@@ -4,6 +4,7 @@ import ingredientDetailsReducer from "./slices/ingredient-details-slice.js";
 import modalReducer from "./slices/modal-slice.js";
 import orderDetailsReducer from "./slices/order-details-slice.js";
 import constructorReducer from "./slices/burger-constructor-slice.js";
+import resetPasswordReducer from "./slices/forgot-password-slice.js";
 export const store = configureStore({
   reducer: {
     ingredients: ingredientsReducer,
@@ -11,5 +12,6 @@ export const store = configureStore({
     modal: modalReducer,
     orderDetails: orderDetailsReducer,
     cartConstructor: constructorReducer,
+    forgotPassword: resetPasswordReducer,
   },
 });

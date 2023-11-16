@@ -4,9 +4,12 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./forgot-password-page.module.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchResetCode } from "../../services/thunks/forgot-password-thunk";
 
 function ForgotPasswordPage() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
   
@@ -21,11 +24,13 @@ function ForgotPasswordPage() {
 
   const resetPassword = (e) => {
     e.preventDefault();
+    dispatch(fetchResetCode());
+
   };
 
   return (
     <main className={styles.content}>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={resetPassword}>
         <h1 className={`text text_type_main-medium`}>Восстановление пароля</h1>
         <EmailInput
           name={"email"}
@@ -35,7 +40,7 @@ function ForgotPasswordPage() {
           errorText={"Email должен быть в формате user@domain.com."}
         />
         <Button
-          htmlType="button"
+          htmlType="submit"
           type="primary"
           size="medium"
           onClick={resetPassword}
