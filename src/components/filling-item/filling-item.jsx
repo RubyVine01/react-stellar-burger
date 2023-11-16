@@ -14,7 +14,7 @@ import { getCartList } from "../../services/selectors/burger-constructor-selecto
 import {
   deleteFromCart,
   sortCart,
-} from "../../services/reducers/burger-constructor-slice";
+} from "../../services/slices/burger-constructor-slice";
 
 function FillingItem({ ingredient, index }) {
 

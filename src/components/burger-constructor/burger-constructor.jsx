@@ -25,9 +25,9 @@ import {
 import {
   addToCart,
   clearCart,
-} from "../../services/reducers/burger-constructor-slice";
+} from "../../services/slices/burger-constructor-slice";
 
-import { closeModal, openModal } from "../../services/reducers/modal-slice";
+import { closeModal, openModal } from "../../services/slices/modal-slice";
 import { fetchOrder } from "../../services/thunks/order-details-thunk";
 
 function BurgerConstructor() {

@@ -17,8 +17,8 @@ import {
   getStatusModal,
   getTypeModal,
 } from "../../services/selectors/modal-selector";
-import { closeModal } from "../../services/reducers/modal-slice";
-import { deleteIngredientDetails } from "../../services/reducers/ingredient-details-slice";
+import { closeModal } from "../../services/slices/modal-slice";
+import { deleteIngredientDetails } from "../../services/slices/ingredient-details-slice";
 
 function BurgerIngredients() {
   const dispatch = useDispatch();

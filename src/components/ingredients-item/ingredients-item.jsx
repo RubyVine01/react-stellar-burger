@@ -9,8 +9,8 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { openModal } from "../../services/reducers/modal-slice";
-import { setIngredientDetails } from "../../services/reducers/ingredient-details-slice";
+import { openModal } from "../../services/slices/modal-slice";
+import { setIngredientDetails } from "../../services/slices/ingredient-details-slice";
 
 import { getAllCart } from "../../services/selectors/burger-constructor-selector.js";
 

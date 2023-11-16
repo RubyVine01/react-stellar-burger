@@ -9,10 +9,11 @@ import { Link } from "react-router-dom";
 function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
+  
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const onChange = (e) => {
+  const onChangeEmail = (e) => {
     const emailValue = e.target.value;
     setEmail(emailValue);
     setIsEmailValid(emailRegex.test(emailValue));
@@ -30,7 +31,7 @@ function ForgotPasswordPage() {
           name={"email"}
           placeholder={"Укажите e-mail"}
           value={email}
-          onChange={onChange}
+          onChange={onChangeEmail}
           errorText={"Email должен быть в формате user@domain.com."}
         />
         <Button
