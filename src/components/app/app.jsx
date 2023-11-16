@@ -36,7 +36,7 @@ function App() {
         <Route path="/login" element={<LoginPage />}/>
         <Route path="/register" element={<RegistrationPage />}/>
         <Route path="/forgot-password" element={<ForgotPasswordPage />}/>
-        <Route path="/create-new-password" element={<NewPasswordPage />}/>
+        <Route path="/reset-password" element={<NewPasswordPage />}/>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

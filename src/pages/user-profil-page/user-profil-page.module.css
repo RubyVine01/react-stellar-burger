@@ -28,11 +28,17 @@
 }
 
 .link {
-  height: 47px;
   text-decoration: none;
-  padding-top: 17px;
 }
 
 .description {
   opacity: 0.4;
+}
+
+.btn_place {
+  width: 480px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  column-gap: 20px;
 }

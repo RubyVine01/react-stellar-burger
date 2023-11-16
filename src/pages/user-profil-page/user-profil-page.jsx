@@ -1,10 +1,12 @@
 import {
+  Button,
   EmailInput,
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./user-profil-page.module.css";
 import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 function UserProfilPage() {
   const [email, setEmail] = useState("test@mail.com");
@@ -15,27 +17,30 @@ function UserProfilPage() {
     <main className={styles.content}>
       <div className={styles.navigation_part}>
         <nav className={styles.nav}>
-          <a
-            href="profile"
-            className={`text text_type_main-medium text_color_primary ${styles.link}`}
+          <NavLink
+            to="profile"
+            className={`text text_type_main-medium text_color_primary pt-8 ${styles.link}`}
           >
             Профиль
-          </a>
-          <a
-            href="order-history"
-            className={`text text_type_main-medium text_color_inactive ${styles.link}`}
+          </NavLink>
+          <NavLink
+            to="order-history"
+            className={`text text_type_main-medium text_color_inactive pt-8 ${styles.link}`}
           >
             История заказов
-          </a>
-          <a
-            href="logout"
-            className={`text text_type_main-medium text_color_inactive ${styles.link}`}
+          </NavLink>
+          <NavLink
+            to="logout"
+            className={`text text_type_main-medium text_color_inactive pt-8 ${styles.link}`}
           >
             Выход
-          </a>
+          </NavLink>
         </nav>
-        <p className={`text text_type_main-default text_color_inactive ${styles.description}`}>
-          В этом разделе вы можете<br/> изменить свои персональные данные
+        <p
+          className={`text text_type_main-default text_color_inactive ${styles.description}`}
+        >
+          В этом разделе вы можете
+          <br /> изменить свои персональные данные
         </p>
       </div>
 
@@ -53,6 +58,17 @@ function UserProfilPage() {
           value={password}
           icon="EditIcon"
         />
+        <div className={styles.btn_place}>
+          <Link
+            to="/"
+            className={`text_color_accent  text text_type_main-default  ${styles.link}`}
+          >
+            Отмена
+          </Link>
+          <Button htmlType="button" type="primary" size="medium">
+            Сохранить
+          </Button>
+        </div>
       </form>
     </main>
   );
