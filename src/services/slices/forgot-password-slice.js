@@ -14,7 +14,6 @@ const forgotPasswordSlice = createSlice({
   extraReducers: {
     [fetchResetCode.fulfilled]: (state, action) => {
       state.fetchRes = action.payload;
-      console.log(action.payload)
       state.isLoading = false;
       state.error = false;
     },

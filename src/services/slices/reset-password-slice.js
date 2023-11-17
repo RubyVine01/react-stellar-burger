@@ -1,32 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchResetCode } from "../thunks/forgot-password-thunk.js";
+import { fetchСonfirmNewPassword } from "../thunks/reset-password-thunk";
 
 const initialState = {
   fetchRes: {},
   isLoading: false,
   error: false,
+  errorMessage: '',
 };
 
-const forgotPasswordSlice = createSlice({
-  name: "forgotPassword",
+const resetPasswordSlice = createSlice({
+  name: "resetPassword",
   initialState,
   reducers: {},
   extraReducers: {
-    [fetchResetCode.fulfilled]: (state, action) => {
+    [fetchСonfirmNewPassword.fulfilled]: (state, action) => {
       state.fetchRes = action.payload;
-      console.log(action.payload)
       state.isLoading = false;
       state.error = false;
     },
-    [fetchResetCode.pending]: (state) => {
+    [fetchСonfirmNewPassword.pending]: (state) => {
       state.isLoading = true;
       state.error = false;
     },
-    [fetchResetCode.rejected]: (state) => {
+    [fetchСonfirmNewPassword.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = true;
+      state.errorMessage = action;
     },
   },
 });
 
-export default forgotPasswordSlice.reducer;
+export default resetPasswordSlice.reducer;

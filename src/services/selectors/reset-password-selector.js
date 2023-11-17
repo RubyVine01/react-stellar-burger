@@ -1,3 +1,4 @@
-export const getStatusSentCode = (state) => state.forgotPassword.fetchRes.success;
-export const getError = (state) => state.forgotPassword.error;
-export const getIsLoading = (state) => state.forgotPassword.isLoading;
+export const getStatusRes = (state) => state.resetPassword.fetchRes.success;
+export const getError = (state) => state.resetPassword.error;
+export const getErrorMessage = (state) => state.resetPassword.errorMessage;
+export const getIsLoading = (state) => state.resetPassword.isLoading;

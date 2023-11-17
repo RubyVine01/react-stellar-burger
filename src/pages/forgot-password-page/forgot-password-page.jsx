@@ -23,15 +23,13 @@ function ForgotPasswordPage() {
   const isError = useSelector(getError);
   const isLoading = useSelector(getIsLoading);
 
-  console.log(isLoading);
+ 
 
   const onChangeEmail = (e) => {
     const emailValue = e.target.value;
     setEmail(emailValue);
     setIsEmailValid(emailRegex.test(emailValue));
   };
-
-  console.log(email);
 
   const handleSubmit = (e) => {
     e.preventDefault();
