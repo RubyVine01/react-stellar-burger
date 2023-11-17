@@ -3,34 +3,45 @@ import {
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./forgot-password-page.module.css";
-import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useCallback, useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchResetCode } from "../../services/thunks/forgot-password-thunk";
+import { getStatusSentCode } from "../../services/selectors/forgot-password-selector";
 
 function ForgotPasswordPage() {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState("");
-  const [isEmailValid, setIsEmailValid] = useState(false);
-  
-
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+  const [email, setEmail] = useState(null);
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const resStatus = useSelector(getStatusSentCode);
+
+  console.log(resStatus);
+
+  console.log(email);
+  console.log(resStatus);
   const onChangeEmail = (e) => {
     const emailValue = e.target.value;
     setEmail(emailValue);
     setIsEmailValid(emailRegex.test(emailValue));
   };
 
-  const resetPassword = (e) => {
-    e.preventDefault();
-    dispatch(fetchResetCode());
-
-  };
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (!email) {
+        return;
+      }
+      dispatch(fetchResetCode(email));
+      setEmail("");
+    },
+    [dispatch]
+  );
 
   return (
     <main className={styles.content}>
-      <form className={styles.form} onSubmit={resetPassword}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <h1 className={`text text_type_main-medium`}>Восстановление пароля</h1>
         <EmailInput
           name={"email"}
@@ -43,7 +54,6 @@ function ForgotPasswordPage() {
           htmlType="submit"
           type="primary"
           size="medium"
-          onClick={resetPassword}
           disabled={!isEmailValid}
         >
           Восстановить

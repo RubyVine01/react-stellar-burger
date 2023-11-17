@@ -1,0 +1,1 @@
+export const getStatusSentCode = (state) => state.forgotPassword.fetchRes.success;
