@@ -11,6 +11,14 @@ function ResetPasswordPage() {
   const [password, setPassword] = useState("");
   const [code, setCode] = useState("");
 
+  const onChangePassword = (e) => {
+    setPassword( e.target.value);
+  };
+
+  const onChangeCode = (e) => {
+    setCode( e.target.value);
+  };
+
   return (
     <main className={styles.content}>
       <form className={styles.form}>
@@ -19,8 +27,10 @@ function ResetPasswordPage() {
           name={"password"}
           placeholder={"Введите новый пароль"}
           value={password}
+          onChange={onChangePassword}
         />
-        <Input type={"text"} placeholder={"Введите код из письма"} value={code}/>
+        <Input type={"text"} placeholder={"Введите код из письма"} value={code}
+        onChange={onChangeCode}/>
         <Button htmlType="button" type="primary" size="medium" >
           Сохранить
         </Button>
