@@ -23,8 +23,6 @@ function ForgotPasswordPage() {
   const isError = useSelector(getError);
   const isLoading = useSelector(getIsLoading);
 
- 
-
   const onChangeEmail = (e) => {
     const emailValue = e.target.value;
     setEmail(emailValue);

@@ -6,7 +6,7 @@ import orderDetailsReducer from "./slices/order-details-slice.js";
 import constructorReducer from "./slices/burger-constructor-slice.js";
 import forgotPasswordReducer from "./slices/forgot-password-slice.js";
 import resetPasswordReducer from "./slices/reset-password-slice.js";
-
+import userProfileReducer from "./slices/user-slice.js";
 
 export const store = configureStore({
   reducer: {
@@ -17,5 +17,6 @@ export const store = configureStore({
     cartConstructor: constructorReducer,
     forgotPassword: forgotPasswordReducer,
     resetPassword: resetPasswordReducer,
+    userProfile: userProfileReducer,
   },
 });

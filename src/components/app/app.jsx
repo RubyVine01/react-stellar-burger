@@ -30,7 +30,7 @@ function App() {
       <AppHeader />
       <Routes>
         <Route index element={<Main />} />
-        <Route path="/profile" element={<UserProfilePage /> }>
+        <Route path="/profile" element={<UserProfilePage />}>
           <Route index element={<UserProfile />} />
           <Route path="order-history" element={<OrderHistory />} />
         </Route>

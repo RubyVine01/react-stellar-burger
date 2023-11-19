@@ -7,23 +7,50 @@ import {
 import styles from "./registration-page.module.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchRegister } from "../../services/thunks/user-thunk";
 
 function RegistrationPage() {
+  const dispatch = useDispatch();
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const onChangeName = (e) => {
+    setName(e.target.value);
+  };
+
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const onChangeEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(fetchRegister({ email, password, name }));
+  };
+
   return (
     <main className={styles.content}>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <h1 className={`text text_type_main-medium`}>Регистрация</h1>
-        <Input type={"text"} placeholder={"Имя"} />
-        <EmailInput name={"email"} placeholder={"E-mail"} value={email} />
+        <Input type={"text"} placeholder={"Имя"} onChange={onChangeName} />
+        <EmailInput
+          name={"email"}
+          placeholder={"E-mail"}
+          value={email}
+          onChange={onChangeEmail}
+        />
         <PasswordInput
           name={"password"}
           placeholder={"Пароль"}
           value={password}
+          onChange={onChangePassword}
         />
-        <Button htmlType="button" type="primary" size="medium">
+        <Button htmlType="submit" type="primary" size="medium">
           Зарегистрироваться
         </Button>
       </form>

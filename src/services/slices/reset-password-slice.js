@@ -5,7 +5,6 @@ const initialState = {
   fetchRes: {},
   isLoading: false,
   error: false,
-  errorMessage: '',
 };
 
 const resetPasswordSlice = createSlice({

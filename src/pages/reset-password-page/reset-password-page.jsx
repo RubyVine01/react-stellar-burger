@@ -12,7 +12,6 @@ import {
   getStatusRes,
   getError,
   getIsLoading,
-  getErrorMessage,
 } from "../../services/selectors/reset-password-selector";
 
 function ResetPasswordPage() {
@@ -25,8 +24,6 @@ function ResetPasswordPage() {
   const resStatus = useSelector(getStatusRes);
   const isError = useSelector(getError);
   const isLoading = useSelector(getIsLoading);
-  const errorMessage = useSelector(getErrorMessage);
-  console.log(errorMessage);
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
