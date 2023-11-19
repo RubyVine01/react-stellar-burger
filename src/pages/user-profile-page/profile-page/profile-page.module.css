@@ -1,0 +1,17 @@
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  row-gap: 24px;
+}
+
+.btn_place {
+  width: 480px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  column-gap: 20px;
+}
