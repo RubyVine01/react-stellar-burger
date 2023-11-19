@@ -16,6 +16,7 @@ import RegistrationPage from "../../pages/registration-page/registration-page";
 import ResetPasswordPage from "../../pages/reset-password-page/reset-password-page";
 import UserProfilePage from "../../pages/user-profile-page/user-profile-page";
 import UserProfile from "../../pages/user-profile-page/profile-page/profile-page";
+import OrderHistory from "../../pages/user-profile-page/order-history-page/order-history-page";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,8 +30,9 @@ function App() {
       <AppHeader />
       <Routes>
         <Route index element={<Main />} />
-        <Route path="/profile" element={<UserProfilePage />}>
+        <Route path="/profile" element={<UserProfilePage /> }>
           <Route index element={<UserProfile />} />
+          <Route path="order-history" element={<OrderHistory />} />
         </Route>
         <Route path="/orders" element={<OrdersPage />} />
         <Route path="/login" element={<LoginPage />} />

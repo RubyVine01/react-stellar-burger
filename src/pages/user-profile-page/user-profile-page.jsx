@@ -1,29 +1,27 @@
-
 import styles from "./user-profile-page.module.css";
 import { NavLink, Outlet } from "react-router-dom";
 
 function UserProfilePage() {
+  const linkClassName = ({ isActive }) =>
+    isActive
+      ? "text_color_primary  text text_type_main-medium mt-8 " +
+        " " +
+        styles.link
+      : "text_color_inactive text text_type_main-medium mt-8" +
+        " " +
+        styles.link;
 
   return (
     <main className={styles.content}>
-      <div className={styles.navigation_part}>
+      <div className={`${styles.navigation_part} ml-5`}>
         <nav className={styles.nav}>
-          <NavLink
-            to="/profile"
-            className={`text text_type_main-medium text_color_primary pt-8 ${styles.link}`}
-          >
+          <NavLink to="/profile" className={linkClassName} end>
             Профиль
           </NavLink>
-          <NavLink
-            to="order-history"
-            className={`text text_type_main-medium text_color_inactive pt-8 ${styles.link}`}
-          >
+          <NavLink to="order-history" className={linkClassName}>
             История заказов
           </NavLink>
-          <NavLink
-            to="/"
-            className={`text text_type_main-medium text_color_inactive pt-8 ${styles.link}`}
-          >
+          <NavLink to="/" className={linkClassName}>
             Выход
           </NavLink>
         </nav>
