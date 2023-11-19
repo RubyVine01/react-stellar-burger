@@ -7,7 +7,7 @@ import AppHeader from "../app-header/app-header.jsx";
 import { fetchIngredients } from "../../services/thunks/ingredients-data-thunk";
 import LoginPage from "../../pages/login-page/login-page";
 import IngredientPage from "../../pages/ingredient-page/ingredient-page";
-import Main from "../main/main";
+import Main from "../../pages/main/main";
 import { Route, Routes } from "react-router-dom";
 import OrdersPage from "../../pages/orders-page/orders-page";
 import NotFoundPage from "../../pages/not-found-page/not-found-page";
