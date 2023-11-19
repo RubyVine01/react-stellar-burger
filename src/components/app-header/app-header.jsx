@@ -44,7 +44,7 @@ function AppHeader() {
           to="/profile"
         >
           <ProfileIcon
-            type={pathname === "/profile" ? "primary" : "secondary"}
+            type={pathname.startsWith("/profile")  ? "primary" : "secondary"}
           />
           <p className={`${styles.name} text text_type_main-default pl-2`}>
             Личный кабинет

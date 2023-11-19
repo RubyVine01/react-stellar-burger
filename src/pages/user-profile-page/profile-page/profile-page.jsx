@@ -5,13 +5,18 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile-page.module.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { getUser } from "../../../services/selectors/user-selector";
 
 function UserProfile() {
-  const [email, setEmail] = useState("test@mail.com");
-  const [password, setPassword] = useState("8923u198");
-  const [name, setName] = useState("Valeriia");
+  const user = useSelector(getUser);
+  console.log(`user: ${user}`);
+  const [email, setEmail] = useState(user.email || "");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState(user.name || "");
   const [fieldDisabled, setDisabled] = useState(true);
+
   const nameInputRef = useRef();
 
   const onChangeEmail = (e) => {
@@ -34,6 +39,18 @@ function UserProfile() {
     setDisabled(false);
     setTimeout(() => nameInputRef.current?.focus(), 0);
   };
+
+  function handleCancel() {
+    setName(user.name);
+    setEmail(user.email);
+  }
+
+  useEffect(() => {
+    if (user) {
+      setName(user.name);
+      setEmail(user.email);
+    }
+  }, [user]);
 
   return (
     <form className={styles.form}>
@@ -66,7 +83,12 @@ function UserProfile() {
         size="default"
       />
       <div className={styles.btn_place}>
-        <Button htmlType="button" type="secondary" size="medium">
+        <Button
+          htmlType="button"
+          type="secondary"
+          size="medium"
+          onClick={() => handleCancel()}
+        >
           Отмена
         </Button>
 

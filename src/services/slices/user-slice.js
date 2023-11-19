@@ -7,7 +7,8 @@ import {
 } from "../thunks/user-thunk";
 
 const initialState = {
-  user: "",
+  user: {},
+  isAuthChecked: false,
   accessToken: "",
   isLoading: false,
   error: false,
@@ -16,11 +17,19 @@ const initialState = {
 const userProfileSlice = createSlice({
   name: "userProfile",
   initialState,
-  reducers: {},
+  reducers: {
+    setAuthChecked: (state, action) => {
+      state.isAuthChecked = action.payload;
+    },
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
+  },
   extraReducers: {
     // Регистрация
     [fetchRegister.fulfilled]: (state, action) => {
       state.user = action.payload.user;
+
       state.accessToken = action.payload.accessToken;
       localStorage.setItem("refreshToken", action.payload.refreshToken);
       state.isLoading = false;
@@ -38,6 +47,7 @@ const userProfileSlice = createSlice({
     // Авторизация
     [fetchLogin.fulfilled]: (state, action) => {
       state.user = action.payload.user;
+      console.log(action.payload.user);
       state.accessToken = action.payload.accessToken;
       localStorage.setItem("refreshToken", action.payload.refreshToken);
       state.isLoading = false;
@@ -90,4 +100,5 @@ const userProfileSlice = createSlice({
   },
 });
 
+export const { setAuthChecked, setUser } = userProfileSlice.actions;
 export default userProfileSlice.reducer;

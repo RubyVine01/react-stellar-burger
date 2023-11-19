@@ -2,7 +2,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseURL } from "../../utils/const.js";
 import { request } from "../../utils/api.js";
 
-
+const urRegister = `${baseURL}/auth/register`;
+const urlLogin = `${baseURL}/auth/login`;
+const urlLogout = `${baseURL}/auth/logout`;
+const urlToken = `${baseURL}/auth/token`;
 
 const options = ({ email, password, name, token } = {}) => {
   const bodyData = {
@@ -19,11 +22,6 @@ const options = ({ email, password, name, token } = {}) => {
     body: JSON.stringify(bodyData),
   };
 };
-
-const urRegister = `${baseURL}/auth/register`;
-const urlLogin = `${baseURL}/auth/login`;
-const urlLogout = `${baseURL}/auth/logout`;
-const urlToken = `${baseURL}/auth/token`;
 
 export const fetchRegister = createAsyncThunk(
   "register/post",
@@ -46,11 +44,9 @@ export const fetchToken = createAsyncThunk(
   }
 );
 
-
 export const fetchLogout = createAsyncThunk(
   "logout/post",
   async ({ refreshToken }) => {
     return request(urlLogout, options({ refreshToken }));
   }
 );
-
