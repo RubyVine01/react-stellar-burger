@@ -7,13 +7,18 @@ import styles from "./reset-password-page.module.css";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchСonfirmNewPassword} from "../../services/thunks/reset-password-thunk"
-import { getStatusRes, getError, getIsLoading, getErrorMessage } from "../../services/selectors/reset-password-selector";
+import { fetchСonfirmNewPassword } from "../../services/thunks/reset-password-thunk";
+import {
+  getStatusRes,
+  getError,
+  getIsLoading,
+  getErrorMessage,
+} from "../../services/selectors/reset-password-selector";
 
 function ResetPasswordPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const [password, setPassword] = useState("");
   const [token, setToken] = useState("");
 
@@ -21,7 +26,7 @@ function ResetPasswordPage() {
   const isError = useSelector(getError);
   const isLoading = useSelector(getIsLoading);
   const errorMessage = useSelector(getErrorMessage);
-  console.log( errorMessage);
+  console.log(errorMessage);
 
   const onChangePassword = (e) => {
     setPassword(e.target.value);
@@ -33,7 +38,7 @@ function ResetPasswordPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchСonfirmNewPassword({password, token}));
+    dispatch(fetchСonfirmNewPassword({ password, token }));
   };
 
   useEffect(() => {
@@ -68,7 +73,7 @@ function ResetPasswordPage() {
           </p>
         )}
         <Button htmlType="submit" type="primary" size="medium">
-        {!isLoading ? "Сохранить" : "Сохранение..."}
+          {!isLoading ? "Сохранить" : "Сохранение..."}
         </Button>
       </form>
       <p className={`pt-20 text text_type_main-default text_color_inactive`}>
