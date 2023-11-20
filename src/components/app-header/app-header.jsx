@@ -11,8 +11,8 @@ function AppHeader() {
   const { pathname } = useLocation();
   const linkClassName = ({ isActive }) =>
     isActive
-      ? "text_color_primary  pt-4 pb-4 pr-5 pl-5" + " " + styles.nav_link
-      : "text_color_inactive  pt-4 pb-4 pr-5 pl-5" + " " + styles.nav_link;
+      ? `text_color_primary  pt-4 pb-4 pr-5 pl-5 ${styles.nav_link}`
+      : `text_color_inactive  pt-4 pb-4 pr-5 pl-5  ${styles.nav_link}`;
 
 
   return (

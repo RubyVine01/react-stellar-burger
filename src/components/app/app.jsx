@@ -6,7 +6,7 @@ import AppHeader from "../app-header/app-header.jsx";
 
 import { fetchIngredients } from "../../services/thunks/ingredients-data-thunk";
 import LoginPage from "../../pages/login-page/login-page";
-import IngredientPage from "../../pages/ingredient-page/ingredient-page";
+// import IngredientPage from "../../pages/ingredient-page/ingredient-page";
 import Main from "../../pages/main/main";
 import { Route, Routes } from "react-router-dom";
 import OrdersPage from "../../pages/orders-page/orders-page";
@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchIngredients());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={styles.app}>

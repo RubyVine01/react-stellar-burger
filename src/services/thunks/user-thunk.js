@@ -15,7 +15,6 @@ const options = ({ email, password, name, token } = {}) => {
     ...(token && { token }),
   };
 
-  console.log(bodyData);
   return {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -23,19 +22,55 @@ const options = ({ email, password, name, token } = {}) => {
   };
 };
 
+//        localStorage.setItem("refreshToken", action.payload.refreshToken);
+//         localStorage.removeItem("refreshToken");
+
 export const fetchRegister = createAsyncThunk(
   "register/post",
-  async ({ email, password, name }) => {
-    return request(urRegister, options({ email, password, name }));
+  async ({ email, password, name }, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const data = await request(
+        urRegister,
+        options({ email, password, name })
+      );
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      return fulfillWithValue(data.user);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );
 
 export const fetchLogin = createAsyncThunk(
   "login/post",
-  async ({ email, password }) => {
-    return request(urlLogin, options({ email, password }));
+  async ({ email, password }, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const data = await request(urlLogin, options({ email, password }));
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      return fulfillWithValue(data.user);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );
+
+
+// export const fetchToken = createAsyncThunk(
+//   "token/post",
+//   async ({ refreshToken }, { fulfillWithValue, rejectWithValue }) => {
+//     try {
+//       const data = await request(urlToken, options({ refreshToken }));
+//       localStorage.setItem("accessToken", data.accessToken);
+//       localStorage.setItem("refreshToken", data.refreshToken);
+//       return fulfillWithValue(data.user);
+//     } catch (error) {
+//       return rejectWithValue(error);
+//     }
+//   }
+// );
+
 
 export const fetchToken = createAsyncThunk(
   "token/post",

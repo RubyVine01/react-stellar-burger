@@ -9,9 +9,9 @@ import {
 const initialState = {
   user: {},
   isAuthChecked: false,
-  accessToken: "",
   isLoading: false,
   error: false,
+  errorMessage: "",
 };
 
 const userProfileSlice = createSlice({
@@ -25,78 +25,50 @@ const userProfileSlice = createSlice({
       state.user = action.payload;
     },
   },
-  extraReducers: {
-    // Регистрация
-    [fetchRegister.fulfilled]: (state, action) => {
-      state.user = action.payload.user;
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchRegister.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.isLoading = false;
+        state.error = false;
+      })
+      .addCase(fetchLogin.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isLoading = false;
+        state.error = false;
+        console.log(state.user);
+      })
+      .addCase(fetchToken.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = false;
+       
+      })
+      .addCase(fetchLogout.fulfilled, (state) => {
+        state.user = "";
+        state.accessToken = "";
+        state.isLoading = false;
+        state.error = false;
+   
+      })
 
-      state.accessToken = action.payload.accessToken;
-      localStorage.setItem("refreshToken", action.payload.refreshToken);
-      state.isLoading = false;
-      state.error = false;
-    },
-    [fetchRegister.pending]: (state) => {
-      state.isLoading = true;
-      state.error = false;
-    },
-    [fetchRegister.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.errorMessage = action;
-    },
-    // Авторизация
-    [fetchLogin.fulfilled]: (state, action) => {
-      state.user = action.payload.user;
-      console.log(action.payload.user);
-      state.accessToken = action.payload.accessToken;
-      localStorage.setItem("refreshToken", action.payload.refreshToken);
-      state.isLoading = false;
-      state.error = false;
-    },
-    [fetchLogin.pending]: (state) => {
-      state.isLoading = true;
-      state.error = false;
-    },
-    [fetchLogin.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.errorMessage = action;
-    },
-
-    // Обновление токена
-    [fetchToken.fulfilled]: (state, action) => {
-      state.accessToken = action.payload.accessToken;
-      localStorage.setItem("refreshToken", action.payload.refreshToken);
-      state.isLoading = false;
-      state.error = false;
-    },
-    [fetchToken.pending]: (state) => {
-      state.isLoading = true;
-      state.error = false;
-    },
-    [fetchToken.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.errorMessage = action;
-    },
-
-    // Выход из системы
-    [fetchLogout.fulfilled]: (state, action) => {
-      state.user = "";
-      state.accessToken = "";
-      localStorage.removeItem("refreshToken");
-      state.isLoading = false;
-      state.error = false;
-    },
-    [fetchLogout.pending]: (state) => {
-      state.isLoading = true;
-      state.error = false;
-    },
-    [fetchLogout.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.error = true;
-      state.errorMessage = action;
-    },
+      .addMatcher(
+        (action) => action.type.endsWith("/pending"),
+        (state) => {
+          state.isLoading = true;
+          state.error = false;
+          // console.log(`state.isLoading: ${state.isLoading}`);
+        }
+      )
+      .addMatcher(
+        (action) => action.type.endsWith("/rejected"),
+        (state, action) => {
+          state.isLoading = false;
+          state.error = true;
+          state.errorMessage = action.payload;
+          console.log(state.error);
+          console.log(`state.errorMessage: ${state.errorMessage}`);
+        }
+      );
   },
 });
 
