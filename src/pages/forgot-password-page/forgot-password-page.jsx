@@ -56,7 +56,7 @@ function ForgotPasswordPage() {
           <p
             className={` text text_type_main-small text_color_error ${styles.fetch_error}`}
           >
-            При обработке запроса, произошла ошибка.
+            При обработке запроса произошла ошибка.
             <br /> Пожалуйста, попробуйте еще раз.
           </p>
         )}
