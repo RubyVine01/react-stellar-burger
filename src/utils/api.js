@@ -1,13 +1,5 @@
-// function checkResponse(res) {
-//   if (res.ok) {
-//     return res.json();
-//   }
-//   return Promise.reject(`Ошибка: ${res.status}`);
-// }
-
 function checkResponse(res) {
   const contentType = res.headers.get("content-type");
-
   if (contentType && contentType.includes("application/json")) {
     return res.json().then((data) => {
       if (res.ok) {
@@ -17,7 +9,6 @@ function checkResponse(res) {
       }
     });
   } else {
-    // Возвращение только кода статуса ошибки
     return Promise.reject(`Ошибка: ${res.status}`);
   }
   

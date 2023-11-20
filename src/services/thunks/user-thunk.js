@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseURL } from "../../utils/const.js";
 import { request } from "../../utils/api.js";
+import { setAuthChecked, setUser } from "../slices/user-slice.js";
 
 const urRegister = `${baseURL}/auth/register`;
 const urlLogin = `${baseURL}/auth/login`;
@@ -21,9 +22,6 @@ const options = ({ email, password, name, token } = {}) => {
     body: JSON.stringify(bodyData),
   };
 };
-
-//        localStorage.setItem("refreshToken", action.payload.refreshToken);
-//         localStorage.removeItem("refreshToken");
 
 export const fetchRegister = createAsyncThunk(
   "register/post",
@@ -57,31 +55,49 @@ export const fetchLogin = createAsyncThunk(
 );
 
 
-// export const fetchToken = createAsyncThunk(
-//   "token/post",
-//   async ({ refreshToken }, { fulfillWithValue, rejectWithValue }) => {
-//     try {
-//       const data = await request(urlToken, options({ refreshToken }));
-//       localStorage.setItem("accessToken", data.accessToken);
-//       localStorage.setItem("refreshToken", data.refreshToken);
-//       return fulfillWithValue(data.user);
-//     } catch (error) {
-//       return rejectWithValue(error);
-//     }
-//   }
-// );
-
-
 export const fetchToken = createAsyncThunk(
   "token/post",
-  async ({ refreshToken }) => {
-    return request(urlToken, options({ refreshToken }));
+  async ({ refreshToken }, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      const data = await request(urlToken, options({ refreshToken })); // ?
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      // return fulfillWithValue(data.user);
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );
+
 
 export const fetchLogout = createAsyncThunk(
   "logout/post",
-  async ({ refreshToken }) => {
-    return request(urlLogout, options({ refreshToken }));
+  async ({ refreshToken }, { fulfillWithValue, rejectWithValue }) => {
+    try {
+      await request(urlLogout, options({ refreshToken })); // ?
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("refreshToken");
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );
+
+
+
+export const checkUserAuth = () => {
+  return (dispatch) => {
+    if (localStorage.getItem("accessToken")) {
+      dispatch(getUser())
+        .catch((error) => {
+          localStorage.removeItem("accessToken");
+          localStorage.removeItem("refreshToken");
+          dispatch(setUser(null));
+        })
+        .finally(() => dispatch(setAuthChecked(true)));
+    } else {
+      dispatch(setAuthChecked(true));
+      dispatch(setUser(null));
+    }
+  };
+};

@@ -7,10 +7,13 @@ import styles from "./login-page.module.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchLogin } from "../../services/thunks/user-thunk";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getError, getErrorMessage } from "../../services/selectors/user-selector";
 
 function LoginPage() {
   
+  const isError = useSelector(getError);
+  const errorMessage = useSelector(getErrorMessage);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,15 +27,9 @@ function LoginPage() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     dispatch(fetchLogin({ email, password }));
   };
-
-  // useEffect(() => {
-  //   if (resStatus && !isError) {
-  //     navigate("/profile");
-  //   }
-  // }, [resStatus, isError, navigate]);
 
   return (
     <main className={styles.content}>
@@ -50,6 +47,15 @@ function LoginPage() {
           value={password}
           onChange={onChangePassword}
         />
+         {isError && (
+          <p
+            className={` text text_type_main-small text_color_error ${styles.fetch_error}`}
+          >
+            При обработке запроса, произошла ошибка:
+            <br />{`"${errorMessage}"`}
+            <br />Пожалуйста, попробуйте еще раз.
+          </p>
+        )}
         <Button htmlType="submit" type="primary" size="medium">
           Войти
         </Button>
