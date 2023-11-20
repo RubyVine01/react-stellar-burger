@@ -41,14 +41,12 @@ const userProfileSlice = createSlice({
       .addCase(fetchToken.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = false;
-       
       })
       .addCase(fetchLogout.fulfilled, (state) => {
         state.user = "";
         state.accessToken = "";
         state.isLoading = false;
         state.error = false;
-   
       })
 
       .addMatcher(
@@ -56,7 +54,6 @@ const userProfileSlice = createSlice({
         (state) => {
           state.isLoading = true;
           state.error = false;
-          // console.log(`state.isLoading: ${state.isLoading}`);
         }
       )
       .addMatcher(

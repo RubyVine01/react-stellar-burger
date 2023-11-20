@@ -8,10 +8,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchLogin } from "../../services/thunks/user-thunk";
 import { useDispatch, useSelector } from "react-redux";
-import { getError, getErrorMessage } from "../../services/selectors/user-selector";
+import {
+  getError,
+  getErrorMessage,
+} from "../../services/selectors/user-selector";
 
 function LoginPage() {
-  
   const isError = useSelector(getError);
   const errorMessage = useSelector(getErrorMessage);
   const dispatch = useDispatch();
@@ -27,13 +29,13 @@ function LoginPage() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     dispatch(fetchLogin({ email, password }));
   };
 
   return (
     <main className={styles.content}>
-      <form className={styles.form} onSubmit={handleSubmit}> 
+      <form className={styles.form} onSubmit={handleSubmit}>
         <h1 className={`text text_type_main-medium`}>Вход</h1>
         <EmailInput
           name={"email"}
@@ -47,13 +49,15 @@ function LoginPage() {
           value={password}
           onChange={onChangePassword}
         />
-         {isError && (
+        {isError && (
           <p
             className={` text text_type_main-small text_color_error ${styles.fetch_error}`}
           >
             При обработке запроса произошла ошибка:
-            <br />{`"${errorMessage}"`}
-            <br />Пожалуйста, попробуйте еще раз.
+            <br />
+            {`"${errorMessage}"`}
+            <br />
+            Пожалуйста, попробуйте еще раз.
           </p>
         )}
         <Button htmlType="submit" type="primary" size="medium">

@@ -11,7 +11,6 @@ function checkResponse(res) {
   } else {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
-  
 }
 
 export function request(url, options) {

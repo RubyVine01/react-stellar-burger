@@ -54,7 +54,6 @@ export const fetchLogin = createAsyncThunk(
   }
 );
 
-
 export const fetchToken = createAsyncThunk(
   "token/post",
   async ({ refreshToken }, { fulfillWithValue, rejectWithValue }) => {
@@ -69,7 +68,6 @@ export const fetchToken = createAsyncThunk(
   }
 );
 
-
 export const fetchLogout = createAsyncThunk(
   "logout/post",
   async ({ refreshToken }, { fulfillWithValue, rejectWithValue }) => {
@@ -82,8 +80,6 @@ export const fetchLogout = createAsyncThunk(
     }
   }
 );
-
-
 
 export const checkUserAuth = () => {
   return (dispatch) => {

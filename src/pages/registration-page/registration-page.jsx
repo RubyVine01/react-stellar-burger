@@ -9,7 +9,10 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRegister } from "../../services/thunks/user-thunk";
-import { getError, getErrorMessage } from "../../services/selectors/user-selector";
+import {
+  getError,
+  getErrorMessage,
+} from "../../services/selectors/user-selector";
 
 function RegistrationPage() {
   const isError = useSelector(getError);
@@ -58,8 +61,10 @@ function RegistrationPage() {
             className={` text text_type_main-small text_color_error ${styles.fetch_error}`}
           >
             При обработке запроса произошла ошибка:
-            <br />{`"${errorMessage}"`}
-            <br />Пожалуйста, попробуйте еще раз.
+            <br />
+            {`"${errorMessage}"`}
+            <br />
+            Пожалуйста, попробуйте еще раз.
           </p>
         )}
         <Button htmlType="submit" type="primary" size="medium">
