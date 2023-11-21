@@ -3,34 +3,25 @@ import { baseURL } from "../../utils/const.js";
 import { request } from "../../utils/api.js";
 import { setAuthChecked, setUser } from "../slices/user-slice.js";
 
+// register/post
+
 const urRegister = `${baseURL}/auth/register`;
-const urlLogin = `${baseURL}/auth/login`;
-const urlLogout = `${baseURL}/auth/logout`;
-const urlToken = `${baseURL}/auth/token`;
-
-const options = ({ email, password, name, token } = {}) => {
-  const bodyData = {
-    ...(email && { email }),
-    ...(password && { password }),
-    ...(name && { name }),
-    ...(token && { token }),
-  };
-
-  return {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(bodyData),
-  };
-};
 
 export const fetchRegister = createAsyncThunk(
   "register/post",
   async ({ email, password, name }, { fulfillWithValue, rejectWithValue }) => {
     try {
-      const data = await request(
-        urRegister,
-        options({ email, password, name })
-      );
+      const data = await request(urRegister, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          name: name,
+        }),
+      });
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
       return fulfillWithValue(data.user);
@@ -39,12 +30,25 @@ export const fetchRegister = createAsyncThunk(
     }
   }
 );
+
+// login/post
+
+const urlLogin = `${baseURL}/auth/login`;
 
 export const fetchLogin = createAsyncThunk(
   "login/post",
   async ({ email, password }, { fulfillWithValue, rejectWithValue }) => {
     try {
-      const data = await request(urlLogin, options({ email, password }));
+      const data = await request(urlLogin, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
       return fulfillWithValue(data.user);
@@ -54,43 +58,54 @@ export const fetchLogin = createAsyncThunk(
   }
 );
 
-export const fetchToken = createAsyncThunk(
-  "token/post",
-  async ({ refreshToken }, { fulfillWithValue, rejectWithValue }) => {
-    try {
-      const data = await request(urlToken, options({ refreshToken })); // ?
-      localStorage.setItem("accessToken", data.accessToken);
-      localStorage.setItem("refreshToken", data.refreshToken);
-      // return fulfillWithValue(data.user);
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
+// logout/post
+
+const urlLogout = `${baseURL}/auth/logout`;
 
 export const fetchLogout = createAsyncThunk(
   "logout/post",
-  async ({ refreshToken }, { fulfillWithValue, rejectWithValue }) => {
+  async ( _, { rejectWithValue }) => {
     try {
-      await request(urlLogout, options({ refreshToken })); // ?
+      await request(urlLogout, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: localStorage.getItem("refreshToken"),
+        }),
+      }); 
       localStorage.removeItem("refreshToken");
-      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("accessToken");
     } catch (error) {
       return rejectWithValue(error);
     }
   }
 );
 
+// token/post
 
+const urlToken = `${baseURL}/auth/token`;
 
-const urlUser = `${baseURL}/auth/user`;
+export const fetchRefreshToken = () => {
+  request(urlToken, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: localStorage.getItem("refreshToken"),
+    }),
+  });
+};
+
 
 const fetchWithRefresh = async (url, options) => {
   try {
     return await request(url, options);
   } catch (err) {
     if (err.message === "jwt expired") {
-      const refreshData = await fetchToken();
+      const refreshData = await fetchRefreshToken();
       if (!refreshData.success) {
         return Promise.reject(refreshData);
       }
@@ -105,6 +120,7 @@ const fetchWithRefresh = async (url, options) => {
 };
 
 
+const urlUser = `${baseURL}/auth/user`;
 
 export const fetchGetUser = () => {
   return (dispatch) => {
@@ -141,11 +157,9 @@ export const checkUserAuth = () => {
   };
 };
 
-
-
 export const fetchUpdateUser = createAsyncThunk(
   "auth/updateUser",
-  async ({name, email }) => {
+  async ({ name, email }) => {
     const res = await fetchWithRefresh(urlUser, {
       method: "PATCH",
       headers: {
@@ -154,7 +168,7 @@ export const fetchUpdateUser = createAsyncThunk(
       },
       body: JSON.stringify({
         name: name,
-        email:email,
+        email: email,
       }),
     });
     return res.user;

@@ -5,7 +5,7 @@ import { setAuthChecked } from "../../services/slices/user-slice";
 import { checkUserAuth } from "../../services/thunks/user-thunk";
 
 
-const Protected = ({ onlyUnAuth = false, component }) => {
+const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -13,8 +13,8 @@ const Protected = ({ onlyUnAuth = false, component }) => {
     dispatch(checkUserAuth());
   }, [dispatch]);
 
-  const isAuthChecked = useSelector((store) => store.user.isAuthChecked);
-  const user = useSelector((store) => store.user.user);
+  const isAuthChecked = useSelector((store) => store.userProfile.isAuthChecked);
+  const user = useSelector((store) => store.userProfile.user);
   const location = useLocation();
 
   if (!isAuthChecked) {
@@ -38,5 +38,5 @@ const Protected = ({ onlyUnAuth = false, component }) => {
   return component;
 };
 
-export const OnlyAuth = (props) => <Protected onlyUnAuth={false} {...props} />;
-export const OnlyUnAuth = (props) => <Protected onlyUnAuth={true} {...props} />;
+export const OnlyAuth = (props) => <ProtectedRoute onlyUnAuth={false} {...props} />;
+export const OnlyUnAuth = (props) => <ProtectedRoute onlyUnAuth={true} {...props} />;

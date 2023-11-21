@@ -10,13 +10,19 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchRegister } from "../../services/thunks/user-thunk";
 import {
-  getError,
-  getErrorMessage,
+  getErrorMessageRegister,
+  getErrorRegister,
+  getIsLoadingRegister,
 } from "../../services/selectors/user-selector";
 
 function RegistrationPage() {
-  const isError = useSelector(getError);
-  const errorMessage = useSelector(getErrorMessage);
+  const isLoading = useSelector(getIsLoadingRegister);
+  const isError = useSelector(getErrorRegister);
+
+  const errorMessage = useSelector(getErrorMessageRegister);
+  console.log(isLoading);
+  console.log(isError);
+  console.log(errorMessage);
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -43,7 +49,7 @@ function RegistrationPage() {
     <main className={styles.content}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h1 className={`text text_type_main-medium`}>Регистрация</h1>
-        <Input type={"text"} placeholder={"Имя"} onChange={onChangeName} />
+        <Input value={name} type={"text"} placeholder={"Имя"} onChange={onChangeName} />
         <EmailInput
           name={"email"}
           placeholder={"E-mail"}
@@ -68,7 +74,8 @@ function RegistrationPage() {
           </p>
         )}
         <Button htmlType="submit" type="primary" size="medium">
-          Зарегистрироваться
+        {!isLoading ? "Зарегистрироваться" : "Регистрация..."}
+          
         </Button>
       </form>
       <p className={`pt-20 text text_type_main-default text_color_inactive`}>

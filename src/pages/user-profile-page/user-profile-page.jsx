@@ -1,5 +1,7 @@
+import { useDispatch } from "react-redux";
 import styles from "./user-profile-page.module.css";
 import { NavLink, Outlet } from "react-router-dom";
+import { fetchLogout } from "../../services/thunks/user-thunk";
 
 function UserProfilePage() {
   const linkClassName = ({ isActive }) =>
@@ -11,6 +13,14 @@ function UserProfilePage() {
         " " +
         styles.link;
 
+
+        const dispatch = useDispatch();
+        
+        const logout = (e) => {
+          e.preventDefault();
+          dispatch(fetchLogout());
+      };
+
   return (
     <main className={styles.content}>
       <div className={`${styles.navigation_part} ml-5`}>
@@ -21,7 +31,7 @@ function UserProfilePage() {
           <NavLink to="order-history" className={linkClassName}>
             История заказов
           </NavLink>
-          <NavLink to="/" className={linkClassName}>
+          <NavLink to="/" className={linkClassName} onClick={logout}>
             Выход
           </NavLink>
         </nav>

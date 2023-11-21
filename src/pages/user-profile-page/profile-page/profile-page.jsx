@@ -6,18 +6,36 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile-page.module.css";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
-import { getUser } from "../../../services/selectors/user-selector";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getError,
+  getIsLoading,
+  getUser,
+} from "../../../services/selectors/user-selector";
+import { fetchUpdateUser } from "../../../services/thunks/user-thunk";
 
 function UserProfile() {
-  const user = useSelector(getUser);
-  console.log(`user: ${user}`);
+  const dispatch = useDispatch();
+
+  const isError = useSelector(getError);
+  const isLoading = useSelector(getIsLoading);
+  const user = useSelector(getUser) ;
+  const nameInputRef = useRef();
+
   const [email, setEmail] = useState(user.email || "");
   const [password, setPassword] = useState("");
   const [name, setName] = useState(user.name || "");
   const [fieldDisabled, setDisabled] = useState(true);
 
-  const nameInputRef = useRef();
+  // Логика отображения Input в неактивном состоянии
+  const onBlur = () => {
+    setDisabled(true);
+  };
+
+  const onIconClick = () => {
+    setDisabled(false);
+    setTimeout(() => nameInputRef.current?.focus(), 0);
+  };
 
   const onChangeEmail = (e) => {
     setEmail(e.target.value);
@@ -31,19 +49,15 @@ function UserProfile() {
     setName(e.target.value);
   };
 
-  const onBlur = () => {
-    setDisabled(true);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(fetchUpdateUser({ name, email }));
   };
 
-  const onIconClick = () => {
-    setDisabled(false);
-    setTimeout(() => nameInputRef.current?.focus(), 0);
-  };
-
-  function handleCancel() {
+  const handleCancel = () => {
     setName(user.name);
     setEmail(user.email);
-  }
+  };
 
   useEffect(() => {
     if (user) {
@@ -53,7 +67,7 @@ function UserProfile() {
   }, [user]);
 
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <Input
         ref={nameInputRef}
         type={"text"}
@@ -82,6 +96,15 @@ function UserProfile() {
         onChange={onChangePassword}
         size="default"
       />
+
+      {isError && (
+        <p
+          className={` text text_type_main-small text_color_error ${styles.fetch_error}`}
+        >
+          При обработке запроса произошла ошибка.
+          <br /> Пожалуйста, попробуйте еще раз.
+        </p>
+      )}
       <div className={styles.btn_place}>
         <Button
           htmlType="button"
@@ -92,8 +115,8 @@ function UserProfile() {
           Отмена
         </Button>
 
-        <Button htmlType="button" type="primary" size="medium">
-          Сохранить
+        <Button htmlType="submit" type="primary" size="medium">
+          {!isLoading ? "Сохранить" : "Сохранение..."}
         </Button>
       </div>
     </form>

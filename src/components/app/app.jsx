@@ -17,6 +17,7 @@ import ResetPasswordPage from "../../pages/reset-password-page/reset-password-pa
 import UserProfilePage from "../../pages/user-profile-page/user-profile-page";
 import UserProfile from "../../pages/user-profile-page/profile-page/profile-page";
 import OrderHistory from "../../pages/user-profile-page/order-history-page/order-history-page";
+import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,15 +31,30 @@ function App() {
       <AppHeader />
       <Routes>
         <Route index element={<Main />} />
-        <Route path="/profile" element={<UserProfilePage />}>
+        <Route
+          path="/profile"
+          element={<OnlyAuth component={<UserProfilePage />} />}
+        >
           <Route index element={<UserProfile />} />
           <Route path="order-history" element={<OrderHistory />} />
         </Route>
         <Route path="/orders" element={<OrdersPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegistrationPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route
+          path="/login"
+          element={<OnlyUnAuth component={<LoginPage />} />}
+        />
+        <Route
+          path="/register"
+          element={<OnlyUnAuth component={<RegistrationPage />} />}
+        />
+        <Route
+          path="/forgot-password"
+          element={<OnlyUnAuth component={<ForgotPasswordPage />} />}
+        />
+        <Route
+          path="/reset-password"
+          element={<OnlyUnAuth component={<ResetPasswordPage />} />}
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
