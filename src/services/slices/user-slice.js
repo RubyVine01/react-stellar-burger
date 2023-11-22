@@ -12,9 +12,18 @@ const initialState = {
   isLoading: false,
   error: false,
   errorMessage: "",
+  // Register
   isLoadingRegister: false,
   errorRegister: false,
   errorMessageRegister: "",
+  // Login
+  isLoadingLogin: false,
+  errorLogin: false,
+  errorMessageLogin: "",
+  // UpdateUser
+  isLoadingUpdateUser: false,
+  errorUpdateUser: false,
+  errorMessageUpdateUser: "",
 };
 
 const userProfileSlice = createSlice({
@@ -30,62 +39,72 @@ const userProfileSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    
-    // регистрация 
+      // регистрация
       .addCase(fetchRegister.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isLoadingRegister = false;
         state.errorRegister = false;
       })
-      .addCase(fetchRegister.pending, (state, action) => {
+      .addCase(fetchRegister.pending, (state) => {
         state.isLoadingRegister = true;
         state.errorRegister = false;
       })
       .addCase(fetchRegister.rejected, (state, action) => {
         state.isLoadingRegister = false;
-          state.errorRegister = true;
-          state.errorMessageRegister = action.payload;
+        state.errorRegister = true;
+        state.errorMessageRegister = action.payload;
       })
       // авторизация
       .addCase(fetchLogin.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.isLoading = false;
-        state.error = false;
-        console.log(state.user);
+        state.isLoadingLogin = false;
+        state.errorLogin = false;
       })
-
+      .addCase(fetchLogin.pending, (state) => {
+        state.isLoadingLogin = true;
+        state.errorLogin = false;
+      })
+      .addCase(fetchLogin.rejected, (state, action) => {
+        state.isLoadingLogin = false;
+        state.errorLogin = true;
+        state.errorMessageLogin = action.payload;
+      })
+      // обновление данных пользователя
+      .addCase(fetchUpdateUser.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isLoadingUpdateUser = false;
+        state.errorUpdateUser = false;
+      })
+      .addCase(fetchUpdateUser.pending, (state) => {
+        state.isLoadingUpdateUser = true;
+        state.errorUpdateUser = false;
+      })
+      .addCase(fetchUpdateUser.rejected, (state, action) => {
+        state.isLoadingUpdateUser = false;
+        state.errorUpdateUser = true;
+        state.errorMessageUpdateUser = action.payload;
+      })
       // выход из профиля
       .addCase(fetchLogout.fulfilled, (state) => {
         state.user = null;
         state.isLoading = false;
         state.error = false;
       })
-
-      // обновление данных пользователя
-      .addCase(fetchUpdateUser.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isLoading = false;
-        state.error = false;
-      })
-      
-
-      // .addMatcher(
-      //   (action) => action.type.endsWith("/pending"),
-      //   (state) => {
-      //     state.isLoading = true;
-      //     state.error = false;
-      //   }
-      // )
-      // .addMatcher(
-      //   (action) => action.type.endsWith("/rejected"),
-      //   (state, action) => {
-      //     state.isLoading = false;
-      //     state.error = true;
-      //     state.errorMessage = action.payload;
-      //     console.log(state.error);
-      //     console.log(`state.errorMessage: ${state.errorMessage}`);
-      //   }
-      // );
+      .addMatcher(
+        (action) => action.type.endsWith("/pending"),
+        (state) => {
+          state.isLoading = true;
+          state.error = false;
+        }
+      )
+      .addMatcher(
+        (action) => action.type.endsWith("/rejected"),
+        (state, action) => {
+          state.isLoading = false;
+          state.error = true;
+          state.errorMessage = action.payload;
+        }
+      );
   },
 });
 

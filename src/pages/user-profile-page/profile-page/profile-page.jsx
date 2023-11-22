@@ -8,8 +8,8 @@ import styles from "./profile-page.module.css";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getError,
-  getIsLoading,
+  getErrorUpdateUser,
+  getIsLoadingUpdateUser,
   getUser,
 } from "../../../services/selectors/user-selector";
 import { fetchUpdateUser } from "../../../services/thunks/user-thunk";
@@ -17,9 +17,9 @@ import { fetchUpdateUser } from "../../../services/thunks/user-thunk";
 function UserProfile() {
   const dispatch = useDispatch();
 
-  const isError = useSelector(getError);
-  const isLoading = useSelector(getIsLoading);
-  const user = useSelector(getUser) ;
+  const isError = useSelector(getErrorUpdateUser);
+  const isLoading = useSelector(getIsLoadingUpdateUser);
+  const user = useSelector(getUser);
   const nameInputRef = useRef();
 
   const [email, setEmail] = useState(user.email || "");
@@ -105,20 +105,23 @@ function UserProfile() {
           <br /> Пожалуйста, попробуйте еще раз.
         </p>
       )}
-      <div className={styles.btn_place}>
-        <Button
-          htmlType="button"
-          type="secondary"
-          size="medium"
-          onClick={() => handleCancel()}
-        >
-          Отмена
-        </Button>
 
-        <Button htmlType="submit" type="primary" size="medium">
-          {!isLoading ? "Сохранить" : "Сохранение..."}
-        </Button>
-      </div>
+      {email !== user.email || name !== user.name ? (
+        <div className={styles.btn_place}>
+          <Button
+            htmlType="button"
+            type="secondary"
+            size="medium"
+            onClick={() => handleCancel()}
+          >
+            Отмена
+          </Button>
+
+          <Button htmlType="submit" type="primary" size="medium">
+            {!isLoading ? "Сохранить" : "Сохранение..."}
+          </Button>
+        </div>
+      ) : null}
     </form>
   );
 }

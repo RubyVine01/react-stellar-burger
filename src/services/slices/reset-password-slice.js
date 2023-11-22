@@ -5,12 +5,18 @@ const initialState = {
   fetchRes: {},
   isLoading: false,
   error: false,
+  resetPasswordAllowed: false, // new
+
 };
 
 const resetPasswordSlice = createSlice({
   name: "resetPassword",
   initialState,
-  reducers: {},
+  reducers: {
+    setResetPasswordAllowed: (state, action) => {
+      state.resetPasswordAllowed = action.payload;
+    }, // new
+  },
   extraReducers: {
     [fetchСonfirmNewPassword.fulfilled]: (state, action) => {
       state.fetchRes = action.payload;
@@ -29,4 +35,5 @@ const resetPasswordSlice = createSlice({
   },
 });
 
+export const { setResetPasswordAllowed } = resetPasswordSlice.actions; // new
 export default resetPasswordSlice.reducer;

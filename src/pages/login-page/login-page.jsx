@@ -9,13 +9,15 @@ import { Link } from "react-router-dom";
 import { fetchLogin } from "../../services/thunks/user-thunk";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getError,
-  getErrorMessage,
+  getErrorLogin,
+  getErrorMessageLogin,
+  getIsLoadingLogin,
 } from "../../services/selectors/user-selector";
 
 function LoginPage() {
-  const isError = useSelector(getError);
-  const errorMessage = useSelector(getErrorMessage);
+  const isLoading = useSelector(getIsLoadingLogin);
+  const isError = useSelector(getErrorLogin);
+  const errorMessage = useSelector(getErrorMessageLogin);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -61,7 +63,7 @@ function LoginPage() {
           </p>
         )}
         <Button htmlType="submit" type="primary" size="medium">
-          Войти
+          {!isLoading ? "Войти" : "Вход..."}
         </Button>
       </form>
       <p className={`pt-20 text text_type_main-default text_color_inactive`}>

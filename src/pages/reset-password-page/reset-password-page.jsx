@@ -13,6 +13,7 @@ import {
   getError,
   getIsLoading,
 } from "../../services/selectors/reset-password-selector";
+import { setResetPasswordAllowed } from "../../services/slices/reset-password-slice";
 
 function ResetPasswordPage() {
   const navigate = useNavigate();
@@ -40,6 +41,7 @@ function ResetPasswordPage() {
 
   useEffect(() => {
     if (resStatus && !isError) {
+      dispatch(setResetPasswordAllowed(false)); //new
       navigate("/");
     }
   }, [resStatus, isError, navigate]);

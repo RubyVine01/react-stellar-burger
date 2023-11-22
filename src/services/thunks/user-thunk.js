@@ -157,8 +157,10 @@ export const checkUserAuth = () => {
   };
 };
 
+// updateUser/patch
+
 export const fetchUpdateUser = createAsyncThunk(
-  "auth/updateUser",
+  "updateUser/patch",
   async ({ name, email }) => {
     const res = await fetchWithRefresh(urlUser, {
       method: "PATCH",
