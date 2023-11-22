@@ -1,8 +1,5 @@
 export const getUser = (state) => state.userProfile.user;
-export const getError = (state) => state.userProfile.error;
-export const getErrorMessage = (state) => state.userProfile.errorMessage;
-export const getIsLoading = (state) => state.userProfile.isLoading;
-export const getIsAuthChecked = (state) => state.userProfile.isAuthChecked
+export const getIsAuthChecked = (state) => state.userProfile.isAuthChecked;
 
 // Register
 export const getErrorRegister = (state) => state.userProfile.errorRegister;

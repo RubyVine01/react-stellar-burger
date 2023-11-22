@@ -49,8 +49,10 @@ export const fetchLogin = createAsyncThunk(
           password: password,
         }),
       });
+
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", data.refreshToken);
+
       return fulfillWithValue(data.user);
     } catch (error) {
       return rejectWithValue(error);
@@ -64,7 +66,7 @@ const urlLogout = `${baseURL}/auth/logout`;
 
 export const fetchLogout = createAsyncThunk(
   "logout/post",
-  async ( _, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       await request(urlLogout, {
         method: "POST",
@@ -74,7 +76,7 @@ export const fetchLogout = createAsyncThunk(
         body: JSON.stringify({
           token: localStorage.getItem("refreshToken"),
         }),
-      }); 
+      });
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("accessToken");
     } catch (error) {
@@ -83,7 +85,27 @@ export const fetchLogout = createAsyncThunk(
   }
 );
 
-// token/post
+// updateUser/patch
+
+export const fetchUpdateUser = createAsyncThunk(
+  "updateUser/patch",
+  async ({ name, email }) => {
+    const res = await fetchWithRefresh(urlUser, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+        authorization: localStorage.getItem("accessToken"),
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+      }),
+    });
+    return res.user;
+  }
+);
+
+// token/post updateUser
 
 const urlToken = `${baseURL}/auth/token`;
 
@@ -98,7 +120,6 @@ export const fetchRefreshToken = () => {
     }),
   });
 };
-
 
 const fetchWithRefresh = async (url, options) => {
   try {
@@ -118,7 +139,6 @@ const fetchWithRefresh = async (url, options) => {
     }
   }
 };
-
 
 const urlUser = `${baseURL}/auth/user`;
 
@@ -156,23 +176,3 @@ export const checkUserAuth = () => {
     }
   };
 };
-
-// updateUser/patch
-
-export const fetchUpdateUser = createAsyncThunk(
-  "updateUser/patch",
-  async ({ name, email }) => {
-    const res = await fetchWithRefresh(urlUser, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-        authorization: localStorage.getItem("accessToken"),
-      },
-      body: JSON.stringify({
-        name: name,
-        email: email,
-      }),
-    });
-    return res.user;
-  }
-);

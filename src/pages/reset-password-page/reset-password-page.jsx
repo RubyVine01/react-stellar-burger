@@ -41,9 +41,7 @@ function ResetPasswordPage() {
 
   useEffect(() => {
     if (resStatus && !isError) {
-      console.log(resStatus);
-
-      dispatch(setResetPasswordAllowed(false)); //new
+      dispatch(setResetPasswordAllowed(false));
       navigate("/login");
     }
   }, [resStatus, isError, navigate, dispatch]);

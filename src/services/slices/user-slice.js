@@ -41,7 +41,7 @@ const userProfileSlice = createSlice({
     builder
       // регистрация
       .addCase(fetchRegister.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.isLoadingRegister = false;
         state.errorRegister = false;
       })

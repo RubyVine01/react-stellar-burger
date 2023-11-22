@@ -13,13 +13,12 @@ function UserProfilePage() {
         " " +
         styles.link;
 
+  const dispatch = useDispatch();
 
-        const dispatch = useDispatch();
-        
-        const logout = (e) => {
-          e.preventDefault();
-          dispatch(fetchLogout());
-      };
+  const logout = (e) => {
+    e.preventDefault();
+    dispatch(fetchLogout());
+  };
 
   return (
     <main className={styles.content}>
