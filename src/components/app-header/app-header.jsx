@@ -6,6 +6,8 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavLink, useLocation } from "react-router-dom";
+import { getUser } from "../../services/selectors/user-selector";
+import { useSelector } from "react-redux";
 
 function AppHeader() {
   const { pathname } = useLocation();
@@ -14,6 +16,8 @@ function AppHeader() {
       ? `text_color_primary  pt-4 pb-4 pr-5 pl-5 ${styles.nav_link}`
       : `text_color_inactive  pt-4 pb-4 pr-5 pl-5  ${styles.nav_link}`;
 
+  const user = useSelector(getUser);
+  const currentLink = user ? "/profile" : "/login";
 
   return (
     <header className={`${styles.header} pb-4 pt-4`}>
@@ -25,10 +29,7 @@ function AppHeader() {
           </p>
         </NavLink>
 
-        <NavLink
-          className={linkClassName} 
-          to="/orders"
-        >
+        <NavLink className={linkClassName} to="/orders">
           <ListIcon type={pathname === "/orders" ? "primary" : "secondary"} />
           <p className={`${styles.name} text text_type_main-default pl-2`}>
             Лента заказов
@@ -39,12 +40,9 @@ function AppHeader() {
           <Logo />
         </div>
 
-        <NavLink
-          className={linkClassName} 
-          to="/profile"
-        >
+        <NavLink className={linkClassName} to={currentLink}>
           <ProfileIcon
-            type={pathname.startsWith("/profile")  ? "primary" : "secondary"}
+            type={pathname.startsWith(currentLink) ? "primary" : "secondary"}
           />
           <p className={`${styles.name} text text_type_main-default pl-2`}>
             Личный кабинет

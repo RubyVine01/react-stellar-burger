@@ -14,7 +14,6 @@ const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
   useEffect(() => {
     dispatch(setAuthChecked(false));
     dispatch(checkUserAuth());
-    console.log(`Я сработал`);
   }, [dispatch]);
 
   const isAuthChecked = useSelector(getIsAuthChecked);
