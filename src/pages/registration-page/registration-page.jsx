@@ -73,7 +73,7 @@ function RegistrationPage() {
             Пожалуйста, попробуйте еще раз.
           </p>
         )}
-        <Button htmlType="submit" type="primary" size="medium">
+        <Button htmlType="submit" type="primary" size="medium" disabled={!email || !password || !name}>
         {!isLoading ? "Зарегистрироваться" : "Регистрация..."}
           
         </Button>

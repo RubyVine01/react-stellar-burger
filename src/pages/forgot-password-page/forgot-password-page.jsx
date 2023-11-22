@@ -14,13 +14,14 @@ import {
 } from "../../services/selectors/forgot-password-selector";
 import { setResetPasswordAllowed } from "../../services/slices/reset-password-slice";
 
+
 function ForgotPasswordPage() {
   const dispatch = useDispatch();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
-  const resStatus = useSelector(getStatusSentCode);
+  const resStatus = useSelector(getStatusSentCode); 
   const isError = useSelector(getError);
   const isLoading = useSelector(getIsLoading);
 

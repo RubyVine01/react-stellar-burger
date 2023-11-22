@@ -15,6 +15,7 @@ import {
 } from "../../services/selectors/reset-password-selector";
 import { setResetPasswordAllowed } from "../../services/slices/reset-password-slice";
 
+
 function ResetPasswordPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -39,12 +40,16 @@ function ResetPasswordPage() {
     dispatch(fetchСonfirmNewPassword({ password, token }));
   };
 
+
+
   useEffect(() => {
     if (resStatus && !isError) {
-      dispatch(setResetPasswordAllowed(false)); //new
-      navigate("/");
+      console.log(resStatus);
+      
+       dispatch(setResetPasswordAllowed(false)); //new
+      navigate("/login");
     }
-  }, [resStatus, isError, navigate]);
+  }, [resStatus, isError, dispatch]);
 
   return (
     <main className={styles.content}>
@@ -62,9 +67,9 @@ function ResetPasswordPage() {
           value={token}
           name={"token"}
           onChange={onChangeToken}
-        />
+        /> 
         {isError && (
-          <p
+          <p 
             className={` text text_type_main-small text_color_error ${styles.fetch_error}`}
           >
             При обработке запроса произошла ошибка.

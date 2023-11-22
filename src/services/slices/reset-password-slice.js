@@ -3,7 +3,7 @@ import { fetchСonfirmNewPassword } from "../thunks/reset-password-thunk";
 
 const initialState = {
   fetchRes: {},
-  isLoading: false,
+  isLoading: false, 
   error: false,
   resetPasswordAllowed: false, // new
 
@@ -15,6 +15,7 @@ const resetPasswordSlice = createSlice({
   reducers: {
     setResetPasswordAllowed: (state, action) => {
       state.resetPasswordAllowed = action.payload;
+      console.log(`resetPasswordAllowe: ${state.resetPasswordAllowed}`);
     }, // new
   },
   extraReducers: {

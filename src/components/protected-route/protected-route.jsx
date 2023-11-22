@@ -3,22 +3,26 @@ import { useDispatch, useSelector } from "react-redux";
 import React, { useEffect } from "react";
 import { setAuthChecked } from "../../services/slices/user-slice";
 import { checkUserAuth } from "../../services/thunks/user-thunk";
-import { getIsAuthChecked, getUser } from "../../services/selectors/user-selector";
-import { getResetPasswordAllowed } from "../../services/selectors/reset-password-selector";
+import {
+  getIsAuthChecked,
+  getUser,
+} from "../../services/selectors/user-selector";
 
+const ProtectedRoute = ({
+  onlyUnAuth = false,
 
-const ProtectedRoute = ({ onlyUnAuth = false, allowResetPassword = false,  component }) => {
-    
+  component,
+}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setAuthChecked(false));
     dispatch(checkUserAuth());
+    // console.log(`Я сработал`);
   }, [dispatch]);
 
   const isAuthChecked = useSelector(getIsAuthChecked);
   const user = useSelector(getUser);
-  const resetPasswordAllowed = useSelector(getResetPasswordAllowed);
   const location = useLocation();
 
   if (!isAuthChecked) {
@@ -38,15 +42,13 @@ const ProtectedRoute = ({ onlyUnAuth = false, allowResetPassword = false,  compo
     return <Navigate to="/login" state={{ from: location }} />;
   }
 
-  if (allowResetPassword && !resetPasswordAllowed) {
-    return <Navigate to="/forgot-password" />;
-  }
-
   // !onlyUnAuth && user
   return component;
 };
 
-export const OnlyAuth = (props) => <ProtectedRoute onlyUnAuth={false} {...props} />;
-export const OnlyUnAuth = (props) => <ProtectedRoute onlyUnAuth={true} {...props} />;
-
-export const ResetPasswordRoute = (props) => <ProtectedRoute allowResetPassword={true} {...props} />;
+export const OnlyAuth = (props) => (
+  <ProtectedRoute onlyUnAuth={false} {...props} />
+);
+export const OnlyUnAuth = (props) => (
+  <ProtectedRoute onlyUnAuth={true} {...props} />
+);

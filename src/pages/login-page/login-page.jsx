@@ -62,7 +62,12 @@ function LoginPage() {
             Пожалуйста, попробуйте еще раз.
           </p>
         )}
-        <Button htmlType="submit" type="primary" size="medium">
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="medium"
+          disabled={!email || !password}
+        >
           {!isLoading ? "Войти" : "Вход..."}
         </Button>
       </form>

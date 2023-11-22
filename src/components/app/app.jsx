@@ -17,7 +17,8 @@ import ResetPasswordPage from "../../pages/reset-password-page/reset-password-pa
 import UserProfilePage from "../../pages/user-profile-page/user-profile-page";
 import UserProfile from "../../pages/user-profile-page/profile-page/profile-page";
 import OrderHistory from "../../pages/user-profile-page/order-history-page/order-history-page";
-import { OnlyAuth, OnlyUnAuth, ResetPasswordRoute } from "../protected-route/protected-route";
+import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
+import ResetPasswordProtectedRoute from "../protected-route/protected-route-reset-password";
 
 function App() {
   const dispatch = useDispatch();
@@ -53,7 +54,9 @@ function App() {
         />
         <Route
           path="/reset-password"
-          element={<ResetPasswordRoute component={<ResetPasswordPage />} />}
+          element={
+            <ResetPasswordProtectedRoute component={<ResetPasswordPage />} />
+          }
         />
 
         <Route path="*" element={<NotFoundPage />} />
