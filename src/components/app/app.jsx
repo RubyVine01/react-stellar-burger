@@ -6,9 +6,8 @@ import AppHeader from "../app-header/app-header.jsx";
 
 import { fetchIngredients } from "../../services/thunks/ingredients-data-thunk";
 import LoginPage from "../../pages/login-page/login-page";
-// import IngredientPage from "../../pages/ingredient-page/ingredient-page";
 import Main from "../../pages/main/main";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import OrdersPage from "../../pages/orders-page/orders-page";
 import NotFoundPage from "../../pages/not-found-page/not-found-page";
 import ForgotPasswordPage from "../../pages/forgot-password-page/forgot-password-page";
@@ -19,6 +18,7 @@ import UserProfile from "../../pages/user-profile-page/profile-page/profile-page
 import OrderHistory from "../../pages/user-profile-page/order-history-page/order-history-page";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import ResetPasswordProtectedRoute from "../protected-route/protected-route-reset-password";
+import IngredientPage from "../../pages/ingredient-page/ingredient-page";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +26,9 @@ function App() {
   useEffect(() => {
     dispatch(fetchIngredients());
   }, [dispatch]);
+
+  // const location = useLocation();
+  // const background = location.state && location.state.background;
 
   return (
     <div className={styles.app}>
@@ -58,7 +61,7 @@ function App() {
             <ResetPasswordProtectedRoute component={<ResetPasswordPage />} />
           }
         />
-
+        <Route path="ingredients/:id" element={<IngredientPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

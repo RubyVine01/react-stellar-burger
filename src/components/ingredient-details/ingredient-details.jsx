@@ -1,29 +1,35 @@
 import { useSelector } from "react-redux";
 import styles from "./ingredient-details.module.css";
 import { getIngredientDetails } from "../../services/selectors/ingredient-details-selector.js";
+import { getIngredients } from "../../services/selectors/ingredients-data-selector";
+import { useLocation } from "react-router-dom";
 
 function IngredientDetails() {
+  const ingredients = useSelector(getIngredients);
 
-  const ingPageData = {
-    _id: "60666c42cc7b410027a1a9b5",
-    name: "Говяжий метеорит (отбивная)",
-    type: "main",
-    proteins: 800,
-    fat: 800,
-    carbohydrates: 300,
-    calories: 2674,
-    price: 3000,
-    image: "https://code.s3.yandex.net/react/code/meat-04.png",
-    image_mobile: "https://code.s3.yandex.net/react/code/meat-04-mobile.png",
-    image_large: "https://code.s3.yandex.net/react/code/meat-04-large.png",
-    __v: 0,
-  }
-  const ingredient = useSelector(getIngredientDetails) || ingPageData
+  const location = useLocation();
+ 
+  const pathSegments = location.pathname.split('/'); 
+  const ingredientId  = pathSegments[2];
+
+  const pageIngt = ingredients.filter((item) => {
+    if (item._id === ingredientId) {
+      console.log(item);
+      return item
+    } else {
+      return null
+    }
+     
+  });
+
+  const ingredient = useSelector(getIngredientDetails) || pageIngt[0];
+
+  console.log( useSelector(getIngredientDetails));
 
   if (!ingredient) {
     return null;
   }
-  
+
   return (
     <div className={styles.ingredient_details}>
       <img
