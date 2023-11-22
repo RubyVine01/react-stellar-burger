@@ -8,17 +8,13 @@ import {
   getUser,
 } from "../../services/selectors/user-selector";
 
-const ProtectedRoute = ({
-  onlyUnAuth = false,
-
-  component,
-}) => {
+const ProtectedRoute = ({ onlyUnAuth = false, component }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setAuthChecked(false));
     dispatch(checkUserAuth());
-    // console.log(`Я сработал`);
+    console.log(`Я сработал`);
   }, [dispatch]);
 
   const isAuthChecked = useSelector(getIsAuthChecked);
