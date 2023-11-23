@@ -1,39 +1,47 @@
-import { useSelector } from "react-redux";
 import styles from "./ingredient-details.module.css";
+
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
 import { getIngredientDetails } from "../../services/selectors/ingredient-details-selector.js";
 import { getIngredients } from "../../services/selectors/ingredients-data-selector";
-import { useLocation } from "react-router-dom";
 
 function IngredientDetails() {
-  const ingredients = useSelector(getIngredients);
-
+  const navigate = useNavigate();
   const location = useLocation();
- 
-  const pathSegments = location.pathname.split('/'); 
-  const ingredientId  = pathSegments[2];
+  const { id } = useParams();
+  const ingredients = useSelector(getIngredients);
+  const background = location.state && location.state.background;
+  const ingredientDetails = useSelector(getIngredientDetails);
 
-  const pageIngt = ingredients.filter((item) => {
-    if (item._id === ingredientId) {
-      console.log(item);
-      return item
+  const ingredient = useSelector((state) => {
+    if (background) {
+      return getIngredientDetails(state);
     } else {
-      return null
+      return ingredients.find((item) => item._id === id);
     }
-     
   });
 
-  const ingredient = useSelector(getIngredientDetails) || pageIngt[0];
-
-  console.log( useSelector(getIngredientDetails));
+  useEffect(() => {
+    if (background && !ingredientDetails) {
+      return navigate("/");
+    }
+  }, [background, navigate]);
 
   if (!ingredient) {
-    return null;
+    return (
+      <p className={`text pb-8 text_type_main-medium pt-5`}>
+        Ингрединт не найден
+      </p>
+    );
   }
 
   return (
     <div className={styles.ingredient_details}>
       <img
         className="pb-4"
+        ingredientDetails
         src={`${ingredient.image_large}`}
         alt={ingredient.name}
       />

@@ -1,21 +1,23 @@
 import styles from "./ingredients-item.module.css";
-import { ingredientType } from "../../utils/prop-types";
 
-import { DragPreviewImage, useDrag } from "react-dnd";
 import { useDispatch, useSelector } from "react-redux";
+import { DragPreviewImage, useDrag } from "react-dnd";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { ingredientType } from "../../utils/prop-types";
 
 import {
   Counter,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { openModal } from "../../services/slices/modal-slice";
 import { setIngredientDetails } from "../../services/slices/ingredient-details-slice";
-
 import { getAllCart } from "../../services/selectors/burger-constructor-selector.js";
 
 function IngredientsItem({ ingredient }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
   const allCart = useSelector(getAllCart);
   const count = allCart.filter((item) => item._id === ingredient._id).length;
 
@@ -26,7 +28,9 @@ function IngredientsItem({ ingredient }) {
 
   const onOpen = () => {
     dispatch(setIngredientDetails(ingredient));
-    dispatch(openModal("ingredient"));
+    navigate(`/ingredients/${ingredient._id}`, {
+      state: { background: location },
+    });
   };
 
   return (

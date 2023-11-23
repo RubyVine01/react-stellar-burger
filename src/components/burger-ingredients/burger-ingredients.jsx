@@ -1,10 +1,7 @@
 import styles from "./burger-ingredients.module.css";
 
 import { useCallback, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
+import { useSelector } from "react-redux";
 
 import IngredientsTabs from "../ingredients-tabs/ingredients-tabs.jsx";
 import IngredientsSet from "../ingredients-set/ingredients-set.jsx";
@@ -13,19 +10,8 @@ import {
   getErrorIngredients,
   getLoadingIngredients,
 } from "../../services/selectors/ingredients-data-selector";
-import {
-  getStatusModal,
-  getTypeModal,
-} from "../../services/selectors/modal-selector";
-import { closeModal } from "../../services/slices/modal-slice";
-import { deleteIngredientDetails } from "../../services/slices/ingredient-details-slice";
 
 function BurgerIngredients() {
-  const dispatch = useDispatch();
-
-  const isOpen = useSelector(getStatusModal);
-  const modalType = useSelector(getTypeModal);
-
   const isLoading = useSelector(getLoadingIngredients);
   const error = useSelector(getErrorIngredients);
 
@@ -69,11 +55,6 @@ function BurgerIngredients() {
     }
   };
 
-  const onCloseIngredientModal = () => {
-    dispatch(closeModal());
-    dispatch(deleteIngredientDetails());
-  };
-
   return (
     <section className={styles.section}>
       <h1 className={`text text_type_main-large pt-10`}>Соберите бургер</h1>
@@ -97,11 +78,6 @@ function BurgerIngredients() {
             <IngredientsSet headline="Соусы" type="sauce" persRef={sauceRef} />
             <IngredientsSet headline="Начинки" type="main" persRef={mainRef} />
           </ul>
-          {isOpen && modalType === "ingredient" && (
-            <Modal title="Детали ингредиента" onClose={onCloseIngredientModal}>
-              <IngredientDetails />
-            </Modal>
-          )}
         </>
       )}
     </section>
