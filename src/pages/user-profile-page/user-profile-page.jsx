@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
 import styles from "./user-profile-page.module.css";
+import { useDispatch } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 import { fetchLogout } from "../../services/thunks/user-thunk";
 

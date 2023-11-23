@@ -1,13 +1,16 @@
+import styles from "./registration-page.module.css";
+
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   Button,
   EmailInput,
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./registration-page.module.css";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+
 import { fetchRegister } from "../../services/thunks/user-thunk";
 import {
   getErrorMessageRegister,
@@ -18,7 +21,6 @@ import {
 function RegistrationPage() {
   const isLoading = useSelector(getIsLoadingRegister);
   const isError = useSelector(getErrorRegister);
-
   const errorMessage = useSelector(getErrorMessageRegister);
   const dispatch = useDispatch();
   const [name, setName] = useState("");

@@ -1,13 +1,15 @@
+import styles from "./login-page.module.css";
 import {
   Button,
   EmailInput,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./login-page.module.css";
+
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { fetchLogin } from "../../services/thunks/user-thunk";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import { fetchLogin } from "../../services/thunks/user-thunk";
 import {
   getErrorLogin,
   getErrorMessageLogin,
@@ -15,10 +17,10 @@ import {
 } from "../../services/selectors/user-selector";
 
 function LoginPage() {
+  const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoadingLogin);
   const isError = useSelector(getErrorLogin);
   const errorMessage = useSelector(getErrorMessageLogin);
-  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 

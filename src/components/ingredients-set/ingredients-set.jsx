@@ -3,7 +3,7 @@ import styles from "./ingredients-set.module.css";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
-import IngredientsItem from "../ingredients-item/ingredients-item.jsx";
+import IngredientsItem from "../ingredients-item/ingredients-item";
 
 import { getIngredients } from "../../services/selectors/ingredients-data-selector.js";
 

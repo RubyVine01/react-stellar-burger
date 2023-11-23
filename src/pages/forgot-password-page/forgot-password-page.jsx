@@ -1,11 +1,13 @@
+import styles from "./forgot-password-page.module.css";
 import {
   Button,
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./forgot-password-page.module.css";
+
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
 import { fetchResetCode } from "../../services/thunks/forgot-password-thunk";
 import {
   getError,
@@ -16,13 +18,13 @@ import { setResetPasswordAllowed } from "../../services/slices/reset-password-sl
 
 function ForgotPasswordPage() {
   const dispatch = useDispatch();
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(false);
   const resStatus = useSelector(getStatusSentCode);
   const isError = useSelector(getError);
   const isLoading = useSelector(getIsLoading);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const onChangeEmail = (e) => {
     const emailValue = e.target.value;
@@ -37,7 +39,7 @@ function ForgotPasswordPage() {
 
   useEffect(() => {
     if (resStatus && !isError) {
-      dispatch(setResetPasswordAllowed(true)); //new
+      dispatch(setResetPasswordAllowed(true));
       navigate("/reset-password");
     }
   }, [resStatus, isError, navigate, dispatch]);

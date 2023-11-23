@@ -50,7 +50,7 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Routes>
+      <Routes  location={background || location}>
         <Route index element={<Main />} />
         <Route
           path="/profile"

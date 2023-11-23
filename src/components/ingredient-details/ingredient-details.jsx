@@ -13,7 +13,7 @@ function IngredientDetails() {
   const { id } = useParams();
   const ingredients = useSelector(getIngredients);
   const background = location.state && location.state.background;
-  const ingredientDetails = useSelector(getIngredientDetails);
+  const ingredientDetail = useSelector(getIngredientDetails);
 
   const ingredient = useSelector((state) => {
     if (background) {
@@ -24,10 +24,10 @@ function IngredientDetails() {
   });
 
   useEffect(() => {
-    if (background && !ingredientDetails) {
+    if (background && !ingredientDetail) {
       return navigate("/");
     }
-  }, [background, navigate]);
+  }, [background, navigate, ingredientDetail]);
 
   if (!ingredient) {
     return (
@@ -41,7 +41,6 @@ function IngredientDetails() {
     <div className={styles.ingredient_details}>
       <img
         className="pb-4"
-        ingredientDetails
         src={`${ingredient.image_large}`}
         alt={ingredient.name}
       />

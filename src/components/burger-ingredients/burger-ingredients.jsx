@@ -3,8 +3,8 @@ import styles from "./burger-ingredients.module.css";
 import { useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
-import IngredientsTabs from "../ingredients-tabs/ingredients-tabs.jsx";
-import IngredientsSet from "../ingredients-set/ingredients-set.jsx";
+import IngredientsTabs from "../ingredients-tabs/ingredients-tabs";
+import IngredientsSet from "../ingredients-set/ingredients-set";
 
 import {
   getErrorIngredients,
@@ -14,7 +14,6 @@ import {
 function BurgerIngredients() {
   const isLoading = useSelector(getLoadingIngredients);
   const error = useSelector(getErrorIngredients);
-
   const [current, setCurrent] = useState("bun");
   const bunRef = useRef(null);
   const sauceRef = useRef(null);

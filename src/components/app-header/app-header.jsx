@@ -1,23 +1,26 @@
 import styles from "./app-header.module.css";
+
+import { useSelector } from "react-redux";
+import { NavLink, useLocation } from "react-router-dom";
+
 import {
   Logo,
   BurgerIcon,
   ListIcon,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { NavLink, useLocation } from "react-router-dom";
+
 import { getUser } from "../../services/selectors/user-selector";
-import { useSelector } from "react-redux";
 
 function AppHeader() {
   const { pathname } = useLocation();
+  const user = useSelector(getUser);
+  const currentLink = user ? "/profile" : "/login";
+
   const linkClassName = ({ isActive }) =>
     isActive
       ? `text_color_primary  pt-4 pb-4 pr-5 pl-5 ${styles.nav_link}`
       : `text_color_inactive  pt-4 pb-4 pr-5 pl-5  ${styles.nav_link}`;
-
-  const user = useSelector(getUser);
-  const currentLink = user ? "/profile" : "/login";
 
   return (
     <header className={`${styles.header} pb-4 pt-4`}>

@@ -26,7 +26,6 @@ import {
   addToCart,
   clearCart,
 } from "../../services/slices/burger-constructor-slice";
-
 import { closeModal, openModal } from "../../services/slices/modal-slice";
 import { fetchOrder } from "../../services/thunks/order-details-thunk";
 
@@ -37,6 +36,7 @@ function BurgerConstructor() {
   const fillingList = useSelector(getCartList);
   const bun = useSelector(getCartBun);
   const allCart = useSelector(getAllCart);
+
   const ingrList = allCart.map((item) => item._id);
   const totolPrice = allCart.reduce((previousValue, item) => {
     return previousValue + item.price;

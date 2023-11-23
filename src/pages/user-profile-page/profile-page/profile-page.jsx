@@ -1,12 +1,15 @@
+import styles from "./profile-page.module.css";
+
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   Button,
   EmailInput,
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./profile-page.module.css";
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import {
   getErrorUpdateUser,
   getIsLoadingUpdateUser,

@@ -1,6 +1,8 @@
-import { Navigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+
+
 import { setAuthChecked } from "../../services/slices/user-slice";
 import { checkUserAuth } from "../../services/thunks/user-thunk";
 import {

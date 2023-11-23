@@ -17,7 +17,6 @@ import {
 } from "../../services/slices/burger-constructor-slice";
 
 function FillingItem({ ingredient, index }) {
-
   const dispatch = useDispatch();
   const fillingList = useSelector(getCartList);
 
@@ -67,7 +66,7 @@ function FillingItem({ ingredient, index }) {
 
 FillingItem.propTypes = {
   ingredient: ingredientType.isRequired,
- index: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 export default FillingItem;

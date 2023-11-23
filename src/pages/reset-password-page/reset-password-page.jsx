@@ -1,12 +1,15 @@
+import styles from "./reset-password-page.module.css";
+
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   Button,
   Input,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./reset-password-page.module.css";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+
 import { fetchСonfirmNewPassword } from "../../services/thunks/reset-password-thunk";
 import {
   getStatusRes,
