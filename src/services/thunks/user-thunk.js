@@ -9,25 +9,21 @@ const urRegister = `${baseURL}/auth/register`;
 
 export const fetchRegister = createAsyncThunk(
   "register/post",
-  async ({ email, password, name }, { fulfillWithValue, rejectWithValue }) => {
-    try {
-      const data = await request(urRegister, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          name: name,
-        }),
-      });
-      localStorage.setItem("accessToken", data.accessToken);
-      localStorage.setItem("refreshToken", data.refreshToken);
-      return fulfillWithValue(data.user);
-    } catch (error) {
-      return rejectWithValue(error);
-    }
+  async ({ email, password, name }) => {
+    const data = await request(urRegister, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        name: name,
+      }),
+    });
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("refreshToken", data.refreshToken);
+    return data.user;
   }
 );
 
@@ -37,26 +33,22 @@ const urlLogin = `${baseURL}/auth/login`;
 
 export const fetchLogin = createAsyncThunk(
   "login/post",
-  async ({ email, password }, { fulfillWithValue, rejectWithValue }) => {
-    try {
-      const data = await request(urlLogin, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-        }),
-      });
+  async ({ email, password }) => {
+    const data = await request(urlLogin, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+    });
 
-      localStorage.setItem("accessToken", data.accessToken);
-      localStorage.setItem("refreshToken", data.refreshToken);
+    localStorage.setItem("accessToken", data.accessToken);
+    localStorage.setItem("refreshToken", data.refreshToken);
 
-      return fulfillWithValue(data.user);
-    } catch (error) {
-      return rejectWithValue(error);
-    }
+    return data.user;
   }
 );
 
@@ -64,26 +56,19 @@ export const fetchLogin = createAsyncThunk(
 
 const urlLogout = `${baseURL}/auth/logout`;
 
-export const fetchLogout = createAsyncThunk(
-  "logout/post",
-  async (_, { rejectWithValue }) => {
-    try {
-      await request(urlLogout, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          token: localStorage.getItem("refreshToken"),
-        }),
-      });
-      localStorage.removeItem("refreshToken");
-      localStorage.removeItem("accessToken");
-    } catch (error) {
-      return rejectWithValue(error);
-    }
-  }
-);
+export const fetchLogout = createAsyncThunk("logout/post", async () => {
+  await request(urlLogout, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      token: localStorage.getItem("refreshToken"),
+    }),
+  });
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("accessToken");
+});
 
 // updateUser/patch
 
