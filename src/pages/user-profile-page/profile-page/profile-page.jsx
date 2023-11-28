@@ -16,6 +16,7 @@ import {
   getUser,
 } from "../../../services/selectors/user-selector";
 import { fetchUpdateUser } from "../../../services/thunks/user-thunk";
+import { useForm } from "../../../hooks/useForm";
 
 function UserProfile() {
   const dispatch = useDispatch();
@@ -25,12 +26,15 @@ function UserProfile() {
   const user = useSelector(getUser);
   const nameInputRef = useRef();
 
-  const [email, setEmail] = useState(user.email || "");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState(user.name || "");
-  const [fieldDisabled, setDisabled] = useState(true);
+  const { values, handleChange, setValues } = useForm({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   // Логика отображения Input в неактивном состоянии
+  const [fieldDisabled, setDisabled] = useState(true);
+
   const onBlur = () => {
     setDisabled(true);
   };
@@ -41,44 +45,31 @@ function UserProfile() {
   };
   //
 
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const onChangeName = (e) => {
-    setName(e.target.value);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchUpdateUser({ name, email }));
+    dispatch(fetchUpdateUser({ name: values.name, email: values.email }));
   };
 
   const handleCancel = () => {
-    setName(user.name);
-    setEmail(user.email);
+    setValues({ ...values, name: user.name, email: user.email });
   };
 
   useEffect(() => {
     if (user) {
-      setName(user.name);
-      setEmail(user.email);
+      setValues({ ...values, name: user.name, email: user.email });
     }
   }, [user]);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <Input
+        name={"name"}
         ref={nameInputRef}
         type={"text"}
         placeholder={"Имя"}
-        value={name}
+        value={values.name}
         icon="EditIcon"
-        onChange={onChangeName}
+        onChange={handleChange}
         size="default"
         disabled={fieldDisabled}
         onBlur={onBlur}
@@ -88,16 +79,16 @@ function UserProfile() {
         isIcon={true}
         name={"email"}
         placeholder={"E-mail"}
-        value={email}
-        onChange={onChangeEmail}
+        value={values.email}
+        onChange={handleChange}
         size="default"
       />
       <PasswordInput
         name={"password"}
         placeholder={"Пароль"}
-        value={password}
+        value={values.password}
         icon="EditIcon"
-        onChange={onChangePassword}
+        onChange={handleChange}
         size="default"
       />
 
@@ -110,7 +101,7 @@ function UserProfile() {
         </p>
       )}
 
-      {email !== user.email || name !== user.name ? (
+      {values.email !== user.email || values.name !== user.name ? (
         <div className={styles.btn_place}>
           <Button
             htmlType="button"
