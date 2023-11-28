@@ -29,7 +29,6 @@ function ForgotPasswordPage() {
   const { values, handleChange } = useForm({ email: "" });
   const isEmailValid = validateEmail(values.email);
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isEmailValid) {
