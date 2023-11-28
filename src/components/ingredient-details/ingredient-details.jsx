@@ -1,15 +1,35 @@
-import { useSelector } from "react-redux";
 import styles from "./ingredient-details.module.css";
+
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
 import { getIngredientDetails } from "../../services/selectors/ingredient-details-selector.js";
+import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 
 function IngredientDetails() {
+  const location = useLocation();
+  const { id } = useParams();
+  const ingredients = useSelector(getIngredients);
+  const background = location.state && location.state.background;
+  const ingredientDetail = useSelector(getIngredientDetails);
 
-  const ingredient = useSelector(getIngredientDetails)
+  const ingredient = useSelector((state) => {
+    if (background && ingredientDetail) {
+      return getIngredientDetails(state);
+    } else {
+      return ingredients.find((item) => item._id === id);
+    }
+  });
 
   if (!ingredient) {
-    return null;
+    return (
+      <p className={`text pb-8 text_type_main-medium pt-5`}>
+        Ингрединт не найден
+      </p>
+    );
   }
-  
+
   return (
     <div className={styles.ingredient_details}>
       <img

@@ -1,0 +1,45 @@
+.content {
+  display: flex;
+  height: calc(100vh - 88px);
+  flex-direction: row;
+  column-gap: 60px;
+  margin: auto;
+  padding-top: 120px;
+  width: 1280px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 24px;
+}
+
+.navigation_part {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  row-gap: 80px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.description {
+  opacity: 0.4;
+}
+
+.btn_place {
+  width: 480px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  column-gap: 20px;
+}

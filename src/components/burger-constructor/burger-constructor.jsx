@@ -3,6 +3,7 @@ import styles from "./burger-constructor.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import uuid from "react-uuid";
+import { useNavigate } from "react-router-dom";
 
 import CurrencyIconLarge from "../../images/currency-icon-36px.svg";
 import {
@@ -25,18 +26,21 @@ import {
 import {
   addToCart,
   clearCart,
-} from "../../services/reducers/burger-constructor-slice";
-
-import { closeModal, openModal } from "../../services/reducers/modal-slice";
+} from "../../services/slices/burger-constructor-slice";
+import { closeModal, openModal } from "../../services/slices/modal-slice";
 import { fetchOrder } from "../../services/thunks/order-details-thunk";
+import { getUser } from "../../services/selectors/user-selector";
 
 function BurgerConstructor() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isOpen = useSelector(getStatusModal);
   const modalType = useSelector(getTypeModal);
   const fillingList = useSelector(getCartList);
   const bun = useSelector(getCartBun);
   const allCart = useSelector(getAllCart);
+  const user = useSelector(getUser);
+
   const ingrList = allCart.map((item) => item._id);
   const totolPrice = allCart.reduce((previousValue, item) => {
     return previousValue + item.price;
@@ -51,9 +55,13 @@ function BurgerConstructor() {
   });
 
   const handleOpenOrderModal = () => {
-    dispatch(openModal("order"));
-    dispatch(fetchOrder(ingrList));
-    dispatch(clearCart());
+    if (user) {
+      dispatch(openModal("order"));
+      dispatch(fetchOrder(ingrList));
+      dispatch(clearCart());
+    } else {
+      navigate("/login");
+    }
   };
 
   const onCloseOrderModal = () => {

@@ -9,21 +9,21 @@
 .nav {
   width: 1280px;
   margin: auto;
-}
-
-.list {
   display: flex;
   align-items: center;
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
+  column-gap: 8px;
 }
 
 .logo_container {
   display: flex;
   align-items: center;
+  margin-right: 250px;
+  margin-left: 102px;
 }
 
-.profil_position {
-  padding-left: 288px;
+.nav_link {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  text-decoration: none;
 }

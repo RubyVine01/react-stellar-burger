@@ -4,7 +4,7 @@ import { request } from "../../utils/api.js";
 
 const urlOrder = `${baseURL}/orders`;
 
-const optionsOrder = (array) => {
+const options = (array) => {
   return {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -12,6 +12,6 @@ const optionsOrder = (array) => {
   };
 };
 
-export const fetchOrder = createAsyncThunk("order/get", async (array) => {
-  return request(urlOrder, optionsOrder(array));
+export const fetchOrder = createAsyncThunk("order/post", async (array) => {
+  return request(urlOrder, options(array));
 });
