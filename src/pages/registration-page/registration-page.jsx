@@ -1,6 +1,6 @@
 import styles from "./registration-page.module.css";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -17,54 +17,69 @@ import {
   getErrorRegister,
   getIsLoadingRegister,
 } from "../../services/selectors/user-selector";
+import { useForm } from "../../hooks/useForm";
+import { validateEmail, validatePassword } from "../../utils/validate";
+import { clearErrorRegister } from "../../services/slices/user-slice";
 
 function RegistrationPage() {
+  const dispatch = useDispatch();
+
   const isLoading = useSelector(getIsLoadingRegister);
   const isError = useSelector(getErrorRegister);
   const errorMessage = useSelector(getErrorMessageRegister);
-  const dispatch = useDispatch();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const onChangeName = (e) => {
-    setName(e.target.value);
-  };
+  const { values, handleChange } = useForm({
+    name: "",
+    email: "",
+    password: "",
+  });
 
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
+  // проверка валидности вводимых данных
+  const isEmailValid = validateEmail(values.email);
+  const isPasswordValid = validatePassword(values.password);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchRegister({ email, password, name }));
+    if (isEmailValid && isPasswordValid && values.name) {
+      dispatch(
+        fetchRegister({
+          email: values.email,
+          password: values.password,
+          name: values.name,
+        })
+      );
+    }
   };
+
+  // обнуляет ошибку, при изменении Input
+  useEffect(() => {
+    if (isError) {
+      dispatch(clearErrorRegister());
+    }
+  }, [values.email, values.password, values.name, dispatch]);
 
   return (
     <main className={styles.content}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h1 className={`text text_type_main-medium`}>Регистрация</h1>
         <Input
-          value={name}
+          name={"name"}
+          value={values.name}
           type={"text"}
           placeholder={"Имя"}
-          onChange={onChangeName}
+          onChange={handleChange}
         />
         <EmailInput
           name={"email"}
           placeholder={"E-mail"}
-          value={email}
-          onChange={onChangeEmail}
+          value={values.email}
+          onChange={handleChange}
         />
         <PasswordInput
           name={"password"}
           placeholder={"Пароль"}
-          value={password}
-          onChange={onChangePassword}
+          value={values.password}
+          onChange={handleChange}
         />
         {isError && (
           <p
@@ -81,7 +96,7 @@ function RegistrationPage() {
           htmlType="submit"
           type="primary"
           size="medium"
-          disabled={!email || !password || !name}
+          disabled={!isEmailValid || !isPasswordValid || !values.name}
         >
           {!isLoading ? "Зарегистрироваться" : "Регистрация..."}
         </Button>

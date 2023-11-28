@@ -15,7 +15,7 @@ import {
   getIsLoadingLogin,
 } from "../../services/selectors/user-selector";
 import { useForm } from "../../hooks/useForm";
-import { validateEmail } from "../../utils/validate-email";
+import { validateEmail, validatePassword } from "../../utils/validate";
 import { clearErrorLogin } from "../../services/slices/user-slice";
 import { useEffect } from "react";
 
@@ -29,8 +29,8 @@ function LoginPage() {
 
   // проверка валидности вводимых данных
   const isEmailValid = validateEmail(values.email);
-  const isPasswordValid = values.password.length >= 6;
-
+  const isPasswordValid = validatePassword(values.password);
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isEmailValid && isPasswordValid) {

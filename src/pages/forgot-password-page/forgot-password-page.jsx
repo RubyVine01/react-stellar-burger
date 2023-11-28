@@ -16,7 +16,7 @@ import {
 } from "../../services/selectors/forgot-password-selector";
 import { setResetPasswordAllowed } from "../../services/slices/reset-password-slice";
 import { useForm } from "../../hooks/useForm";
-import { validateEmail } from "../../utils/validate-email";
+import { validateEmail } from "../../utils/validate";
 
 function ForgotPasswordPage() {
   const dispatch = useDispatch();
@@ -28,6 +28,7 @@ function ForgotPasswordPage() {
 
   const { values, handleChange } = useForm({ email: "" });
   const isEmailValid = validateEmail(values.email);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
