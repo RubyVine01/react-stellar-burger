@@ -36,6 +36,14 @@ const userProfileSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    clearErrorLogin: (state) => {
+      state.errorLogin = false;
+      state.errorMessageLogin = "";
+    },
+    clearErrorRegister: (state) => {
+      state.errorRegister = false;
+      state.errorMessageRegister = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -52,7 +60,7 @@ const userProfileSlice = createSlice({
       .addCase(fetchRegister.rejected, (state, action) => {
         state.isLoadingRegister = false;
         state.errorRegister = true;
-        state.errorMessageRegister = action.payload;
+        state.errorMessageRegister = action.error.message;
       })
       // авторизация
       .addCase(fetchLogin.fulfilled, (state, action) => {
@@ -67,7 +75,7 @@ const userProfileSlice = createSlice({
       .addCase(fetchLogin.rejected, (state, action) => {
         state.isLoadingLogin = false;
         state.errorLogin = true;
-        state.errorMessageLogin = action.payload;
+        state.errorMessageLogin = action.error.message;
       })
       // обновление данных пользователя
       .addCase(fetchUpdateUser.fulfilled, (state, action) => {
@@ -82,7 +90,7 @@ const userProfileSlice = createSlice({
       .addCase(fetchUpdateUser.rejected, (state, action) => {
         state.isLoadingUpdateUser = false;
         state.errorUpdateUser = true;
-        state.errorMessageUpdateUser = action.payload;
+        state.errorMessageUpdateUser = action.error.message;
       })
       // выход из профиля
       .addCase(fetchLogout.fulfilled, (state) => {
@@ -102,11 +110,11 @@ const userProfileSlice = createSlice({
         (state, action) => {
           state.isLoading = false;
           state.error = true;
-          state.errorMessage = action.payload;
+          state.errorMessage = action.error.message;
         }
       );
   },
 });
 
-export const { setAuthChecked, setUser } = userProfileSlice.actions;
+export const { setAuthChecked, setUser, clearErrorLogin, clearErrorRegister } = userProfileSlice.actions;
 export default userProfileSlice.reducer;

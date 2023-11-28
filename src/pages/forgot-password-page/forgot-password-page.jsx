@@ -16,6 +16,7 @@ import {
 } from "../../services/selectors/forgot-password-selector";
 import { setResetPasswordAllowed } from "../../services/slices/reset-password-slice";
 import { useForm } from "../../hooks/useForm";
+import { validateEmail } from "../../utils/validate-email";
 
 function ForgotPasswordPage() {
   const dispatch = useDispatch();
@@ -26,8 +27,7 @@ function ForgotPasswordPage() {
   const isLoading = useSelector(getIsLoading);
 
   const { values, handleChange } = useForm({ email: "" });
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const isEmailValid = emailRegex.test(values.email);
+  const isEmailValid = validateEmail(values.email);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,7 +47,6 @@ function ForgotPasswordPage() {
     <main className={styles.content}>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h1 className={`text text_type_main-medium`}>Восстановление пароля</h1>
-
         <EmailInput
           name={"email"}
           placeholder={"Укажите e-mail"}

@@ -5,7 +5,6 @@ import {
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -15,27 +14,36 @@ import {
   getErrorMessageLogin,
   getIsLoadingLogin,
 } from "../../services/selectors/user-selector";
+import { useForm } from "../../hooks/useForm";
+import { validateEmail } from "../../utils/validate-email";
+import { clearErrorLogin } from "../../services/slices/user-slice";
+import { useEffect } from "react";
 
 function LoginPage() {
   const dispatch = useDispatch();
   const isLoading = useSelector(getIsLoadingLogin);
   const isError = useSelector(getErrorLogin);
   const errorMessage = useSelector(getErrorMessageLogin);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const onChangeEmail = (e) => {
-    setEmail(e.target.value);
-  };
+  const { values, handleChange } = useForm({ email: "", password: "" });
 
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
+  // проверка валидности вводимых данных
+  const isEmailValid = validateEmail(values.email);
+  const isPasswordValid = values.password.length >= 6;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchLogin({ email, password }));
+    if (isEmailValid && isPasswordValid) {
+      dispatch(fetchLogin({ email: values.email, password: values.password }));
+    }
   };
+
+  // обнуляет ошибку, при изменении Input
+  useEffect(() => {
+    if (isError) {
+      dispatch(clearErrorLogin());
+    }
+  }, [values.email, values.password, dispatch]);
 
   return (
     <main className={styles.content}>
@@ -44,14 +52,14 @@ function LoginPage() {
         <EmailInput
           name={"email"}
           placeholder={"E-mail"}
-          value={email}
-          onChange={onChangeEmail}
+          value={values.email}
+          onChange={handleChange}
         />
         <PasswordInput
           name={"password"}
           placeholder={"Пароль"}
-          value={password}
-          onChange={onChangePassword}
+          value={values.password}
+          onChange={handleChange}
         />
         {isError && (
           <p
@@ -68,7 +76,7 @@ function LoginPage() {
           htmlType="submit"
           type="primary"
           size="medium"
-          disabled={!email || !password}
+          disabled={!isEmailValid || !isPasswordValid}
         >
           {!isLoading ? "Войти" : "Вход..."}
         </Button>
