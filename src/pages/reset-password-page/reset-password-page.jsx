@@ -17,29 +17,32 @@ import {
   getIsLoading,
 } from "../../services/selectors/reset-password-selector";
 import { setResetPasswordAllowed } from "../../services/slices/reset-password-slice";
+import { validatePassword } from "../../utils/validate";
+import { useForm } from "../../hooks/useForm";
 
 function ResetPasswordPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
-
   const resStatus = useSelector(getStatusRes);
   const isError = useSelector(getError);
   const isLoading = useSelector(getIsLoading);
 
-  const onChangePassword = (e) => {
-    setPassword(e.target.value);
-  };
+  const { values, handleChange } = useForm({ password: "", token: "" });
 
-  const onChangeToken = (e) => {
-    setToken(e.target.value);
-  };
+  // проверка валидности вводимых данных
+  const isPasswordValid = validatePassword(values.password);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(fetchСonfirmNewPassword({ password, token }));
+    if (values.token && isPasswordValid) {
+      dispatch(
+        fetchСonfirmNewPassword({
+          password: values.password,
+          token: values.token,
+        })
+      );
+    }
   };
 
   useEffect(() => {
@@ -56,15 +59,15 @@ function ResetPasswordPage() {
         <PasswordInput
           name={"password"}
           placeholder={"Введите новый пароль"}
-          value={password}
-          onChange={onChangePassword}
+          value={values.password}
+          onChange={handleChange}
         />
         <Input
           type={"text"}
           placeholder={"Введите код из письма"}
-          value={token}
+          value={values.token}
           name={"token"}
-          onChange={onChangeToken}
+          onChange={handleChange}
         />
         {isError && (
           <p
@@ -74,7 +77,12 @@ function ResetPasswordPage() {
             <br /> Пожалуйста, попробуйте еще раз.
           </p>
         )}
-        <Button htmlType="submit" type="primary" size="medium">
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="medium"
+          disabled={!isPasswordValid || !values.token}
+        >
           {!isLoading ? "Сохранить" : "Сохранение..."}
         </Button>
       </form>
