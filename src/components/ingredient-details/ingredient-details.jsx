@@ -8,7 +8,6 @@ import { getIngredientDetails } from "../../services/selectors/ingredient-detail
 import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 
 function IngredientDetails() {
-  const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
   const ingredients = useSelector(getIngredients);
@@ -16,18 +15,12 @@ function IngredientDetails() {
   const ingredientDetail = useSelector(getIngredientDetails);
 
   const ingredient = useSelector((state) => {
-    if (background) {
+    if (background && ingredientDetail) {
       return getIngredientDetails(state);
     } else {
       return ingredients.find((item) => item._id === id);
     }
   });
-
-  useEffect(() => {
-    if (background && !ingredientDetail) {
-      return navigate("/");
-    }
-  }, [background, navigate, ingredientDetail]);
 
   if (!ingredient) {
     return (
