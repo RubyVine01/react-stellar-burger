@@ -40,7 +40,9 @@ function AppHeader() {
         </NavLink>
 
         <div className={`${styles.logo_container} pl-3`}>
-          <Logo />
+          <NavLink to="/">
+            <Logo />
+          </NavLink>
         </div>
 
         <NavLink className={linkClassName} to={currentLink}>
