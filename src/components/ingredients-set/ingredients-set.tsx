@@ -7,7 +7,7 @@ import { TIngredient } from "../../utils/types";
 
 type TIngredientsSetProps = {
   headline: string;
-  type: "bun" | "sauce " | "main";
+  type: "bun" | "sauce" | "main";
   persRef?: React.RefObject<HTMLHeadingElement>;
 };
 
