@@ -15,6 +15,8 @@ const constructorSlice = createSlice({
       } else {
         state.cartList.push(action.payload);
       }
+
+      
     },
     deleteFromCart: (state, action) => {
       state.cartList = state.cartList.filter(

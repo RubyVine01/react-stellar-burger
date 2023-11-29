@@ -1,9 +1,7 @@
 import styles from "./filling-item.module.css";
-// import { ingredientType } from "../../utils/prop-types";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
-
 
 import {
   ConstructorElement,
@@ -15,10 +13,17 @@ import {
   deleteFromCart,
   sortCart,
 } from "../../services/slices/burger-constructor-slice";
+import { FC } from "react";
+import { TFillingItem } from "../../utils/types";
 
-function FillingItem({ ingredient, index }) {
+type TFillingItemProps = {
+  ingredient: TFillingItem;
+  index: number;
+};
+
+const FillingItem: FC<TFillingItemProps> = ({ ingredient, index }) => {
   const dispatch = useDispatch();
-  const fillingList = useSelector(getCartList);
+  const fillingList = useSelector(getCartList) as Array<TFillingItem>;
 
   const [{ isDragging }, dragRef] = useDrag({
     type: "sort",
@@ -28,13 +33,13 @@ function FillingItem({ ingredient, index }) {
     }),
   });
 
-  const findIndex = (item) => {
+  const findIndex = (item: TFillingItem): number => {
     return fillingList.indexOf(item);
   };
 
   const [, dropRef] = useDrop({
     accept: "sort",
-    hover({ item }) {
+    hover({ item }: { item: TFillingItem }) {
       if (!item || item.uid === ingredient.uid) return;
       dispatch(
         sortCart({
@@ -53,7 +58,7 @@ function FillingItem({ ingredient, index }) {
         isDragging ? `${styles.element_dragged}` : ""
       }`}
     >
-      <DragIcon />
+      <DragIcon type="primary" />
       <ConstructorElement
         text={ingredient.name}
         price={ingredient.price}
@@ -62,11 +67,6 @@ function FillingItem({ ingredient, index }) {
       />
     </li>
   );
-}
-
-// FillingItem.propTypes = {
-//   ingredient: ingredientType.isRequired,
-//   index: PropTypes.number.isRequired,
-// };
+};
 
 export default FillingItem;
