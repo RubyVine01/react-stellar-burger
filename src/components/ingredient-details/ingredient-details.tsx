@@ -5,13 +5,14 @@ import { useLocation, useParams } from "react-router-dom";
 
 import { getIngredientDetails } from "../../services/selectors/ingredient-details-selector.js";
 import { getIngredients } from "../../services/selectors/ingredients-data-selector";
+import { TIngredient } from "../../utils/types";
 
-function IngredientDetails() {
+const  IngredientDetails = () => {
   const location = useLocation();
   const { id } = useParams();
-  const ingredients = useSelector(getIngredients);
+  const ingredients = useSelector(getIngredients) as Array<TIngredient>;
   const background = location.state && location.state.background;
-  const ingredientDetail = useSelector(getIngredientDetails);
+  const ingredientDetail = useSelector<TIngredient>(getIngredientDetails);
 
   const ingredient = useSelector((state) => {
     if (background && ingredientDetail) {
@@ -19,7 +20,7 @@ function IngredientDetails() {
     } else {
       return ingredients.find((item) => item._id === id);
     }
-  });
+  }) as TIngredient;
 
   if (!ingredient) {
     return (
