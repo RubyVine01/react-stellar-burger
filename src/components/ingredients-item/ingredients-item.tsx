@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { DragPreviewImage, useDrag } from "react-dnd";
 import { useLocation, useNavigate } from "react-router-dom";
 
-// import { ingredientType } from "../../utils/prop-types";
-
 import {
   Counter,
   CurrencyIcon,
@@ -13,13 +11,23 @@ import {
 
 import { setIngredientDetails } from "../../services/slices/ingredient-details-slice";
 import { getAllCart } from "../../services/selectors/burger-constructor-selector.js";
+import { TFillingItem, TIngredient } from "../../utils/types";
+import { FC } from "react";
 
-function IngredientsItem({ ingredient }) {
+type TIngredientsItemProps = {
+  ingredient: TIngredient;
+};
+
+const IngredientsItem: FC<TIngredientsItemProps> = ({ ingredient }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
-  const allCart = useSelector(getAllCart);
-  const count = allCart.filter((item) => item._id === ingredient._id).length;
+
+  const allCart = useSelector(getAllCart) as Array<TFillingItem>;
+
+  const count: number = allCart.filter(
+    (item) => item._id === ingredient._id
+  ).length;
 
   const [, dragRef, preview] = useDrag({
     type: "ingredient",
@@ -58,10 +66,6 @@ function IngredientsItem({ ingredient }) {
       </li>
     </>
   );
-}
-
-// IngredientsItem.propTypes = {
-//   ingredient: ingredientType.isRequired,
-// };
+};
 
 export default IngredientsItem;
