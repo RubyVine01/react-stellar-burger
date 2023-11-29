@@ -1,9 +1,9 @@
 import styles from "./filling-item.module.css";
-import { ingredientType } from "../../utils/prop-types";
+// import { ingredientType } from "../../utils/prop-types";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
-// import PropTypes from "prop-types";
+
 
 import {
   ConstructorElement,
