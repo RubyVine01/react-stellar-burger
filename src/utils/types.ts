@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export type TIngredient ={
     _id: string;
     name:string;
@@ -13,3 +15,11 @@ export type TIngredient ={
     __v: number;
   }
   
+export type TUser = {
+  email: string;
+  name:  string;
+}
+
+export type TOrder = {
+  number: number;
+}

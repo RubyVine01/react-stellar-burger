@@ -7,11 +7,16 @@ import {
   getIsloading,
   getOrder,
 } from "../../services/selectors/order-details-selector";
+import { TOrder } from "../../utils/types";
 
 function OrderDetails() {
-  const order = useSelector(getOrder);
-  const orderError = useSelector(getError);
-  const orderIsloading = useSelector(getIsloading);
+  const order = useSelector<ReturnType<typeof getOrder>, TOrder | null>(
+    getOrder
+  );
+  const orderError = useSelector<boolean>(getError);
+  const orderIsloading = useSelector<string>(getIsloading);
+
+  console.log(order);
 
   return (
     <div className={`${styles.order_details} pt-4 pb-15`}>
@@ -26,7 +31,7 @@ function OrderDetails() {
         </p>
       ) : (
         <>
-          <span className={`text text_type_digits-large`}>{order.number}</span>
+          <span className={`text text_type_digits-large`}>{order?.number}</span>
           <p className={`text text_type_main-medium pt-8`}>
             идентификатор заказа
           </p>
@@ -37,9 +42,6 @@ function OrderDetails() {
           />
           <p className={`text text_type_main-default pt-15`}>
             Ваш заказ начали готовить
-          </p>
-          <p className={`text text_type_main-default text_color_inactive pt-2`}>
-            {order.message}
           </p>
         </>
       )}

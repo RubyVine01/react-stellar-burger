@@ -3,7 +3,7 @@ import { ingredientType } from "../../utils/prop-types";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 import {
   ConstructorElement,
@@ -64,9 +64,9 @@ function FillingItem({ ingredient, index }) {
   );
 }
 
-FillingItem.propTypes = {
-  ingredient: ingredientType.isRequired,
-  index: PropTypes.number.isRequired,
-};
+// FillingItem.propTypes = {
+//   ingredient: ingredientType.isRequired,
+//   index: PropTypes.number.isRequired,
+// };
 
 export default FillingItem;

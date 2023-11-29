@@ -31,7 +31,7 @@ import { fetchIngredients } from "../../services/thunks/ingredients-data-thunk";
 import { closeModal } from "../../services/slices/modal-slice";
 import { deleteIngredientDetails } from "../../services/slices/ingredient-details-slice";
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { DragPreviewImage, useDrag } from "react-dnd";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { ingredientType } from "../../utils/prop-types";
+// import { ingredientType } from "../../utils/prop-types";
 
 import {
   Counter,
@@ -60,8 +60,8 @@ function IngredientsItem({ ingredient }) {
   );
 }
 
-IngredientsItem.propTypes = {
-  ingredient: ingredientType.isRequired,
-};
+// IngredientsItem.propTypes = {
+//   ingredient: ingredientType.isRequired,
+// };
 
 export default IngredientsItem;

@@ -3,6 +3,8 @@ import styles from "./app-header.module.css";
 import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 
+import { TUser } from "../../utils/types";
+
 import {
   Logo,
   BurgerIcon,
@@ -12,9 +14,10 @@ import {
 
 import { getUser } from "../../services/selectors/user-selector";
 
-function AppHeader() {
+
+const AppHeader = () => {
   const { pathname } = useLocation();
-  const user = useSelector(getUser);
+  const user = useSelector<TUser | null>(getUser);
   const currentLink = user ? "/profile" : "/login";
 
   const linkClassName = ({ isActive }:{isActive: boolean}): string =>
