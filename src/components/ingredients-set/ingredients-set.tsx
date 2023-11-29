@@ -1,14 +1,22 @@
 import styles from "./ingredients-set.module.css";
-
-import PropTypes from "prop-types";
+import { FC } from "react";
 import { useSelector } from "react-redux";
-
 import IngredientsItem from "../ingredients-item/ingredients-item";
-
 import { getIngredients } from "../../services/selectors/ingredients-data-selector.js";
+import { TIngredient } from "../../utils/types";
 
-function IngredientsSet({ headline, type, persRef }) {
-  const ingredients = useSelector(getIngredients);
+type TIngredientsSetProps = {
+  headline: string;
+  type: "bun" | "sauce " | "main";
+  persRef?: React.RefObject<HTMLHeadingElement>;
+};
+
+const IngredientsSet: FC<TIngredientsSetProps> = ({
+  headline,
+  type,
+  persRef,
+}) => {
+  const ingredients = useSelector(getIngredients) as Array<TIngredient>;
   return (
     <li>
       <h2 className={`text text_type_main-medium pb-6`} ref={persRef}>
@@ -16,10 +24,10 @@ function IngredientsSet({ headline, type, persRef }) {
       </h2>
       <ul className={styles.item_box}>
         {ingredients
-          .filter((item) => {
-            return item.type === type;
+          .filter((ingredient: TIngredient) => {
+            return ingredient.type === type;
           })
-          .map((ingredient) => {
+          .map((ingredient: TIngredient) => {
             return (
               <IngredientsItem key={ingredient._id} ingredient={ingredient} />
             );
@@ -27,12 +35,6 @@ function IngredientsSet({ headline, type, persRef }) {
       </ul>
     </li>
   );
-}
-
-IngredientsSet.propTypes = {
-  headline: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  persRef: PropTypes.object.isRequired,
 };
 
 export default IngredientsSet;

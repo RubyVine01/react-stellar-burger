@@ -17,7 +17,7 @@ function AppHeader() {
   const user = useSelector(getUser);
   const currentLink = user ? "/profile" : "/login";
 
-  const linkClassName = ({ isActive }) =>
+  const linkClassName = ({ isActive }:{isActive: boolean}): string =>
     isActive
       ? `text_color_primary  pt-4 pb-4 pr-5 pl-5 ${styles.nav_link}`
       : `text_color_inactive  pt-4 pb-4 pr-5 pl-5  ${styles.nav_link}`;

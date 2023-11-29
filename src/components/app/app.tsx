@@ -9,7 +9,7 @@ import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import ResetPasswordProtectedRoute from "../protected-route/protected-route-reset-password";
 
 // components
-import AppHeader from "../app-header/app-header.jsx";
+import AppHeader from "../app-header/app-header";
 import Modal from "../modal/modal";
 
 // pages
