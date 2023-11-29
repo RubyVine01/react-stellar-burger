@@ -30,23 +30,24 @@ import {
 import { closeModal, openModal } from "../../services/slices/modal-slice";
 import { fetchOrder } from "../../services/thunks/order-details-thunk";
 import { getUser } from "../../services/selectors/user-selector";
+import { TFillingItem, TIngredient, TOrder } from "../../utils/types";
 
-function BurgerConstructor() {
+const BurgerConstructor = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isOpen = useSelector(getStatusModal);
-  const modalType = useSelector(getTypeModal);
-  const fillingList = useSelector(getCartList);
-  const bun = useSelector(getCartBun);
-  const allCart = useSelector(getAllCart);
-  const user = useSelector(getUser);
+  const isOpen = useSelector(getStatusModal) as boolean;
+  const modalType = useSelector<"order" | "ingredient">(getTypeModal);
+  const fillingList = useSelector(getCartList) as Array<TFillingItem>;
+  const bun = useSelector(getCartBun) as TFillingItem;
+  const allCart = useSelector(getAllCart) as Array<TFillingItem>;
+  const user = useSelector<TOrder | null>(getUser);
 
   const ingrList = allCart.map((item) => item._id);
   const totolPrice = allCart.reduce((previousValue, item) => {
     return previousValue + item.price;
   }, 0);
 
-  const [, dropRef] = useDrop({
+  const [, dropRef] = useDrop<TIngredient, void, void>({
     accept: "ingredient",
     drop(ingredient) {
       const uid = uuid();
@@ -57,7 +58,7 @@ function BurgerConstructor() {
   const handleOpenOrderModal = () => {
     if (user) {
       dispatch(openModal("order"));
-      dispatch(fetchOrder(ingrList));
+      // dispatch(fetchOrder(ingrList));
       dispatch(clearCart());
     } else {
       navigate("/login");
@@ -161,6 +162,6 @@ function BurgerConstructor() {
       )}
     </>
   );
-}
+};
 
 export default BurgerConstructor;

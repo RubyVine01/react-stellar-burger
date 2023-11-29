@@ -11,46 +11,49 @@ import {
   getLoadingIngredients,
 } from "../../services/selectors/ingredients-data-selector";
 
-function BurgerIngredients() {
-  const isLoading = useSelector(getLoadingIngredients);
-  const error = useSelector(getErrorIngredients);
-  const [current, setCurrent] = useState("bun");
-  const bunRef = useRef(null);
-  const sauceRef = useRef(null);
-  const mainRef = useRef(null);
+type THandleScroll = () => void;
+type TCurrentValue = "bun" | "sauce" | "main";
 
-  const scrollToRef = useCallback((ref) => {
-    if (ref === "bun") {
+const BurgerIngredients = () => {
+  const isLoading = useSelector<boolean>(getLoadingIngredients);
+  const error = useSelector<boolean>(getErrorIngredients);
+  const [current, setCurrent] = useState<TCurrentValue>("bun");
+  const bunRef = useRef<HTMLHeadingElement>(null);
+  const sauceRef = useRef<HTMLHeadingElement>(null);
+  const mainRef = useRef<HTMLHeadingElement>(null);
+
+  const scrollToRef = useCallback((ref: "bun" | "sauce" | "main") => {
+    if (ref === "bun" && bunRef.current) {
       bunRef.current.scrollIntoView({ behavior: "smooth" });
     }
-    if (ref === "sauce") {
+    if (ref === "sauce" && sauceRef.current) {
       sauceRef.current.scrollIntoView({ behavior: "smooth" });
     }
-    if (ref === "main") {
+    if (ref === "main" && mainRef.current) {
       mainRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, []);
 
-  const handleScroll = () => {
+  const handleScroll: THandleScroll = () => {
     const result = [
       {
         name: "bun",
-        coords: bunRef.current.getBoundingClientRect().top,
+        coords: bunRef.current?.getBoundingClientRect().top,
       },
       {
         name: "sauce",
-        coords: sauceRef.current.getBoundingClientRect().top,
+        coords: sauceRef.current?.getBoundingClientRect().top,
       },
       {
         name: "main",
-        coords: mainRef.current.getBoundingClientRect().top,
+        coords: mainRef.current?.getBoundingClientRect().top,
       },
     ]
-      .filter((el) => el.coords > 0)
-      .sort((a, b) => a.coords - b.coords);
+      .filter((el) => el.coords && el.coords > 0)
+      .sort((a, b) => Number(a.coords) - Number(b.coords));
 
     if (result.length) {
-      setCurrent(result[0].name);
+      setCurrent(result[0].name as TCurrentValue);
     }
   };
 
@@ -81,6 +84,6 @@ function BurgerIngredients() {
       )}
     </section>
   );
-}
+};
 
 export default BurgerIngredients;
