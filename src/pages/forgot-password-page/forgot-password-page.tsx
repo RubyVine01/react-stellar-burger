@@ -4,7 +4,7 @@ import {
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { useEffect } from "react";
+import { FC, FormEvent, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -18,20 +18,22 @@ import { setResetPasswordAllowed } from "../../services/slices/reset-password-sl
 import { useForm } from "../../hooks/useForm";
 import { validateEmail } from "../../utils/validate";
 
-function ForgotPasswordPage() {
+const ForgotPasswordPage: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const resStatus = useSelector(getStatusSentCode);
-  const isError = useSelector(getError);
-  const isLoading = useSelector(getIsLoading);
+  const isError = useSelector<boolean>(getError);
+  const isLoading = useSelector<boolean>(getIsLoading);
 
   const { values, handleChange } = useForm({ email: "" });
-  const isEmailValid = validateEmail(values.email);
 
-  const handleSubmit = (e) => {
+  const isEmailValid = validateEmail(values.email );
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isEmailValid) {
+      //@ts-ignore
       dispatch(fetchResetCode(values.email));
     }
   };
@@ -52,6 +54,7 @@ function ForgotPasswordPage() {
           placeholder={"Укажите e-mail"}
           value={values.email}
           onChange={handleChange}
+          //@ts-ignore
           errorText={"Email должен быть в формате user@domain.com."}
         />
         {isError && (

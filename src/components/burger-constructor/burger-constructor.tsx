@@ -58,7 +58,8 @@ const BurgerConstructor = () => {
   const handleOpenOrderModal = () => {
     if (user) {
       dispatch(openModal("order"));
-      // dispatch(fetchOrder(ingrList));
+      //@ts-ignore
+      dispatch(fetchOrder(ingrList));
       dispatch(clearCart());
     } else {
       navigate("/login");
