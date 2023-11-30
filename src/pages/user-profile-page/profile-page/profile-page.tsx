@@ -1,6 +1,6 @@
 import styles from "./profile-page.module.css";
 
-import { useEffect, useRef, useState } from "react";
+import { FC, FormEvent, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -17,14 +17,15 @@ import {
 } from "../../../services/selectors/user-selector";
 import { fetchUpdateUser } from "../../../services/thunks/user-thunk";
 import { useForm } from "../../../hooks/useForm";
+import { TUser } from "../../../utils/types";
 
-function UserProfile() {
+const  UserProfile: FC = () => {
   const dispatch = useDispatch();
 
-  const isError = useSelector(getErrorUpdateUser);
-  const isLoading = useSelector(getIsLoadingUpdateUser);
-  const user = useSelector(getUser);
-  const nameInputRef = useRef();
+  const isError = useSelector<boolean>(getErrorUpdateUser);
+  const isLoading = useSelector<boolean>(getIsLoadingUpdateUser);
+  const user = useSelector(getUser) as TUser;
+  const nameInputRef = useRef<HTMLInputElement>(null);
 
   const { values, handleChange, setValues } = useForm({
     name: "",
@@ -45,8 +46,9 @@ function UserProfile() {
   };
   //
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+     //@ts-ignore
     dispatch(fetchUpdateUser({ name: values.name, email: values.email }));
   };
 

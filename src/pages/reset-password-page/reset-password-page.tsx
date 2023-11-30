@@ -1,6 +1,6 @@
 import styles from "./reset-password-page.module.css";
 
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -24,19 +24,20 @@ function ResetPasswordPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const resStatus = useSelector(getStatusRes);
-  const isError = useSelector(getError);
-  const isLoading = useSelector(getIsLoading);
+  const resStatus = useSelector<boolean | null>(getStatusRes);
+  const isError = useSelector<boolean>(getError);
+  const isLoading = useSelector<boolean>(getIsLoading);
 
   const { values, handleChange } = useForm({ password: "", token: "" });
 
   // проверка валидности вводимых данных
   const isPasswordValid = validatePassword(values.password);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (values.token && isPasswordValid) {
       dispatch(
+        //@ts-ignore
         fetchСonfirmNewPassword({
           password: values.password,
           token: values.token,

@@ -1,5 +1,6 @@
 import styles from "./ingredient-details.module.css";
 
+import { FC } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 
@@ -7,7 +8,8 @@ import { getIngredientDetails } from "../../services/selectors/ingredient-detail
 import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 import { TIngredient } from "../../utils/types";
 
-const IngredientDetails = () => {
+
+const IngredientDetails: FC = () => {
   const location = useLocation();
   const { id } = useParams();
   const ingredients = useSelector(getIngredients) as Array<TIngredient>;

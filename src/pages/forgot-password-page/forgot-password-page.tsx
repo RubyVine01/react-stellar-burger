@@ -22,7 +22,7 @@ const ForgotPasswordPage: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const resStatus = useSelector(getStatusSentCode);
+  const resStatus = useSelector<boolean | null>(getStatusSentCode);
   const isError = useSelector<boolean>(getError);
   const isLoading = useSelector<boolean>(getIsLoading);
 

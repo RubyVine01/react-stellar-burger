@@ -1,6 +1,6 @@
 import styles from "./app.module.css";
 
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -31,7 +31,7 @@ import { fetchIngredients } from "../../services/thunks/ingredients-data-thunk";
 import { closeModal } from "../../services/slices/modal-slice";
 import { deleteIngredientDetails } from "../../services/slices/ingredient-details-slice";
 
-const App = () => {
+const App: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();

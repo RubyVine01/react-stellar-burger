@@ -1,5 +1,6 @@
 import styles from "./burger-constructor.module.css";
 
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import uuid from "react-uuid";
@@ -32,7 +33,7 @@ import { fetchOrder } from "../../services/thunks/order-details-thunk";
 import { getUser } from "../../services/selectors/user-selector";
 import { TFillingItem, TIngredient, TOrder } from "../../utils/types";
 
-const BurgerConstructor = () => {
+const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isOpen = useSelector(getStatusModal) as boolean;

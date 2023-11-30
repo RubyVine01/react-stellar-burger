@@ -1,5 +1,6 @@
 import styles from "./ingredients-item.module.css";
 
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DragPreviewImage, useDrag } from "react-dnd";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -12,7 +13,7 @@ import {
 import { setIngredientDetails } from "../../services/slices/ingredient-details-slice";
 import { getAllCart } from "../../services/selectors/burger-constructor-selector.js";
 import { TFillingItem, TIngredient } from "../../utils/types";
-import { FC } from "react";
+
 
 type TIngredientsItemProps = {
   ingredient: TIngredient;

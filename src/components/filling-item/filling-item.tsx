@@ -1,5 +1,6 @@
 import styles from "./filling-item.module.css";
 
+import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 
@@ -13,7 +14,6 @@ import {
   deleteFromCart,
   sortCart,
 } from "../../services/slices/burger-constructor-slice";
-import { FC } from "react";
 import { TFillingItem } from "../../utils/types";
 
 type TFillingItemProps = {

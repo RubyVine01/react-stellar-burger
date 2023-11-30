@@ -1,10 +1,11 @@
 import styles from "./user-profile-page.module.css";
+import { FC, MouseEventHandler } from "react";
 import { useDispatch } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 import { fetchLogout } from "../../services/thunks/user-thunk";
 
-function UserProfilePage() {
-  const linkClassName = ({ isActive }) =>
+const UserProfilePage: FC = () => {
+  const linkClassName = ({ isActive }: { isActive: boolean }) =>
     isActive
       ? "text_color_primary  text text_type_main-medium mt-8 " +
         " " +
@@ -15,7 +16,7 @@ function UserProfilePage() {
 
   const dispatch = useDispatch();
 
-  const logout = (e) => {
+  const logout: MouseEventHandler = (e) => {
     e.preventDefault();
     dispatch(fetchLogout());
   };
@@ -46,6 +47,6 @@ function UserProfilePage() {
       </div>
     </main>
   );
-}
+};
 
 export default UserProfilePage;

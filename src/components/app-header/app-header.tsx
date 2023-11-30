@@ -1,5 +1,6 @@
 import styles from "./app-header.module.css";
 
+import { FC } from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
 
@@ -15,7 +16,8 @@ import {
 import { getUser } from "../../services/selectors/user-selector";
 
 
-const AppHeader = () => {
+
+const AppHeader: FC = () => {
   const { pathname } = useLocation();
   const user = useSelector<TUser | null>(getUser);
   const currentLink = user ? "/profile" : "/login";

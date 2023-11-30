@@ -1,6 +1,6 @@
 import styles from "./registration-page.module.css";
 
-import { useEffect } from "react";
+import { FC, FormEvent, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -21,12 +21,12 @@ import { useForm } from "../../hooks/useForm";
 import { validateEmail, validatePassword } from "../../utils/validate";
 import { clearErrorRegister } from "../../services/slices/user-slice";
 
-function RegistrationPage() {
+const RegistrationPage: FC = () => {
   const dispatch = useDispatch();
 
-  const isLoading = useSelector(getIsLoadingRegister);
-  const isError = useSelector(getErrorRegister);
-  const errorMessage = useSelector(getErrorMessageRegister);
+  const isLoading = useSelector<boolean>(getIsLoadingRegister);
+  const isError = useSelector<boolean>(getErrorRegister);
+  const errorMessage = useSelector<string>(getErrorMessageRegister);
 
   const { values, handleChange } = useForm({
     name: "",
@@ -38,10 +38,11 @@ function RegistrationPage() {
   const isEmailValid = validateEmail(values.email);
   const isPasswordValid = validatePassword(values.password);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isEmailValid && isPasswordValid && values.name) {
       dispatch(
+        //@ts-ignore
         fetchRegister({
           email: values.email,
           password: values.password,
@@ -56,7 +57,7 @@ function RegistrationPage() {
     if (isError) {
       dispatch(clearErrorRegister());
     }
-  }, [values.email, values.password, values.name, dispatch]);
+  }, [values.email, values.password, values.name, isError, dispatch]);
 
   return (
     <main className={styles.content}>
@@ -109,6 +110,6 @@ function RegistrationPage() {
       </p>
     </main>
   );
-}
+};
 
 export default RegistrationPage;

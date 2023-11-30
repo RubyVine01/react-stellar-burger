@@ -1,4 +1,5 @@
 import styles from "./order-details.module.css";
+import { FC } from "react";
 import { useSelector } from "react-redux";
 import OrderAccpetedDone from "../../images/order-accpeted-done.svg";
 
@@ -9,7 +10,7 @@ import {
 } from "../../services/selectors/order-details-selector";
 import { TOrder } from "../../utils/types";
 
-function OrderDetails() {
+const OrderDetails: FC = () => {
   const order = useSelector<ReturnType<typeof getOrder>, TOrder | null>(
     getOrder
   );
@@ -47,6 +48,6 @@ function OrderDetails() {
       )}
     </div>
   );
-}
+};
 
 export default OrderDetails;

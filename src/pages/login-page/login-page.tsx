@@ -1,14 +1,16 @@
 import styles from "./login-page.module.css";
+import { FC, FormEvent, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 import {
   Button,
   EmailInput,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-
 import { fetchLogin } from "../../services/thunks/user-thunk";
+import { clearErrorLogin } from "../../services/slices/user-slice";
 import {
   getErrorLogin,
   getErrorMessageLogin,
@@ -16,24 +18,23 @@ import {
 } from "../../services/selectors/user-selector";
 import { useForm } from "../../hooks/useForm";
 import { validateEmail, validatePassword } from "../../utils/validate";
-import { clearErrorLogin } from "../../services/slices/user-slice";
-import { useEffect } from "react";
 
-function LoginPage() {
+const LoginPage: FC = () => {
   const dispatch = useDispatch();
-  const isLoading = useSelector(getIsLoadingLogin);
-  const isError = useSelector(getErrorLogin);
-  const errorMessage = useSelector(getErrorMessageLogin);
+  const isLoading = useSelector<boolean>(getIsLoadingLogin);
+  const isError = useSelector<boolean>(getErrorLogin);
+  const errorMessage = useSelector<string>(getErrorMessageLogin);
 
   const { values, handleChange } = useForm({ email: "", password: "" });
 
   // проверка валидности вводимых данных
   const isEmailValid = validateEmail(values.email);
   const isPasswordValid = validatePassword(values.password);
- 
-  const handleSubmit = (e) => {
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isEmailValid && isPasswordValid) {
+      //@ts-ignore
       dispatch(fetchLogin({ email: values.email, password: values.password }));
     }
   };
@@ -43,7 +44,7 @@ function LoginPage() {
     if (isError) {
       dispatch(clearErrorLogin());
     }
-  }, [values.email, values.password, dispatch]);
+  }, [values.email, values.password, isError, dispatch]);
 
   return (
     <main className={styles.content}>
@@ -98,6 +99,6 @@ function LoginPage() {
       </p>
     </main>
   );
-}
+};
 
 export default LoginPage;

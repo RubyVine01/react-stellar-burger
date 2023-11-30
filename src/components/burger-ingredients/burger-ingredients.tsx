@@ -1,6 +1,6 @@
 import styles from "./burger-ingredients.module.css";
 
-import { useCallback, useRef, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
 import IngredientsTabs from "../ingredients-tabs/ingredients-tabs";
@@ -14,7 +14,7 @@ import {
 type THandleScroll = () => void;
 type TCurrentValue = "bun" | "sauce" | "main";
 
-const BurgerIngredients = () => {
+const BurgerIngredients: FC = () => {
   const isLoading = useSelector<boolean>(getLoadingIngredients);
   const error = useSelector<boolean>(getErrorIngredients);
   const [current, setCurrent] = useState<TCurrentValue>("bun");
