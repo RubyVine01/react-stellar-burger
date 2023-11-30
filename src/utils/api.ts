@@ -1,4 +1,7 @@
-function checkResponse(res) {
+
+
+
+function checkResponse(res: Response) {
   const contentType = res.headers.get("content-type");
   if (contentType && contentType.includes("application/json")) {
     return res.json().then((data) => {
@@ -13,7 +16,9 @@ function checkResponse(res) {
   }
 }
 
-export function request(url, options) {
+
+
+export function request(url:string, options?:RequestInit) {
   return fetch(url, options)
     .then(checkResponse)
     .catch((error) => {

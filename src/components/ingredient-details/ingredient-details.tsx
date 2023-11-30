@@ -7,7 +7,7 @@ import { getIngredientDetails } from "../../services/selectors/ingredient-detail
 import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 import { TIngredient } from "../../utils/types";
 
-const  IngredientDetails = () => {
+const IngredientDetails = () => {
   const location = useLocation();
   const { id } = useParams();
   const ingredients = useSelector(getIngredients) as Array<TIngredient>;
@@ -74,6 +74,6 @@ const  IngredientDetails = () => {
       </ul>
     </div>
   );
-}
+};
 
 export default IngredientDetails;
