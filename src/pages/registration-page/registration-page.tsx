@@ -57,7 +57,7 @@ const RegistrationPage: FC = () => {
     if (isError) {
       dispatch(clearErrorRegister());
     }
-  }, [values.email, values.password, values.name, isError, dispatch]);
+  }, [values.email, values.password, values.name, dispatch]);
 
   return (
     <main className={styles.content}>

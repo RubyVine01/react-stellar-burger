@@ -44,7 +44,7 @@ const LoginPage: FC = () => {
     if (isError) {
       dispatch(clearErrorLogin());
     }
-  }, [values.email, values.password, isError, dispatch]);
+  }, [values.email, values.password, dispatch]);
 
   return (
     <main className={styles.content}>
