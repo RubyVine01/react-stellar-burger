@@ -1,7 +1,6 @@
 import styles from "./burger-ingredients.module.css";
 
 import { FC, useCallback, useRef, useState } from "react";
-import { useSelector } from "react-redux";
 
 import IngredientsTabs from "../ingredients-tabs/ingredients-tabs";
 import IngredientsSet from "../ingredients-set/ingredients-set";
@@ -10,13 +9,15 @@ import {
   getErrorIngredients,
   getLoadingIngredients,
 } from "../../services/selectors/ingredients-data-selector";
+import { useAppSelector } from "../../hooks/hooks";
 
 type THandleScroll = () => void;
 type TCurrentValue = "bun" | "sauce" | "main";
 
 const BurgerIngredients: FC = () => {
-  const isLoading = useSelector<boolean>(getLoadingIngredients);
-  const error = useSelector<boolean>(getErrorIngredients);
+  const isLoading = useAppSelector(getLoadingIngredients);
+  const error = useAppSelector(getErrorIngredients);
+
   const [current, setCurrent] = useState<TCurrentValue>("bun");
   const bunRef = useRef<HTMLHeadingElement>(null);
   const sauceRef = useRef<HTMLHeadingElement>(null);

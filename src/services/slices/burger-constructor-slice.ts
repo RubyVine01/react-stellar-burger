@@ -7,7 +7,7 @@ type TCartConstructor = {
 };
 
 const initialState: TCartConstructor = {
-  cartList: [],
+  cartList: [], 
   cartBun: null,
 };
 

@@ -1,7 +1,6 @@
 import styles from "./filling-item.module.css";
 
 import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 
 import {
@@ -15,6 +14,7 @@ import {
   sortCart,
 } from "../../services/slices/burger-constructor-slice";
 import { TFillingItem } from "../../utils/types";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 type TFillingItemProps = {
   ingredient: TFillingItem;
@@ -22,8 +22,8 @@ type TFillingItemProps = {
 };
 
 const FillingItem: FC<TFillingItemProps> = ({ ingredient, index }) => {
-  const dispatch = useDispatch();
-  const fillingList = useSelector(getCartList) as Array<TFillingItem>;
+  const dispatch = useAppDispatch();
+  const fillingList = useAppSelector(getCartList);
 
   const [{ isDragging }, dragRef] = useDrag({
     type: "sort",

@@ -1,28 +1,26 @@
 import styles from "./ingredient-details.module.css";
 
 import { FC } from "react";
-import { useSelector } from "react-redux";
 import { useLocation, useParams } from "react-router-dom";
 
 import { getIngredientDetails } from "../../services/selectors/ingredient-details-selector.js";
 import { getIngredients } from "../../services/selectors/ingredients-data-selector";
-import { TIngredient } from "../../utils/types";
-
+import { useAppSelector } from "../../hooks/hooks";
 
 const IngredientDetails: FC = () => {
   const location = useLocation();
   const { id } = useParams();
-  const ingredients = useSelector(getIngredients) as Array<TIngredient>;
+  const ingredients = useAppSelector(getIngredients);
   const background = location.state && location.state.background;
-  const ingredientDetail = useSelector<TIngredient>(getIngredientDetails);
+  const ingredientDetail = useAppSelector(getIngredientDetails);
 
-  const ingredient = useSelector((state) => {
+  const ingredient = useAppSelector((state) => {
     if (background && ingredientDetail) {
       return getIngredientDetails(state);
     } else {
       return ingredients.find((item) => item._id === id);
     }
-  }) as TIngredient;
+  });
 
   if (!ingredient) {
     return (
