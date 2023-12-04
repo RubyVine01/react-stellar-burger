@@ -50,7 +50,7 @@ const App: FC = () => {
     dispatch(deleteIngredientDetails());
     navigate(-1);
   };
-
+ 
   return (
     <div className={styles.app}>
       <AppHeader />

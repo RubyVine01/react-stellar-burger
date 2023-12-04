@@ -1,7 +1,7 @@
 import styles from "./ingredients-set.module.css";
 import { FC } from "react";
 import IngredientsItem from "../ingredients-item/ingredients-item";
-import { getIngredients } from "../../services/selectors/ingredients-data-selector.js";
+import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 import { TIngredient } from "../../utils/types";
 import { useAppSelector } from "../../hooks/hooks";
 
