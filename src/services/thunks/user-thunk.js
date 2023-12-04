@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { baseURL } from "../../utils/const.ts";
-import { request } from "../../utils/api.ts";
-import { setAuthChecked, setUser } from "../slices/user-slice.js";
+import { baseURL } from "../../utils/const";
+import { request } from "../../utils/api";
+import { setAuthChecked, setUser } from "../slices/user-slice";
 
 // register/post
 

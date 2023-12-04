@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchResetCode } from "../thunks/forgot-password-thunk.js";
+import { fetchResetCode } from "../thunks/forgot-password-thunk";
 
 const initialState = {
   fetchRes: {},

@@ -7,7 +7,6 @@ import { store } from "./services/store";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
-
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
@@ -16,7 +15,7 @@ ReactDOM.render(
       </BrowserRouter>
     </React.StrictMode>
   </Provider>,
-  document.getElementById("root")
+  document.getElementById("root") as HTMLElement
 );
 
 // If you want to start measuring performance in your app, pass a function

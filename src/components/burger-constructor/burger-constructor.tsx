@@ -1,11 +1,13 @@
+// Styles
 import styles from "./burger-constructor.module.css";
 
+// Library
 import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import uuid from "react-uuid";
 import { useNavigate } from "react-router-dom";
 
+// Components
 import CurrencyIconLarge from "../../images/currency-icon-36px.svg";
 import {
   Button,
@@ -15,6 +17,7 @@ import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import FillingItem from "../filling-item/filling-item";
 
+// Services
 import {
   getStatusModal,
   getTypeModal,
@@ -31,17 +34,21 @@ import {
 import { closeModal, openModal } from "../../services/slices/modal-slice";
 import { fetchOrder } from "../../services/thunks/order-details-thunk";
 import { getUser } from "../../services/selectors/user-selector";
-import { TFillingItem, TIngredient, TOrder } from "../../utils/types";
+import { TIngredient } from "../../utils/types";
+
+// Hooks
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 const BurgerConstructor: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const isOpen = useSelector(getStatusModal) as boolean;
-  const modalType = useSelector<"order" | "ingredient">(getTypeModal);
-  const fillingList = useSelector(getCartList) as Array<TFillingItem>;
-  const bun = useSelector(getCartBun) as TFillingItem;
-  const allCart = useSelector(getAllCart) as Array<TFillingItem>;
-  const user = useSelector<TOrder | null>(getUser);
+
+  const isOpen = useAppSelector(getStatusModal);
+  const modalType = useAppSelector(getTypeModal);
+  const fillingList = useAppSelector(getCartList);
+  const bun = useAppSelector(getCartBun);
+  const allCart = useAppSelector(getAllCart);
+  const user = useAppSelector(getUser);
 
   const ingrList = allCart.map((item) => item._id);
   const totolPrice = allCart.reduce((previousValue, item) => {

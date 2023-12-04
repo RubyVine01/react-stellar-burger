@@ -1,10 +1,7 @@
 import styles from "./app-header.module.css";
 
 import { FC } from "react";
-import { useSelector } from "react-redux";
 import { NavLink, useLocation } from "react-router-dom";
-
-import { TUser } from "../../utils/types";
 
 import {
   Logo,
@@ -13,16 +10,17 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
+
 import { getUser } from "../../services/selectors/user-selector";
 
-
+import { useAppSelector } from "../../hooks/hooks";
 
 const AppHeader: FC = () => {
   const { pathname } = useLocation();
-  const user = useSelector<TUser | null>(getUser);
+  const user = useAppSelector(getUser);
   const currentLink = user ? "/profile" : "/login";
 
-  const linkClassName = ({ isActive }:{isActive: boolean}): string =>
+  const linkClassName = ({ isActive }: { isActive: boolean }): string =>
     isActive
       ? `text_color_primary  pt-4 pb-4 pr-5 pl-5 ${styles.nav_link}`
       : `text_color_inactive  pt-4 pb-4 pr-5 pl-5  ${styles.nav_link}`;
@@ -61,6 +59,6 @@ const AppHeader: FC = () => {
       </nav>
     </header>
   );
-}
+};
 
 export default AppHeader;

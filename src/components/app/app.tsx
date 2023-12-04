@@ -1,18 +1,19 @@
+// Styles
 import styles from "./app.module.css";
 
+// Library
 import React, { FC, useEffect } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 // ProtectedRoute
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route";
 import ResetPasswordProtectedRoute from "../protected-route/protected-route-reset-password";
 
-// components
+// Components
 import AppHeader from "../app-header/app-header";
 import Modal from "../modal/modal";
 
-// pages
+// Pages
 import Main from "../../pages/main/main";
 import IngredientPage from "../../pages/ingredient-page/ingredient-page";
 import IngredientDetails from "../ingredient-details/ingredient-details";
@@ -26,17 +27,19 @@ import UserProfilePage from "../../pages/user-profile-page/user-profile-page";
 import UserProfile from "../../pages/user-profile-page/profile-page/profile-page";
 import OrderHistory from "../../pages/user-profile-page/order-history-page/order-history-page";
 
-// services
+// Services
 import { fetchIngredients } from "../../services/thunks/ingredients-data-thunk";
 import { closeModal } from "../../services/slices/modal-slice";
 import { deleteIngredientDetails } from "../../services/slices/ingredient-details-slice";
 
+// Hooks
+import { useAppDispatch } from "../../hooks/hooks";
+
 const App: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const background = location.state && location.state.background;
- 
 
   useEffect(() => {
     dispatch(fetchIngredients());
@@ -99,6 +102,6 @@ const App: FC = () => {
       )}
     </div>
   );
-}
+};
 
 export default App;

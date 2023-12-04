@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { baseURL } from "../../utils/const.ts";
-import { request } from "../../utils/api.ts";
+import { baseURL } from "../../utils/const";
+import { request } from "../../utils/api";
 
 const urlСonfirmNewPassword = `${baseURL}/password-reset/reset`
 

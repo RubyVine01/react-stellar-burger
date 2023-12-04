@@ -11,7 +11,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { setIngredientDetails } from "../../services/slices/ingredient-details-slice";
-import { getAllCart } from "../../services/selectors/burger-constructor-selector.js";
+import { getAllCart } from "../../services/selectors/burger-constructor-selector";
 import { TFillingItem, TIngredient } from "../../utils/types";
 
 

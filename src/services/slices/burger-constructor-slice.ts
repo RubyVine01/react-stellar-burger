@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { TFillingItem } from "../../utils/types";
 
-const initialState = {
+type TCartConstructor = {
+  cartList: Array<TFillingItem>;
+  cartBun: TFillingItem | null;
+};
+
+const initialState: TCartConstructor = {
   cartList: [],
   cartBun: null,
 };
@@ -15,8 +21,6 @@ const constructorSlice = createSlice({
       } else {
         state.cartList.push(action.payload);
       }
-
-      
     },
     deleteFromCart: (state, action) => {
       state.cartList = state.cartList.filter(
