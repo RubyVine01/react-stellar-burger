@@ -14,8 +14,6 @@ const ordersNumListInWork: string[] = ["034528", "034527", "034526"];
 const doneOrdersCount: number = 23657;
 const doneOrdersCountDay: number = 257;
 
-
-
 const OrdersStatistics: FC = () => {
   return (
     <section className={styles.order_statistics}>
@@ -25,6 +23,7 @@ const OrdersStatistics: FC = () => {
           {ordersNumList.map((num: string) => {
             return (
               <li
+                key={num}
                 className={`text text_type_digits-default text_color_success mt-2`}
               >
                 {num}
@@ -36,7 +35,9 @@ const OrdersStatistics: FC = () => {
           <h2 className={`text text_type_main-medium mb-4`}>В работе:</h2>
           {ordersNumListInWork.map((num: string) => {
             return (
-              <li className={`text text_type_digits-default mt-2`}>{num}</li>
+              <li key={num} className={`text text_type_digits-default mt-2`}>
+                {num}
+              </li>
             );
           })}
         </ul>
