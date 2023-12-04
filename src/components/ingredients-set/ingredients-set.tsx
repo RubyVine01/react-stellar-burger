@@ -1,9 +1,9 @@
 import styles from "./ingredients-set.module.css";
 import { FC } from "react";
-import { useSelector } from "react-redux";
 import IngredientsItem from "../ingredients-item/ingredients-item";
 import { getIngredients } from "../../services/selectors/ingredients-data-selector.js";
 import { TIngredient } from "../../utils/types";
+import { useAppSelector } from "../../hooks/hooks";
 
 type TIngredientsSetProps = {
   headline: string;
@@ -16,7 +16,7 @@ const IngredientsSet: FC<TIngredientsSetProps> = ({
   type,
   persRef,
 }) => {
-  const ingredients = useSelector(getIngredients) as Array<TIngredient>;
+  const ingredients = useAppSelector(getIngredients);
   return (
     <li>
       <h2 className={`text text_type_main-medium pb-6`} ref={persRef}>

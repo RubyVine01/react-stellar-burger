@@ -1,14 +1,14 @@
 import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { getResetPasswordAllowed } from "../../services/selectors/reset-password-selector";
 import { ReactElement } from "react";
+import { useAppSelector } from "../../hooks/hooks";
 
 type TComponent = {
   component: ReactElement;
 };
 
 const ResetPasswordProtectedRoute = ({ component }: TComponent) => {
-  const resetPasswordAllowed = useSelector<boolean>(getResetPasswordAllowed);
+  const resetPasswordAllowed = useAppSelector(getResetPasswordAllowed);
 
   if (!resetPasswordAllowed) {
     // Пользователь не прошел через процесс восстановления пароля

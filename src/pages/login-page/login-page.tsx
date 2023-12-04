@@ -1,6 +1,5 @@
 import styles from "./login-page.module.css";
 import { FC, FormEvent, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import {
@@ -18,12 +17,13 @@ import {
 } from "../../services/selectors/user-selector";
 import { useForm } from "../../hooks/useForm";
 import { validateEmail, validatePassword } from "../../utils/validate";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 const LoginPage: FC = () => {
-  const dispatch = useDispatch();
-  const isLoading = useSelector<boolean>(getIsLoadingLogin);
-  const isError = useSelector<boolean>(getErrorLogin);
-  const errorMessage = useSelector<string>(getErrorMessageLogin);
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(getIsLoadingLogin);
+  const isError = useAppSelector(getErrorLogin);
+  const errorMessage = useAppSelector(getErrorMessageLogin);
 
   const { values, handleChange } = useForm({ email: "", password: "" });
 

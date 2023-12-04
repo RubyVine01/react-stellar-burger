@@ -20,13 +20,14 @@ import {
 import { useForm } from "../../hooks/useForm";
 import { validateEmail, validatePassword } from "../../utils/validate";
 import { clearErrorRegister } from "../../services/slices/user-slice";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 const RegistrationPage: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const isLoading = useSelector<boolean>(getIsLoadingRegister);
-  const isError = useSelector<boolean>(getErrorRegister);
-  const errorMessage = useSelector<string>(getErrorMessageRegister);
+  const isLoading = useAppSelector(getIsLoadingRegister);
+  const isError = useAppSelector(getErrorRegister);
+  const errorMessage = useAppSelector(getErrorMessageRegister);
 
   const { values, handleChange } = useForm({
     name: "",

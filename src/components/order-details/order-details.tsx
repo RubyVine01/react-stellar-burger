@@ -1,6 +1,5 @@
 import styles from "./order-details.module.css";
 import { FC } from "react";
-import { useSelector } from "react-redux";
 import OrderAccpetedDone from "../../images/order-accpeted-done.svg";
 
 import {
@@ -8,17 +7,12 @@ import {
   getIsloading,
   getOrder,
 } from "../../services/selectors/order-details-selector";
-import { TOrder } from "../../utils/types";
+import { useAppSelector } from "../../hooks/hooks";
 
 const OrderDetails: FC = () => {
-  const order = useSelector<ReturnType<typeof getOrder>, TOrder | null>(
-    getOrder
-  );
-  const orderError = useSelector<boolean>(getError);
-  const orderIsloading = useSelector<string>(getIsloading);
-
-  console.log(order);
-
+  const order = useAppSelector(getOrder);
+  const orderError = useAppSelector(getError);
+  const orderIsloading = useAppSelector(getIsloading);
   return (
     <div className={`${styles.order_details} pt-4 pb-15`}>
       {orderIsloading === true ? (

@@ -1,5 +1,4 @@
 import { ReactElement, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 
 import { setAuthChecked } from "../../services/slices/user-slice";
@@ -9,6 +8,7 @@ import {
   getUser,
 } from "../../services/selectors/user-selector";
 import { TUser } from "../../utils/types";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 type TProtectedRouteProps = {
   onlyUnAuth?: boolean;
@@ -19,15 +19,15 @@ const ProtectedRoute = ({
   onlyUnAuth = false,
   component,
 }: TProtectedRouteProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(setAuthChecked(false));
     dispatch(checkUserAuth());
   }, [dispatch]);
 
-  const isAuthChecked = useSelector<boolean>(getIsAuthChecked);
-  const user = useSelector(getUser) as TUser;
+  const isAuthChecked = useAppSelector(getIsAuthChecked);
+  const user = useAppSelector(getUser);
   const location = useLocation();
 
   if (!isAuthChecked) {

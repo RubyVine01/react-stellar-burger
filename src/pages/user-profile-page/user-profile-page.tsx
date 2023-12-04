@@ -1,8 +1,8 @@
 import styles from "./user-profile-page.module.css";
 import { FC, MouseEventHandler } from "react";
-import { useDispatch } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 import { fetchLogout } from "../../services/thunks/user-thunk";
+import { useAppDispatch } from "../../hooks/hooks";
 
 const UserProfilePage: FC = () => {
   const linkClassName = ({ isActive }: { isActive: boolean }) =>
@@ -14,7 +14,7 @@ const UserProfilePage: FC = () => {
         " " +
         styles.link;
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const logout: MouseEventHandler = (e) => {
     e.preventDefault();

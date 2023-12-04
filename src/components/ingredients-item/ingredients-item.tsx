@@ -1,7 +1,6 @@
 import styles from "./ingredients-item.module.css";
 
 import { FC } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { DragPreviewImage, useDrag } from "react-dnd";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -12,8 +11,8 @@ import {
 
 import { setIngredientDetails } from "../../services/slices/ingredient-details-slice";
 import { getAllCart } from "../../services/selectors/burger-constructor-selector";
-import { TFillingItem, TIngredient } from "../../utils/types";
-
+import { TIngredient } from "../../utils/types";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 type TIngredientsItemProps = {
   ingredient: TIngredient;
@@ -21,10 +20,10 @@ type TIngredientsItemProps = {
 
 const IngredientsItem: FC<TIngredientsItemProps> = ({ ingredient }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const location = useLocation();
 
-  const allCart = useSelector(getAllCart) as Array<TFillingItem>;
+  const allCart = useAppSelector(getAllCart);
 
   const count: number = allCart.filter(
     (item) => item._id === ingredient._id

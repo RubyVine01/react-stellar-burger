@@ -2,7 +2,6 @@ import styles from "./reset-password-page.module.css";
 
 import { FormEvent, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
 import {
   Button,
@@ -19,14 +18,15 @@ import {
 import { setResetPasswordAllowed } from "../../services/slices/reset-password-slice";
 import { validatePassword } from "../../utils/validate";
 import { useForm } from "../../hooks/useForm";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 function ResetPasswordPage() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const resStatus = useSelector<boolean | null>(getStatusRes);
-  const isError = useSelector<boolean>(getError);
-  const isLoading = useSelector<boolean>(getIsLoading);
+  const resStatus = useAppSelector(getStatusRes);
+  const isError = useAppSelector(getError);
+  const isLoading = useAppSelector(getIsLoading);
 
   const { values, handleChange } = useForm({ password: "", token: "" });
 

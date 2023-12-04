@@ -1,7 +1,6 @@
 import styles from "./profile-page.module.css";
 
 import { FC, FormEvent, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import {
   Button,
@@ -18,13 +17,14 @@ import {
 import { fetchUpdateUser } from "../../../services/thunks/user-thunk";
 import { useForm } from "../../../hooks/useForm";
 import { TUser } from "../../../utils/types";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 
 const  UserProfile: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const isError = useSelector<boolean>(getErrorUpdateUser);
-  const isLoading = useSelector<boolean>(getIsLoadingUpdateUser);
-  const user = useSelector(getUser) as TUser;
+  const isError = useAppSelector(getErrorUpdateUser);
+  const isLoading = useAppSelector(getIsLoadingUpdateUser);
+  const user = useAppSelector(getUser);
   const nameInputRef = useRef<HTMLInputElement>(null);
 
   const { values, handleChange, setValues } = useForm({

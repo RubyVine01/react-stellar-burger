@@ -6,7 +6,6 @@ import {
 
 import { FC, FormEvent, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
 import { fetchResetCode } from "../../services/thunks/forgot-password-thunk";
 import {
@@ -17,18 +16,19 @@ import {
 import { setResetPasswordAllowed } from "../../services/slices/reset-password-slice";
 import { useForm } from "../../hooks/useForm";
 import { validateEmail } from "../../utils/validate";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 const ForgotPasswordPage: FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const resStatus = useSelector<boolean | null>(getStatusSentCode);
-  const isError = useSelector<boolean>(getError);
-  const isLoading = useSelector<boolean>(getIsLoading);
+  const resStatus = useAppSelector(getStatusSentCode);
+  const isError = useAppSelector(getError);
+  const isLoading = useAppSelector(getIsLoading);
 
   const { values, handleChange } = useForm({ email: "" });
 
-  const isEmailValid = validateEmail(values.email );
+  const isEmailValid = validateEmail(values.email);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -83,6 +83,6 @@ const ForgotPasswordPage: FC = () => {
       </p>
     </main>
   );
-}
+};
 
 export default ForgotPasswordPage;
