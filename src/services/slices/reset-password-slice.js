@@ -15,8 +15,7 @@ const resetPasswordSlice = createSlice({
   reducers: {
     setResetPasswordAllowed: (state, action) => {
       state.resetPasswordAllowed = action.payload;
-      console.log(`resetPasswordAllowe: ${state.resetPasswordAllowed}`);
-    }, // new
+    },
   },
   extraReducers: {
     [fetchСonfirmNewPassword.fulfilled]: (state, action) => {

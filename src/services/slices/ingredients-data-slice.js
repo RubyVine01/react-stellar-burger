@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchIngredients } from "../thunks/ingredients-data-thunk.js";
+import { fetchIngredients } from "../thunks/ingredients-data-thunk";
 
 const initialState = {
   ingredientArray: [],
