@@ -14,7 +14,7 @@ import {
   ConstructorElement,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modal/modal";
-import OrderDetails from "../order-details/order-details";
+import OrderAccpetedDetails from "../order-accpeted-details/order-accpeted-details";
 import FillingItem from "../filling-item/filling-item";
 
 // Services
@@ -166,7 +166,7 @@ const BurgerConstructor: FC = () => {
 
       {isOpen && modalType === "order" && (
         <Modal title="" onClose={onCloseOrderModal}>
-          <OrderDetails />
+          <OrderAccpetedDetails />
         </Modal>
       )}
     </>
