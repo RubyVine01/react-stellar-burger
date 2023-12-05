@@ -34,6 +34,7 @@ import { deleteIngredientDetails } from "../../services/slices/ingredient-detail
 
 // Hooks
 import { useAppDispatch } from "../../hooks/hooks";
+import OrderFullDetails from "../order-full-details/order-full-details";
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
@@ -83,6 +84,7 @@ const App: FC = () => {
           }
         />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
+        <Route path="/orders/1" element={<OrderFullDetails />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       {background && (

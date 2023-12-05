@@ -50,7 +50,7 @@ const OrderItem: FC<TOrderItem> = ({ order }) => {
           date={new Date(order.createdAt)}
         />
       </div>
-
+ 
       <h2 className="text text_type_main-medium mt-6">{order.name}</h2>
       <p
         className="text text_type_main-default mt-2"
