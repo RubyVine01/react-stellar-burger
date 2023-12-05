@@ -9,7 +9,7 @@ type TOrderItem = {
   ingredients: string[];
   _id: string;
   status: "created" | "pending" | "done";
-  number: number;
+  number: string;
   createdAt: string;
   updatedAt: string;
   name: string;
@@ -18,32 +18,59 @@ type TOrderItem = {
 const orderList: TOrderItem[] = [
   {
     ingredients: [
-      "60d3463f7034a000269f45e7",
-      "60d3463f7034a000269f45e9",
-      "60d3463f7034a000269f45e8",
-      "60d3463f7034a000269f45ea",
+      "643d69a5c3f7b9001cfa093c",
+      "643d69a5c3f7b9001cfa093e",
+      "643d69a5c3f7b9001cfa0941",
+      "643d69a5c3f7b9001cfa0941",
+      "643d69a5c3f7b9001cfa093e",
     ],
     _id: "",
     status: "done",
-    number: 0,
+    number: "034535",
     createdAt: "2021-06-23T14:43:22.587Z",
     updatedAt: "2021-06-23T14:43:22.603Z",
     name: "Death Star Starship Main бургер",
   },
   {
-    ingredients: ["60d3463f7034a000269f45e9", "60d3463f7034a000269f45e7"],
+    ingredients: [
+      "643d69a5c3f7b9001cfa093c",
+      "643d69a5c3f7b9001cfa093e",
+      "643d69a5c3f7b9001cfa0941",
+      "643d69a5c3f7b9001cfa0941",
+      "643d69a5c3f7b9001cfa093e",
+      "643d69a5c3f7b9001cfa093e",
+      "643d69a5c3f7b9001cfa093e",
+      "643d69a5c3f7b9001cfa093e",
+    ],
     _id: "",
     status: "done",
-    number: 1,
+    number: "034535",
     createdAt: "2021-06-23T20:11:01.403Z",
     updatedAt: "2021-06-23T20:11:01.406Z",
     name: "Interstellar бургер",
   },
   {
-    ingredients: ["60d3463f7034a000269f45e9"],
+    ingredients: [
+      "643d69a5c3f7b9001cfa093c",
+      "643d69a5c3f7b9001cfa093e",
+      "643d69a5c3f7b9001cfa0941",
+    ],
     _id: "",
     status: "done",
-    number: 3,
+    number: "034535",
+    createdAt: "2021-06-23T20:13:23.654Z",
+    updatedAt: "2021-06-23T20:13:23.657Z",
+    name: "Black Hole Singularity острый бургер",
+  },
+  {
+    ingredients: [
+      "643d69a5c3f7b9001cfa093c",
+      "643d69a5c3f7b9001cfa093e",
+      "643d69a5c3f7b9001cfa0941",
+    ],
+    _id: "",
+    status: "done",
+    number: "034535",
     createdAt: "2021-06-23T20:13:23.654Z",
     updatedAt: "2021-06-23T20:13:23.657Z",
     name: "Black Hole Singularity острый бургер",
@@ -52,8 +79,10 @@ const orderList: TOrderItem[] = [
 
 const OrderList: FC = () => {
   return (
-    <section className={styles.order_list}>
-      <OrderItem />
+    <section className={`${styles.order_list} ${styles.scroll} pr-2`}>
+      {orderList.map((order) => (
+        <OrderItem order={order} />
+      ))}
     </section>
   );
 };

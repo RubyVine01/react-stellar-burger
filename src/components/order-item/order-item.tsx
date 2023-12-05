@@ -11,7 +11,7 @@ import { TIngredient } from "../../utils/types";
 
 const date = "2021-06-23T14:43:22.603Z";
 
-type TOrderItem = {
+type TOrderItemType = {
   ingredients: string[];
   _id: string;
   status: "created" | "pending" | "done";
@@ -21,31 +21,22 @@ type TOrderItem = {
   name: string;
 };
 
-const orderData: TOrderItem = {
-  ingredients: [
-    "643d69a5c3f7b9001cfa093c",
-    "643d69a5c3f7b9001cfa093e",
-    "643d69a5c3f7b9001cfa0941",
-    "643d69a5c3f7b9001cfa093e",
-  ],
-  _id: "",
-  status: "done",
-  number: "034535",
-  createdAt: "2023-12-03T14:43:22.587Z",
-  updatedAt: "2023-12-03T14:43:22.603Z",
-  name: "Death Star Starship Main бургер",
+type TOrderItem = {
+  order: TOrderItemType;
 };
 
-const OrderItem: FC = () => {
+const OrderItem: FC<TOrderItem> = ({ order }) => {
   const allIngredients = useAppSelector(getIngredients);
 
-  const orderIdArray = orderData.ingredients;
+  const orderIdArray = order.ingredients;
 
-  const orderIngredients = orderIdArray.map((orderIngredientId: string) => {
-    return allIngredients.find(
-      (ingredient) => ingredient._id === orderIngredientId
-    );
-  }).filter(ingredient => ingredient !== undefined) as TIngredient[];
+  const orderIngredients = orderIdArray
+    .map((orderIngredientId: string) => {
+      return allIngredients.find(
+        (ingredient) => ingredient._id === orderIngredientId
+      );
+    })
+    .filter((ingredient) => ingredient !== undefined) as TIngredient[];
 
   const totolPrice = orderIngredients.reduce((previousValue, item) => {
     return previousValue + item.price;
@@ -54,23 +45,48 @@ const OrderItem: FC = () => {
   return (
     <section className={`p-6 ${styles.order_item}`}>
       <div className={styles.row}>
-        <p className="text text_type_digits-default">{`# ${orderData.number}`}</p>
+        <p className="text text_type_digits-default">{`# ${order.number}`}</p>
         <FormattedDate
           className="text text_type_main-default text_color_inactive"
-          date={new Date(orderData.createdAt)}
+          date={new Date(order.createdAt)}
         />
       </div>
 
-      <h2 className="text text_type_main-medium ">{orderData.name}</h2>
+      <h2 className="text text_type_main-medium mt-6">{order.name}</h2>
+      <p
+        className="text text_type_main-default mt-2"
+        style={
+          order?.status === "done" ? { color: "#00CCCC" } : { color: "#FFFFFF" }
+        }
+      >
+        {order.status}
+      </p>
 
-      <div className={styles.row}>
+      <div className={`${styles.row} ${styles.row_img} mt-6`}>
         <ul className={styles.img_list}>
-          <li className={styles.img_item} >
-            <img className={styles.image} src="https://code.s3.yandex.net/react/code/bun-02-mobile.png"/>
-          </li>
-          <li className={styles.img_item} >
-            <img className={styles.image} src="https://code.s3.yandex.net/react/code/bun-02-mobile.png"/>
-          </li>
+          {orderIngredients.slice(0, 6).map((ingridient, index) => (
+            <li
+              className={styles.img_item}
+              key={ingridient?._id}
+              style={{
+                zIndex: 5 - index,
+                left: `${index * 50}px`,
+              }}
+            >
+              <img
+                className={styles.image}
+                src={ingridient?.image_mobile}
+                alt={ingridient?.name}
+              />
+              {orderIngredients.length > 6 && index === 5 ? (
+                <div className={styles.overlay}>
+                  <span className="text text_type_main-default">{`+${
+                    orderIngredients.length - 6
+                  }`}</span>
+                </div>
+              ) : null}
+            </li>
+          ))}
         </ul>
         <div className={styles.price}>
           <span className="text_type_digits-default">{totolPrice}</span>

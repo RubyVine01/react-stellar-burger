@@ -74,7 +74,7 @@ const BurgerIngredients: FC = () => {
         <>
           <IngredientsTabs current={current} scrollToRef={scrollToRef} />
           <ul
-            className={`${styles.ingredients} ${styles.scroll} mt-10`}
+            className={`${styles.ingredients} ${styles.scroll} mt-10`} 
             onScroll={handleScroll}
           >
             <IngredientsSet headline="Булки" type="bun" persRef={bunRef} />

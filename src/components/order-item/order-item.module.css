@@ -1,8 +1,6 @@
 .order_item {
   display: flex;
   flex-direction: column;
-  row-gap: 24px;
-  max-height: calc(100vh - 288px - 15px);
   background: var(--interface-modal-bg, #1c1c21);
   box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04),
     0px 0px 2px 0px rgba(0, 0, 0, 0.06), 0px 4px 8px 0px rgba(0, 0, 0, 0.04);
@@ -12,6 +10,10 @@
 .row {
   display: flex;
   justify-content: space-between;
+}
+
+.row_img {
+  height: 74px;
 }
 
 .price {
@@ -26,15 +28,19 @@
   list-style: none;
   padding-left: 0;
   margin: 0;
+  position: relative;
 }
 
 .img_item {
+  position: absolute;
   width: 64px;
   height: 64px;
   margin: 4px 0px;
   border-radius: 100px;
-  border: 2px solid var(--button-normal, #801ab2);
-  background: var(--interface-bg, #131316);
+  border: 2px solid transparent;
+  background: linear-gradient(black, black) padding-box,
+    linear-gradient(to right, rgba(76, 76, 255, 1), rgba(128, 26, 178, 1))
+      border-box;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -44,5 +50,18 @@
 .image {
   width: 112px;
   height: 56px;
-  object-fit: cover; 
+  object-fit: cover;
 }
+
+.overlay {
+  position: absolute;
+  opacity: 0.6;
+  width: 62px;
+  height: 62px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgba(19, 19, 22, 0.8);
+}
+
