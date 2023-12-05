@@ -1,10 +1,11 @@
 import { FC } from "react";
 import styles from "./order-history-page.module.css";
+import OrderList from "../../../components/order-list/order-list";
 
 const OrderHistory: FC = () => {
   return (
-    <div className={styles.content}>
-      <p className={`text text_type_main-large mb-4`}> История заказов</p>
+    <div className={`${styles.content} pt-10`}>
+      <OrderList />
     </div>
   );
 };

@@ -9,7 +9,6 @@ import { useAppSelector } from "../../hooks/hooks";
 import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 import { TIngredient } from "../../utils/types";
 
-const date = "2021-06-23T14:43:22.603Z";
 
 type TOrderItemType = {
   ingredients: string[];

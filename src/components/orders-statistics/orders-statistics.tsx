@@ -10,7 +10,7 @@ const ordersNumList: string[] = [
   "034529",
 ];
 
-const ordersNumListInWork: string[] = ["034528", "034527", "034526"];
+const ordersNumListInWork: string[] = ["034533", "034532", "034531", "034530"];
 const doneOrdersCount: number = 23657;
 const doneOrdersCountDay: number = 257;
 
@@ -18,24 +18,28 @@ const OrdersStatistics: FC = () => {
   return (
     <section className={styles.order_statistics}>
       <div className={styles.orders_list_conteiner}>
+        <h2 className={`text text_type_main-medium mb-2`}>Готовы:</h2>
+        <h2 className={`text text_type_main-medium mb-2`}>В работе:</h2>
         <ul className={styles.orders_list}>
-          <h2 className={`text text_type_main-medium mb-4`}>Готовы:</h2>
-          {ordersNumList.map((num: string) => {
+          {ordersNumList.slice(0, 30).map((num: string) => {
             return (
               <li
                 key={num}
-                className={`text text_type_digits-default text_color_success mt-2`}
+                className={`text text_type_digits-default text_color_success mt-2 ${styles.orders_item}`}
               >
                 {num}
               </li>
             );
           })}
         </ul>
+
         <ul className={styles.orders_list}>
-          <h2 className={`text text_type_main-medium mb-4`}>В работе:</h2>
           {ordersNumListInWork.map((num: string) => {
             return (
-              <li key={num} className={`text text_type_digits-default mt-2`}>
+              <li
+                key={num}
+                className={`text text_type_digits-default mt-2 ${styles.orders_item}`}
+              >
                 {num}
               </li>
             );

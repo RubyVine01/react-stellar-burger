@@ -1,19 +1,32 @@
 .order_statistics {
-  width: 580px;
+  min-width: 580px;
   display: flex;
   flex-direction: column;
-  row-gap: 60px;
+  row-gap: 40px;
+  max-height: calc(100vh - 190px); /* 190px- header и заголовок*/
+  overflow: hidden;
 }
 
 .orders_list_conteiner {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .orders_list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
   list-style: none;
   padding-left: 0;
   margin: 0;
   width: 280px;
+  max-height: calc(
+    100vh - 200px - 390px
+  ); /* 200px - header и заголовок, 390px - остальная статистика которая не имеет динамической ширины */
+  overflow: hidden;
+}
 
+.orders_item {
+  min-width: calc(280px / 3); /* максимально количество колонок = 3 */
 }
