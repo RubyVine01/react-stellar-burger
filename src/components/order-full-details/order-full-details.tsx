@@ -37,6 +37,10 @@ const order: TOrderItem = {
   name: "Death Star Starship Main бургер Death Star Starship Main бургер",
 };
 
+export type TUniqueOrderItem = TIngredient & {
+  count: number;
+};
+
 const OrderFullDetails: FC = () => {
   const location = useLocation();
   const { id } = useParams();
@@ -68,19 +72,29 @@ const OrderFullDetails: FC = () => {
     })
     .filter((ingredient) => ingredient !== undefined) as TIngredient[];
 
-  console.log(orderIngredients);
+  // const map = new Map();
 
-  const ingredientCounts = {};
-
-  // orderIngredients.forEach(ingredient => {
-  //   if (!ingredientCounts[ingredient._id]) {
-  //     ingredientCounts[ingredient._id] = { ...ingredient, count: 0 };
+  // orderIngredients.forEach((item) => {
+  //   if (map.has(item._id)) {
+  //     map.get(item._id).count++;
+  //   } else {
+  //     map.set(item._id, { ...item, count: 1 });
   //   }
-  //   ingredientCounts[ingredient._id].count += ingredient.type === "bun" ? 2 : 1;
   // });
 
-  // const uniqueIngredientsWithCount = Object.values(ingredientCounts);
+  // const uniqueOrderIngredients = Array.from(map.values());
 
+  const uniqueIngredients: { [key: string]: TUniqueOrderItem } = {};
+
+  orderIngredients.forEach((item) => {
+    if (uniqueIngredients[item._id]) {
+      uniqueIngredients[item._id].count++;
+    } else {
+      uniqueIngredients[item._id] = { ...item, count: 1 } as TUniqueOrderItem;
+    }
+  });
+
+  const uniqueOrderIngredients = Object.values(uniqueIngredients);
 
   const totolPrice = orderIngredients.reduce((previousValue, item) => {
     return previousValue + item.price;
@@ -102,8 +116,8 @@ const OrderFullDetails: FC = () => {
       </p>
       <h2 className="text text_type_main-medium mt-10 mb-6">Состав:</h2>
       <ul className={`${styles.list}  ${styles.scroll}`}>
-        {orderIngredients.map((ingridient) => (
-          <li className={styles.list_item} key={ingridient?._id}>
+        {uniqueOrderIngredients.map((ingridient, index) => (
+          <li className={styles.list_item} key={index}>
             <div className={styles.img_conteiner}>
               <img
                 className={styles.image}
@@ -120,7 +134,9 @@ const OrderFullDetails: FC = () => {
 
             <div className={`${styles.price} ${styles.ingridient_price} `}>
               <span className="text_type_digits-default">
-                {ingridient?.price}
+                {ingridient?.type === "bun"
+                  ? `${ingridient?.count * 2} x ${ingridient?.price * 2}`
+                  : `${ingridient?.count} x ${ingridient?.price}`}
               </span>
               <CurrencyIcon type="primary" />
             </div>
