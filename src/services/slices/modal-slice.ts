@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TModalSlice } from "../../utils/types";
+
+type TModalSlice = {
+  isOpen: boolean;
+  modalType: string | null;
+};
 
 const initialState: TModalSlice = {
   isOpen: false,

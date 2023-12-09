@@ -1,6 +1,13 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchСonfirmNewPassword } from "../thunks/reset-password-thunk";
-import { FetchResponse, TResetPasswordSlice } from "../../utils/types";
+import { FetchResponse } from "../../utils/types";
+
+type TResetPasswordSlice = {
+  fetchRes: FetchResponse | null;
+  isLoading: boolean;
+  error: boolean;
+  resetPasswordAllowed: boolean;
+};
 
 const initialState: TResetPasswordSlice = {
   fetchRes: null,

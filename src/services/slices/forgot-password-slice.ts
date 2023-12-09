@@ -1,6 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchResetCode } from "../thunks/forgot-password-thunk";
-import { FetchResponse, TForgotPasswordSlice } from "../../utils/types";
+import { FetchResponse } from "../../utils/types";
+
+type TForgotPasswordSlice = {
+  fetchRes: FetchResponse | null;
+  isLoading: boolean;
+  error: boolean;
+};
 
 const initialState: TForgotPasswordSlice = {
   fetchRes: null,

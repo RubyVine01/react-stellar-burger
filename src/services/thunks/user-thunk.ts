@@ -3,15 +3,13 @@ import { baseURL } from "../../utils/const";
 import { request } from "../../utils/api";
 import { setAuthChecked, setUser } from "../slices/user-slice";
 import { AppDispatch } from "../store";
-import {
-  TFetchLogin,
-  TFetchRefreshToken,
-  TFetchRegister,
-  TFetchUpdateUser,
-  TRequestOptions,
-} from "../../utils/types";
 
 // register/post
+type TFetchRegister = {
+  email: string;
+  password: string;
+  name: string;
+};
 
 const urRegister: Readonly<string> = `${baseURL}/auth/register`;
 
@@ -36,6 +34,10 @@ export const fetchRegister = createAsyncThunk(
 );
 
 // login/post
+type TFetchLogin = {
+  email: string;
+  password: string;
+};
 
 const urlLogin: Readonly<string> = `${baseURL}/auth/login`;
 
@@ -79,6 +81,10 @@ export const fetchLogout = createAsyncThunk("logout/post", async () => {
 });
 
 // updateUser/patch
+type TFetchUpdateUser = {
+  email: string;
+  name: string;
+};
 
 export const fetchUpdateUser = createAsyncThunk(
   "updateUser/patch",
@@ -99,6 +105,11 @@ export const fetchUpdateUser = createAsyncThunk(
 );
 
 // token/post updateUser
+type TFetchRefreshToken = {
+  success: boolean;
+  accessToken: string;
+  refreshToken: string;
+};
 
 const urlToken: Readonly<string> = `${baseURL}/auth/token`;
 
@@ -112,6 +123,10 @@ export const fetchRefreshToken = async (): Promise<TFetchRefreshToken> => {
       token: localStorage.getItem("refreshToken"),
     }),
   });
+};
+
+type TRequestOptions = RequestInit & {
+  headers: Record<string, string>;
 };
 
 const fetchWithRefresh = async (url: string, options: TRequestOptions) => {

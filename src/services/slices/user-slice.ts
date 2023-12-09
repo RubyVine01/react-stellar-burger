@@ -5,7 +5,24 @@ import {
   fetchRegister,
   fetchUpdateUser,
 } from "../thunks/user-thunk";
-import { TUser, TUserProfileeSlice } from "../../utils/types";
+import { TUser } from "../../utils/types";
+
+type TUserProfileeSlice = {
+  user: TUser | null;
+  isAuthChecked: boolean;
+  isLoading: boolean;
+  error: boolean;
+  errorMessage: string;
+  isLoadingRegister: boolean;
+  errorRegister: boolean;
+  errorMessageRegister: string;
+  isLoadingLogin: boolean;
+  errorLogin: boolean;
+  errorMessageLogin: string;
+  isLoadingUpdateUser: boolean;
+  errorUpdateUser: boolean;
+  errorMessageUpdateUser: string;
+};
 
 const initialState: TUserProfileeSlice = {
   user: null,
