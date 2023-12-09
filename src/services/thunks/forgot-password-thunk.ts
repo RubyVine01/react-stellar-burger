@@ -2,9 +2,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseURL } from "../../utils/const";
 import { request } from "../../utils/api";
 
-const urlResetPassword = `${baseURL}/password-reset`;
+const urlResetPassword:Readonly<string> = `${baseURL}/password-reset`;
 
-const options = (email) => {
+const options = (email:string) => {
   return {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -14,7 +14,7 @@ const options = (email) => {
 
 export const fetchResetCode = createAsyncThunk(
   "resetPassword/post",
-  async (email) => {
+  async (email: string) => {
     return request(urlResetPassword, options(email));
   }
 );

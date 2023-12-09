@@ -1,12 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TFillingItem } from "../../utils/types";
+import { TCartConstructorSlice } from "../../utils/types";
 
-type TCartConstructor = {
-  cartList: Array<TFillingItem>;
-  cartBun: TFillingItem | null;
-};
-
-const initialState: TCartConstructor = {
+const initialState: TCartConstructorSlice = {
   cartList: [],
   cartBun: null,
 };
