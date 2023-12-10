@@ -1,4 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {
+  combineReducers,
+  configureStore,
+  getDefaultMiddleware,
+} from "@reduxjs/toolkit";
 import ingredientsReducer from "./slices/ingredients-data-slice";
 import ingredientDetailsReducer from "./slices/ingredient-details-slice";
 import modalReducer from "./slices/modal-slice";
@@ -7,21 +11,34 @@ import constructorReducer from "./slices/burger-constructor-slice";
 import forgotPasswordReducer from "./slices/forgot-password-slice";
 import resetPasswordReducer from "./slices/reset-password-slice";
 import userProfileReducer from "./slices/user-slice";
+import { socketMiddleware } from "./middleware/socket-middleware";
+import { orderReducer } from "./slices/order-slice";
 
-export const store = configureStore({
-  reducer: {
-    ingredients: ingredientsReducer,
-    ingredientDetails: ingredientDetailsReducer,
-    modal: modalReducer,
-    orderDetails: orderDetailsReducer,
-    cartConstructor: constructorReducer,
-    forgotPassword: forgotPasswordReducer,
-    resetPassword: resetPasswordReducer,
-    userProfile: userProfileReducer,
-  },
+const wsActions = {
+  wsConnect: "orders/setWebsocketConnect",
+  wsDisconnect: "orders/setWebsocketDisconnect",
+  wsOpen: "orders/setWebsocketOpen",
+  wsError: "orders/setWebsocketConnectionError",
+  wsMessage: "orders/setWebsocketGetOrders",
+  wsClose: "orders/setWebsocketClose",
+};
+
+const rootReducer = combineReducers({
+  ingredients: ingredientsReducer,
+  ingredientDetails: ingredientDetailsReducer,
+  modal: modalReducer,
+  orderDetails: orderDetailsReducer,
+  cartConstructor: constructorReducer,
+  forgotPassword: forgotPasswordReducer,
+  resetPassword: resetPasswordReducer,
+  userProfile: userProfileReducer,
+  orders: orderReducer,
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
-export type AppDispatch = typeof store.dispatch
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: getDefaultMiddleware().concat(socketMiddleware(wsActions)),
+});
+
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppDispatch = typeof store.dispatch;

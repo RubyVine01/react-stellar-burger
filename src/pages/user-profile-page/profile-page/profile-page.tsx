@@ -16,7 +16,6 @@ import {
 } from "../../../services/selectors/user-selector";
 import { fetchUpdateUser } from "../../../services/thunks/user-thunk";
 import { useForm } from "../../../hooks/useForm";
-import { TUser } from "../../../utils/types";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 
 const UserProfile: FC = () => {
@@ -62,7 +61,8 @@ const UserProfile: FC = () => {
     if (user) {
       setValues({ ...values, name: user.name, email: user.email });
     }
-  }, [user]);
+
+  }, [user]); //  All dependencies declared
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>

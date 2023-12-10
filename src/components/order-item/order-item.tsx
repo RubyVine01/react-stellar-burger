@@ -66,7 +66,7 @@ const OrderItem: FC<TOrderItem> = ({ order }) => {
           {orderIngredients.slice(0, 6).map((ingridient, index) => (
             <li
               className={styles.img_item}
-              key={ingridient?._id}
+              key={index}
               style={{
                 zIndex: 5 - index,
                 left: `${index * 50}px`,
