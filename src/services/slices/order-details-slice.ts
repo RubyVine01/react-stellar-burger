@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchOrder } from "../thunks/order-details-thunk";
-import { TOrder } from "../../utils/types";
+import { TOrder, TOrderAccpeted } from "../../utils/types";
 
 type TOrderDetailsSlice = {
-  orderDetails: TOrder | null;
+  orderDetails: TOrderAccpeted | null;
   isLoading: boolean;
   error: boolean;
 };
@@ -20,11 +20,14 @@ const orderDetailsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchOrder.fulfilled, (state, action: PayloadAction<TOrder>) => {
-        state.orderDetails = action.payload;
-        state.isLoading = false;
-        state.error = false;
-      })
+      .addCase(
+        fetchOrder.fulfilled,
+        (state, action: PayloadAction<TOrderAccpeted>) => {
+          state.orderDetails = action.payload;
+          state.isLoading = false;
+          state.error = false;
+        }
+      )
       .addCase(fetchOrder.pending, (state) => {
         state.isLoading = true;
         state.error = false;

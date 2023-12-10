@@ -7,24 +7,13 @@ import styles from "./order-item.module.css";
 import { FC } from "react";
 import { useAppSelector } from "../../hooks/hooks";
 import { getIngredients } from "../../services/selectors/ingredients-data-selector";
-import { TIngredient } from "../../utils/types";
+import { TIngredient, TOrderItem } from "../../utils/types";
 
-
-type TOrderItemType = {
-  ingredients: string[];
-  _id: string;
-  status: "created" | "pending" | "done";
-  number: string;
-  createdAt: string;
-  updatedAt: string;
-  name: string;
+type TOrder = {
+  order: TOrderItem;
 };
 
-type TOrderItem = {
-  order: TOrderItemType;
-};
-
-const OrderItem: FC<TOrderItem> = ({ order }) => {
+const OrderItem: FC<TOrder> = ({ order }) => {
   const allIngredients = useAppSelector(getIngredients);
 
   const orderIdArray = order.ingredients;
@@ -50,7 +39,7 @@ const OrderItem: FC<TOrderItem> = ({ order }) => {
           date={new Date(order.createdAt)}
         />
       </div>
- 
+
       <h2 className="text text_type_main-medium mt-6">{order.name}</h2>
       <p
         className="text text_type_main-default mt-2"

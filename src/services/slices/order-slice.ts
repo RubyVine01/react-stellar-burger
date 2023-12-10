@@ -1,22 +1,6 @@
 // import { LiveTable, WebsocketStatus } from "../../../types/live-table";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
-export type TOrder = {
-  _id: string;
-  ingredients: Array<string>;
-  status: string;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-  number: number;
-};
-
-export type TOrders = {
-  success: boolean;
-  orders: TOrder[];
-  total: number;
-  totalToday: number;
-};
+import { TOrders } from "../../utils/types";
 
 type TDataState = {
   wsOpen: boolean;
@@ -47,7 +31,7 @@ const ordersSlice = createSlice({
       state.orders = null;
       state.wsError = null;
     },
-    setWebsocketConnection: (state, action: PayloadAction<string>) => {
+    setWebsocketConnect: (state, action: PayloadAction<string>) => {
       state.wsConnectionStatus = true;
       state.wsUrl = action.payload;
     },
@@ -57,7 +41,7 @@ const ordersSlice = createSlice({
     ) => {
       state.wsError = action.payload;
     },
-    setWebsocketOffline: (state) => {
+    setWebsocketDisconnect: (state) => {
       state.wsConnectionStatus = false;
     },
     setWebsocketGetOrders: (state, action: PayloadAction<TOrders>) => {
@@ -69,9 +53,9 @@ const ordersSlice = createSlice({
 export const {
   setWebsocketOpen,
   setWebsocketClose,
-  setWebsocketConnection,
+  setWebsocketConnect,
   setWebsocketConnectionError,
-  setWebsocketOffline,
+  setWebsocketDisconnect,
   setWebsocketGetOrders,
 } = ordersSlice.actions;
 

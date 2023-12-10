@@ -4,20 +4,22 @@ import OrderList from "../../components/order-list/order-list";
 import OrdersStatistics from "../../components/orders-statistics/orders-statistics";
 import { useAppDispatch } from "../../hooks/hooks";
 import { useLocation } from "react-router-dom";
-import { setWebsocketConnection, setWebsocketOffline } from "../../services/slices/order-slice";
-
-const wssUrl: Readonly<string> = "wss://norma.nomoreparties.space"
+import {
+  setWebsocketConnect,
+  setWebsocketDisconnect,
+} from "../../services/slices/order-slice";
+import { wssUrl } from "../../utils/const";
 
 const OrdersPage: FC = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(setWebsocketConnection(`${wssUrl}/orders/all`));
+    dispatch(setWebsocketConnect(`${wssUrl}/orders/all`));
     return () => {
-      dispatch(setWebsocketOffline());
+      dispatch(setWebsocketDisconnect());
     };
-  }, [location.pathname, dispatch]);
+  }, [location.pathname]);
 
   return (
     <main className={styles.content}>

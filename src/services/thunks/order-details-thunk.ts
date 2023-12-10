@@ -7,7 +7,10 @@ const urlOrder = `${baseURL}/orders`;
 const options = (array: Array<string>) => {
   return {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      authorization: localStorage.getItem("accessToken") as string,
+    },
     body: JSON.stringify({ ingredients: array }),
   };
 };

@@ -30,3 +30,33 @@ export type FetchResponse = {
   message: string;
   success: boolean;
 };
+
+export type TOrderItem = {
+  _id: string;
+  ingredients: Array<string>;
+  status: "created" | "pending" | "done";
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  number: number;
+};
+
+export type TOrders = {
+  success: boolean;
+  orders: TOrderItem[];
+  total: number;
+  totalToday: number;
+};
+
+export type TOrderAccpeted = {
+  name: string;
+  order: TOrderItem & {
+    price: number;
+    owner: {
+      createdAt: string;
+      email: string;
+      name: string;
+      updatedAt: string;
+    };
+  };
+};

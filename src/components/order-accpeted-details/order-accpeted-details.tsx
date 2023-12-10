@@ -16,17 +16,17 @@ const OrderAccpetedDetails: FC = () => {
   return (
     <div className={`${styles.order_details} pt-4 pb-15`}>
       {orderIsloading === true ? (
-        <p className={`text text_type_main-large pt-10`}>
+        <p className={`text text_type_main-medium pt-10`}>
           Заказ обрабатывается...
         </p>
       ) : orderError === true ? (
-        <p className={`text text_type_main-large pt-10`}>
+        <p className={`text text_type_main-medium pt-10`}>
           Ошибка при создании заказа, оформите заказ позже или обратитесь в
           службу поддержки
         </p>
       ) : (
         <>
-          <span className={`text text_type_digits-large`}>{order?.number}</span>
+          <p className={`text text_type_digits-large`}>{order?.order.number}</p>
           <p className={`text text_type_main-medium pt-8`}>
             идентификатор заказа
           </p>
