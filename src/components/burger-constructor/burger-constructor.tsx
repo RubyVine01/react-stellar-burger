@@ -14,7 +14,7 @@ import {
   ConstructorElement,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modal/modal";
-import OrderAccpetedDetails from "../order-accpeted-details/order-accpeted-details";
+
 import FillingItem from "../filling-item/filling-item";
 
 // Services
@@ -32,12 +32,13 @@ import {
   clearCart,
 } from "../../services/slices/burger-constructor-slice";
 import { closeModal, openModal } from "../../services/slices/modal-slice";
-import { fetchOrder } from "../../services/thunks/order-details-thunk";
+import { fetchCreateOrder } from "../../services/thunks/created-order-details-thunk";
 import { getUser } from "../../services/selectors/user-selector";
 import { TIngredient } from "../../utils/types";
 
 // Hooks
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import CreatedOrderDetails from "../created-order-details/created-order-details";
 
 const BurgerConstructor: FC = () => {
   const dispatch = useAppDispatch();
@@ -67,7 +68,7 @@ const BurgerConstructor: FC = () => {
     if (user) {
       dispatch(openModal("order"));
       //@ts-ignore
-      dispatch(fetchOrder(ingrList));
+      dispatch(fetchCreateOrder(ingrList));
       dispatch(clearCart());
     } else {
       navigate("/login");
@@ -166,7 +167,7 @@ const BurgerConstructor: FC = () => {
 
       {isOpen && modalType === "order" && (
         <Modal title="" onClose={onCloseOrderModal}>
-          <OrderAccpetedDetails />
+          <CreatedOrderDetails/>
         </Modal>
       )}
     </>

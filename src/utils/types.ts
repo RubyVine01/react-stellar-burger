@@ -48,7 +48,7 @@ export type TOrders = {
   totalToday: number;
 };
 
-export type TOrderAccpeted = {
+export type TCreatedOrder = {
   name: string;
   order: TOrderItem & {
     price: number;

@@ -15,7 +15,7 @@ const options = (array: Array<string>) => {
   };
 };
 
-export const fetchOrder = createAsyncThunk(
+export const fetchCreateOrder = createAsyncThunk(
   "order/post",
   async (array: Array<string>) => {
     return request(urlOrder, options(array));

@@ -6,13 +6,14 @@ import {
 import ingredientsReducer from "./slices/ingredients-data-slice";
 import ingredientDetailsReducer from "./slices/ingredient-details-slice";
 import modalReducer from "./slices/modal-slice";
-import orderDetailsReducer from "./slices/order-details-slice";
+import createdOrderReducer from "./slices/created-order-details-slice";
 import constructorReducer from "./slices/burger-constructor-slice";
 import forgotPasswordReducer from "./slices/forgot-password-slice";
 import resetPasswordReducer from "./slices/reset-password-slice";
 import userProfileReducer from "./slices/user-slice";
+import orderInforReducer from "./slices/order-info-slice";
 import { socketMiddleware } from "./middleware/socket-middleware";
-import { orderReducer } from "./slices/order-slice";
+import { orderReducer } from "./slices/orders-slice";
 
 const wsActions = {
   wsConnect: "orders/setWebsocketConnect",
@@ -27,12 +28,13 @@ const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   ingredientDetails: ingredientDetailsReducer,
   modal: modalReducer,
-  orderDetails: orderDetailsReducer,
+  createdOrder: createdOrderReducer,
   cartConstructor: constructorReducer,
   forgotPassword: forgotPasswordReducer,
   resetPassword: resetPasswordReducer,
   userProfile: userProfileReducer,
   orders: orderReducer,
+  orderInfor: orderInforReducer,
 });
 
 export const store = configureStore({

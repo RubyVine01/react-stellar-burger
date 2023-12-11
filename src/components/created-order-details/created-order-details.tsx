@@ -1,4 +1,4 @@
-import styles from "./order-accpeted-details.module.css";
+import styles from "./created-order-details.module.css";
 import { FC } from "react";
 import OrderAccpetedDone from "../../images/order-accpeted-done.svg";
 
@@ -6,10 +6,10 @@ import {
   getError,
   getIsloading,
   getOrder,
-} from "../../services/selectors/order-details-selector";
+} from "../../services/selectors/created-order-details-selector";
 import { useAppSelector } from "../../hooks/hooks";
 
-const OrderAccpetedDetails: FC = () => {
+const CreatedOrderDetails: FC = () => {
   const order = useAppSelector(getOrder);
   const orderError = useAppSelector(getError);
   const orderIsloading = useAppSelector(getIsloading);
@@ -44,4 +44,4 @@ const OrderAccpetedDetails: FC = () => {
   );
 };
 
-export default OrderAccpetedDetails;
+export default CreatedOrderDetails;

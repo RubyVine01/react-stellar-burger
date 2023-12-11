@@ -5,16 +5,22 @@ import {
 import styles from "./order-item.module.css";
 
 import { FC } from "react";
-import { useAppSelector } from "../../hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 import { TIngredient, TOrderItem } from "../../utils/types";
 import { getStatusDisplay } from "../../utils/order-utils";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type TOrder = {
   order: TOrderItem;
 };
 
 const OrderItem: FC<TOrder> = ({ order }) => {
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const location = useLocation();
+
   const allIngredients = useAppSelector(getIngredients);
 
   const orderIdArray = order.ingredients;
@@ -31,8 +37,16 @@ const OrderItem: FC<TOrder> = ({ order }) => {
     return previousValue + item.price;
   }, 0);
 
+
+  const onOpen = () => {
+    // dispatch(setIngredientDetails(ingredient));
+    navigate(`/ingredients/${order._id}`, {
+      state: { background: location },
+    });
+  };
+
   return (
-    <section className={`p-6 ${styles.order_item}`}>
+    <section className={`p-6 ${styles.order_item}`} onClick={onOpen}>
       <div className={styles.row}>
         <p className="text text_type_digits-default">{`# ${order.number}`}</p>
         <FormattedDate
@@ -49,7 +63,7 @@ const OrderItem: FC<TOrder> = ({ order }) => {
         }
       >
         {getStatusDisplay(order.status)}
-      </p>
+      </p> 
 
       <div className={`${styles.row} ${styles.row_img} mt-6`}>
         <ul className={styles.img_list}>

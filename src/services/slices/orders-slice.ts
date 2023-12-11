@@ -19,7 +19,7 @@ export const initialState: TDataState = {
 
 const ordersSlice = createSlice({
   name: "orders",
-  initialState,
+  initialState, 
   reducers: {
     setWebsocketOpen: (state, action: PayloadAction<boolean>) => {
       state.wsOpen = action.payload;

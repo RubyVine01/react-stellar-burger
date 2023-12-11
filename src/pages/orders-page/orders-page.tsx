@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import {
   setWebsocketConnect,
   setWebsocketDisconnect,
-} from "../../services/slices/order-slice";
+} from "../../services/slices/orders-slice";
 import { wssUrl } from "../../utils/const";
 import { getOrders } from "../../services/selectors/orders-selector";
 

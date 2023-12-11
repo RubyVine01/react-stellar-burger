@@ -1,9 +1,9 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { fetchOrder } from "../thunks/order-details-thunk";
-import { TOrder, TOrderAccpeted } from "../../utils/types";
+import { fetchCreateOrder } from "../thunks/created-order-details-thunk";
+import { TCreatedOrder } from "../../utils/types";
 
 type TOrderDetailsSlice = {
-  orderDetails: TOrderAccpeted | null;
+  orderDetails: TCreatedOrder | null;
   isLoading: boolean;
   error: boolean;
 };
@@ -14,29 +14,29 @@ const initialState: TOrderDetailsSlice = {
   error: false,
 };
 
-const orderDetailsSlice = createSlice({
-  name: "orderDetails",
+const createdOrderSlice = createSlice({
+  name: "createdOrder",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(
-        fetchOrder.fulfilled,
-        (state, action: PayloadAction<TOrderAccpeted>) => {
+        fetchCreateOrder.fulfilled,
+        (state, action: PayloadAction<TCreatedOrder>) => {
           state.orderDetails = action.payload;
           state.isLoading = false;
           state.error = false;
         }
       )
-      .addCase(fetchOrder.pending, (state) => {
+      .addCase(fetchCreateOrder.pending, (state) => {
         state.isLoading = true;
         state.error = false;
       })
-      .addCase(fetchOrder.rejected.type, (state) => {
+      .addCase(fetchCreateOrder.rejected.type, (state) => {
         state.isLoading = false;
         state.error = true;
       });
   },
 });
 
-export default orderDetailsSlice.reducer;
+export default createdOrderSlice.reducer;
