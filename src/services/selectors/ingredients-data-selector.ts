@@ -1,4 +1,3 @@
-import { TIngredient } from "../../utils/types";
 import { RootState } from "../store";
 
 export const getIngredients = (state: RootState) =>
