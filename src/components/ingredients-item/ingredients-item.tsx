@@ -17,7 +17,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 type TIngredientsItemProps = {
   ingredient: TIngredient;
 };
-
+ 
 const IngredientsItem: FC<TIngredientsItemProps> = ({ ingredient }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

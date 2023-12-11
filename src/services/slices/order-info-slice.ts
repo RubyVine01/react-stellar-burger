@@ -1,28 +1,52 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { TOrder } from "../../utils/types";
+import { TOrder, TOrderItem } from "../../utils/types";
+import { fetchOrderDetails } from "../thunks/get-order-details-thunk";
 
 type TOrderDetailsSlice = {
-  order: TOrder | null;
+  orderInfor: TOrderItem | null;
+  isLoading: boolean;
+  error: boolean;
 };
 
 const initialState: TOrderDetailsSlice = {
-  order: null, 
+  orderInfor: null,
+  isLoading: false,
+  error: false,
 };
 
-export const orderInforSlice = createSlice({
-  name: "orderInfor",
+export const orderInfoSlice = createSlice({
+  name: "orderInfo",
   initialState,
   reducers: {
     setOrder: (state, action) => {
-      state.order = action.payload;
+      state.orderInfor = action.payload;
     },
     deleteOrder: (state) => {
-      state.order = null;
+      state.orderInfor = null;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(
+        fetchOrderDetails.fulfilled,
+        (state, action: PayloadAction<TOrderItem>) => {
+          state.orderInfor = action.payload;
+          state.isLoading = false;
+          state.error = false;
+        }
+      )
+      .addCase(fetchOrderDetails.pending, (state) => {
+        state.isLoading = true;
+        state.error = false;
+      })
+      .addCase(fetchOrderDetails.rejected, (state) => {
+        state.isLoading = false;
+        state.error = true;
+      });
   },
 });
 
-export const { setOrder, deleteOrder } = orderInforSlice.actions;
+export const { setOrder, deleteOrder } = orderInfoSlice.actions;
 
-export default orderInforSlice.reducer;
+export default orderInfoSlice.reducer;

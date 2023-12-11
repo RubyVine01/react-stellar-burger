@@ -26,6 +26,7 @@ import LoginPage from "../../pages/login-page/login-page";
 import UserProfilePage from "../../pages/user-profile-page/user-profile-page";
 import UserProfile from "../../pages/user-profile-page/profile-page/profile-page";
 import OrderHistory from "../../pages/user-profile-page/order-history-page/order-history-page";
+import OrderPage from "../../pages/order-details-page/order-details-page";
 
 // Services
 import { fetchIngredients } from "../../services/thunks/ingredients-data-thunk";
@@ -34,7 +35,8 @@ import { deleteIngredientDetails } from "../../services/slices/ingredient-detail
 
 // Hooks
 import { useAppDispatch } from "../../hooks/hooks";
-import OrderFullDetails from "../order-full-details/order-full-details";
+import OrderDetails from "../order-details/order-details";
+import { deleteOrder } from "../../services/slices/order-info-slice";
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
@@ -52,6 +54,12 @@ const App: FC = () => {
     navigate(-1);
   };
 
+  const onCloseOrderModal = () => {
+    dispatch(closeModal());
+    dispatch(deleteOrder());
+    navigate(-1);
+  };
+
   return (
     <div className={styles.app}>
       <AppHeader />
@@ -62,7 +70,8 @@ const App: FC = () => {
           element={<OnlyAuth component={<UserProfilePage />} />}
         >
           <Route index element={<UserProfile />} />
-          <Route path="order-history" element={<OrderHistory />} />
+          <Route path="orders-history" element={<OrderHistory />} />
+          <Route path="orders-histor/:number" element={<OrderPage />} />
         </Route>
         <Route path="/orders" element={<OrdersPage />} />
         <Route
@@ -84,7 +93,8 @@ const App: FC = () => {
           }
         />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
-        <Route path="/orders/1" element={<OrderFullDetails />} />
+        <Route path="/orders/:number" element={<OrderPage />} />
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       {background && (
@@ -97,6 +107,22 @@ const App: FC = () => {
                 title="Детали ингредиента"
               >
                 <IngredientDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path="/orders/:number"
+            element={
+              <Modal onClose={onCloseOrderModal}>
+                <OrderDetails />
+              </Modal>
+            }
+          />
+          <Route
+            path="/orders-history/:number"
+            element={
+              <Modal onClose={onCloseOrderModal}>
+                <OrderDetails />
               </Modal>
             }
           />

@@ -1,15 +1,15 @@
-import styles from "./ingredient-page.module.css";
+import styles from "./order-details-page.module.css";
 
 
 import { FC } from "react";
-import OrderFullDetails from "../../components/order-full-details/order-full-details";
+import OrderDetails from "../../components/order-details/order-details";
 
-const IngredientPage: FC = () => {
+const OrderPage: FC = () => {
   return (
     <main className={styles.content}>
-      <OrderFullDetails/>
+      <OrderDetails/>
     </main>
   );
 };
 
-export default IngredientPage;
+export default OrderPage;

@@ -10,6 +10,7 @@ import { getIngredients } from "../../services/selectors/ingredients-data-select
 import { TIngredient, TOrderItem } from "../../utils/types";
 import { getStatusDisplay } from "../../utils/order-utils";
 import { useLocation, useNavigate } from "react-router-dom";
+import { setOrder } from "../../services/slices/order-info-slice";
 
 type TOrder = {
   order: TOrderItem;
@@ -39,8 +40,9 @@ const OrderItem: FC<TOrder> = ({ order }) => {
 
 
   const onOpen = () => {
-    // dispatch(setIngredientDetails(ingredient));
-    navigate(`/ingredients/${order._id}`, {
+    console.log(order);
+    dispatch(setOrder(order));
+    navigate(`/orders/${order.number}`, {
       state: { background: location },
     });
   };

@@ -11,7 +11,7 @@ import constructorReducer from "./slices/burger-constructor-slice";
 import forgotPasswordReducer from "./slices/forgot-password-slice";
 import resetPasswordReducer from "./slices/reset-password-slice";
 import userProfileReducer from "./slices/user-slice";
-import orderInforReducer from "./slices/order-info-slice";
+import orderInfoReducer from "./slices/order-info-slice";
 import { socketMiddleware } from "./middleware/socket-middleware";
 import { orderReducer } from "./slices/orders-slice";
 
@@ -34,7 +34,7 @@ const rootReducer = combineReducers({
   resetPassword: resetPasswordReducer,
   userProfile: userProfileReducer,
   orders: orderReducer,
-  orderInfor: orderInforReducer,
+  orderInfo: orderInfoReducer,
 });
 
 export const store = configureStore({

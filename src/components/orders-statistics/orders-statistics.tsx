@@ -1,6 +1,5 @@
 import { useAppSelector } from "../../hooks/hooks";
 import {
-  getOrders,
   getOrdersNumListDone,
   getOrdersNumListInWork,
   getTotal,
