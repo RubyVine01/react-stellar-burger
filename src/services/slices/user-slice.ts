@@ -83,7 +83,6 @@ const userProfileSlice = createSlice({
         (state, action: { error: SerializedError }) => {
           state.isLoadingRegister = false;
           state.errorRegister = true;
-          console.log(action);
           state.errorMessageRegister =
             action.error.message || "Произошла неизвестная ошибка";
         }

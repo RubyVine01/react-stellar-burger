@@ -10,6 +10,7 @@ import {
   CurrencyIcon,
   FormattedDate,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { getStatusDisplay } from "../../utils/order-utils";
 
 type TOrderItem = {
   ingredients: string[];
@@ -112,7 +113,7 @@ const OrderFullDetails: FC = () => {
           order?.status === "done" ? { color: "#00CCCC" } : { color: "#FFFFFF" }
         }
       >
-        {order.status}
+        {getStatusDisplay(order.status)}
       </p>
       <h2 className="text text_type_main-medium mt-10 mb-6">Состав:</h2>
       <ul className={`${styles.list}  ${styles.scroll}`}>

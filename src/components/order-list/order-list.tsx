@@ -9,10 +9,10 @@ const OrderList: FC = () => {
 
   return (
     <section className={`${styles.order_list} ${styles.scroll} pr-2`}>
-      {orders ? (
-        orders.map((order) => <OrderItem order={order} key={order.number} />)
+      {!orders ? (
+        <p className={`text text_type_main-medium mt-2}`}>Загрузка данных...</p>
       ) : (
-        <p>Закгрузка данных</p>
+        orders.map((order) => <OrderItem order={order} key={order.number} />)
       )}
     </section>
   );

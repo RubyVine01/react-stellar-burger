@@ -20,8 +20,6 @@ const OrderHistory: FC = () => {
 
   const accessToken = getAccessToken();
 
-  console.log(accessToken);
-
   useEffect(() => {
     dispatch(setWebsocketConnect(`${wssUrl}/orders?token=${accessToken}`));
     return () => {

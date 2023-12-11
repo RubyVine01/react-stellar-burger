@@ -8,6 +8,7 @@ import { FC } from "react";
 import { useAppSelector } from "../../hooks/hooks";
 import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 import { TIngredient, TOrderItem } from "../../utils/types";
+import { getStatusDisplay } from "../../utils/order-utils";
 
 type TOrder = {
   order: TOrderItem;
@@ -47,7 +48,7 @@ const OrderItem: FC<TOrder> = ({ order }) => {
           order?.status === "done" ? { color: "#00CCCC" } : { color: "#FFFFFF" }
         }
       >
-        {order.status}
+        {getStatusDisplay(order.status)}
       </p>
 
       <div className={`${styles.row} ${styles.row_img} mt-6`}>
