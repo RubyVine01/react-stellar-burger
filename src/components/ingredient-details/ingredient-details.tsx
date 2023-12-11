@@ -1,5 +1,5 @@
 import styles from "./ingredient-details.module.css";
- 
+
 import { FC } from "react";
 import { useLocation, useParams } from "react-router-dom";
 

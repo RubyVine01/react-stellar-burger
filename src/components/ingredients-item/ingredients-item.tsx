@@ -17,7 +17,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 type TIngredientsItemProps = {
   ingredient: TIngredient;
 };
- 
+
 const IngredientsItem: FC<TIngredientsItemProps> = ({ ingredient }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -25,7 +25,7 @@ const IngredientsItem: FC<TIngredientsItemProps> = ({ ingredient }) => {
 
   const allCart = useAppSelector(getAllCart);
 
-  const count: number = allCart.filter( 
+  const count: number = allCart.filter(
     (item) => item._id === ingredient._id
   ).length;
 

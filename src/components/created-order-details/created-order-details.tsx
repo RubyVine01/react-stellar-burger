@@ -13,6 +13,7 @@ const CreatedOrderDetails: FC = () => {
   const order = useAppSelector(getOrder);
   const orderError = useAppSelector(getError);
   const orderIsloading = useAppSelector(getIsloading);
+
   return (
     <div className={`${styles.order_details} pt-4 pb-15`}>
       {orderIsloading === true ? (

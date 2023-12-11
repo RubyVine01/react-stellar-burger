@@ -2,7 +2,6 @@ import styles from "./registration-page.module.css";
 
 import { FC, FormEvent, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
 import {
   Button,
@@ -43,7 +42,6 @@ const RegistrationPage: FC = () => {
     e.preventDefault();
     if (isEmailValid && isPasswordValid && values.name) {
       dispatch(
-        //@ts-ignore
         fetchRegister({
           email: values.email,
           password: values.password,

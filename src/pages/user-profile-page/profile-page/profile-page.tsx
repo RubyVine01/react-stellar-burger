@@ -61,7 +61,6 @@ const UserProfile: FC = () => {
     if (user) {
       setValues({ ...values, name: user.name, email: user.email });
     }
-
   }, [user]); //  All dependencies declared
 
   return (

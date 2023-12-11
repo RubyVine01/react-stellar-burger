@@ -25,23 +25,23 @@ export const socketMiddleware = (
 
       if (type === wsConnect) {
         url = payload;
-        // console.log("connect");
+        console.log("ws connect");
         socket = new WebSocket(`${url}`);
       }
 
       if (type === wsDisconnect) {
         if (socket) {
-          // console.log("disconnect");
+          console.log("ws disconnect");
           socket.close(1000, `Websocket closed`);
           socket = null;
         }
       }
 
       if (socket) {
-        socket.onopen = (event) => {
+        socket.onopen = () => {
           dispatch({ type: wsOpen });
         };
-        socket.onerror = (event) => {
+        socket.onerror = () => {
           dispatch({ type: wsError });
         };
         socket.onmessage = (event) => {

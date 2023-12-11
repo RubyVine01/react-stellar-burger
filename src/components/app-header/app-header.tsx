@@ -10,7 +10,6 @@ import {
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-
 import { getUser } from "../../services/selectors/user-selector";
 
 import { useAppSelector } from "../../hooks/hooks";

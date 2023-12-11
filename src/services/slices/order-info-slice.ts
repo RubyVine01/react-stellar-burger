@@ -1,16 +1,16 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { TOrder, TOrderItem } from "../../utils/types";
+import { TOrderItem } from "../../utils/types";
 import { fetchOrderDetails } from "../thunks/get-order-details-thunk";
 
-type TOrderDetailsSlice = {
-  orderInfor: TOrderItem | null;
+type TOrderInfoSlice = {
+  orderInfo: TOrderItem | null;
   isLoading: boolean;
   error: boolean;
 };
 
-const initialState: TOrderDetailsSlice = {
-  orderInfor: null,
+const initialState: TOrderInfoSlice = {
+  orderInfo: null,
   isLoading: false,
   error: false,
 };
@@ -20,10 +20,10 @@ export const orderInfoSlice = createSlice({
   initialState,
   reducers: {
     setOrder: (state, action) => {
-      state.orderInfor = action.payload;
+      state.orderInfo = action.payload;
     },
     deleteOrder: (state) => {
-      state.orderInfor = null;
+      state.orderInfo = null;
     },
   },
   extraReducers: (builder) => {
@@ -31,7 +31,8 @@ export const orderInfoSlice = createSlice({
       .addCase(
         fetchOrderDetails.fulfilled,
         (state, action: PayloadAction<TOrderItem>) => {
-          state.orderInfor = action.payload;
+          state.orderInfo = action.payload;
+          console.log(state.orderInfo);
           state.isLoading = false;
           state.error = false;
         }

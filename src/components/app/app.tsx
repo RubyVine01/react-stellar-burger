@@ -27,16 +27,16 @@ import UserProfilePage from "../../pages/user-profile-page/user-profile-page";
 import UserProfile from "../../pages/user-profile-page/profile-page/profile-page";
 import OrderHistory from "../../pages/user-profile-page/order-history-page/order-history-page";
 import OrderPage from "../../pages/order-details-page/order-details-page";
+import OrderDetails from "../order-details/order-details";
 
 // Services
 import { fetchIngredients } from "../../services/thunks/ingredients-data-thunk";
 import { closeModal } from "../../services/slices/modal-slice";
 import { deleteIngredientDetails } from "../../services/slices/ingredient-details-slice";
+import { deleteOrder } from "../../services/slices/order-info-slice";
 
 // Hooks
 import { useAppDispatch } from "../../hooks/hooks";
-import OrderDetails from "../order-details/order-details";
-import { deleteOrder } from "../../services/slices/order-info-slice";
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
@@ -71,7 +71,6 @@ const App: FC = () => {
         >
           <Route index element={<UserProfile />} />
           <Route path="orders-history" element={<OrderHistory />} />
-          <Route path="orders-histor/:number" element={<OrderPage />} />
         </Route>
         <Route path="/orders" element={<OrdersPage />} />
         <Route
@@ -94,6 +93,10 @@ const App: FC = () => {
         />
         <Route path="/ingredients/:id" element={<IngredientPage />} />
         <Route path="/orders/:number" element={<OrderPage />} />
+        <Route
+          path="/profile/orders-history/:number"
+          element={<OnlyAuth component={<OrderPage />} />}
+        />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
@@ -119,7 +122,7 @@ const App: FC = () => {
             }
           />
           <Route
-            path="/orders-history/:number"
+            path="/profile/orders-history/:number"
             element={
               <Modal onClose={onCloseOrderModal}>
                 <OrderDetails />

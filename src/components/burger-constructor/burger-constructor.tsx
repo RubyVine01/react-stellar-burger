@@ -16,6 +16,7 @@ import {
 import Modal from "../modal/modal";
 
 import FillingItem from "../filling-item/filling-item";
+import CreatedOrderDetails from "../created-order-details/created-order-details";
 
 // Services
 import {
@@ -38,7 +39,6 @@ import { TIngredient } from "../../utils/types";
 
 // Hooks
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import CreatedOrderDetails from "../created-order-details/created-order-details";
 
 const BurgerConstructor: FC = () => {
   const dispatch = useAppDispatch();
@@ -67,7 +67,6 @@ const BurgerConstructor: FC = () => {
   const handleOpenOrderModal = () => {
     if (user) {
       dispatch(openModal("order"));
-      //@ts-ignore
       dispatch(fetchCreateOrder(ingrList));
       dispatch(clearCart());
     } else {
@@ -167,7 +166,7 @@ const BurgerConstructor: FC = () => {
 
       {isOpen && modalType === "order" && (
         <Modal title="" onClose={onCloseOrderModal}>
-          <CreatedOrderDetails/>
+          <CreatedOrderDetails />
         </Modal>
       )}
     </>

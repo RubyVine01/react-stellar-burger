@@ -1,19 +1,24 @@
 import styles from "./order-details.module.css";
 
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
-import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { TIngredient } from "../../utils/types";
+
+import OrderDetailsIngredient from "../order-details-ingredient/order-details-ingredient";
 import {
   CurrencyIcon,
   FormattedDate,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+
 import { getStatusDisplay } from "../../utils/order-utils";
-import { getOrderInfo } from "../../services/selectors/orders-info-selector";
+import {
+  getOrderInfo,
+  getTotalPrice,
+  getUniqueOrderIngredients,
+} from "../../services/selectors/orders-info-selector";
 import { fetchOrderDetails } from "../../services/thunks/get-order-details-thunk";
-import OrderDetailsIngredient from "../order-details-ingredient/order-details-ingredient";
 
 export type TUniqueOrderItem = TIngredient & {
   count: number;
@@ -22,53 +27,26 @@ export type TUniqueOrderItem = TIngredient & {
 const OrderDetails: FC = () => {
   const location = useLocation();
   const { number } = useParams();
-  const orderDetails = useAppSelector(getOrderInfo);
-  const allIngredients = useAppSelector(getIngredients);
+
   const background = location.state && location.state.background;
   const dispatch = useAppDispatch();
 
-  const order = useAppSelector((state) => {
-    if (background && orderDetails) {
-      return getOrderInfo(state);
-    } else {
-      // if (number) dispatch(fetchOrderDetails(number));
-      // return getOrderInfo(state);
-    }
-  });
+  const order = useAppSelector(getOrderInfo);
 
-  console.log(order);
+  const uniqueOrderIngredients = useAppSelector(getUniqueOrderIngredients);
+  const totolPrice = useAppSelector(getTotalPrice);
+
+  useEffect(() => {
+    if (number && !background) {
+      dispatch(fetchOrderDetails(number));
+    }
+  }, [number, background, dispatch]);
 
   if (!order) {
     return (
-      <p className={`text pb-8 text_type_main-medium pt-5`}>Заказ не найден</p>
+      <p className={`text pb-8 text_type_main-medium pt-5`}>Поиск заказа</p>
     );
   }
-
-  const orderIdArray = order?.ingredients;
-
-  const orderIngredients = orderIdArray
-    .map((orderIngredientId: string) => {
-      return allIngredients.find(
-        (ingredient) => ingredient._id === orderIngredientId
-      );
-    })
-    .filter((ingredient) => ingredient !== undefined) as TIngredient[];
-
-  const uniqueIngredients: { [key: string]: TUniqueOrderItem } = {};
-
-  orderIngredients.forEach((item) => {
-    if (uniqueIngredients[item._id]) {
-      uniqueIngredients[item._id].count++;
-    } else {
-      uniqueIngredients[item._id] = { ...item, count: 1 } as TUniqueOrderItem;
-    }
-  });
-
-  const uniqueOrderIngredients = Object.values(uniqueIngredients);
-
-  const totolPrice = orderIngredients.reduce((previousValue, item) => {
-    return previousValue + item.price;
-  }, 0);
 
   return (
     <div className={styles.ingredient_details}>
@@ -87,7 +65,7 @@ const OrderDetails: FC = () => {
       <h2 className="text text_type_main-medium mt-10 mb-6">Состав:</h2>
       <ul className={`${styles.list}  ${styles.scroll}`}>
         {uniqueOrderIngredients.map((ingredient, index) => (
-          <OrderDetailsIngredient ingredient={ingredient} index={index} />
+          <OrderDetailsIngredient ingredient={ingredient} key={index} />
         ))}
       </ul>
 

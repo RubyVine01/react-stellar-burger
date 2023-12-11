@@ -1,15 +1,14 @@
+import styles from "./order-item.module.css";
+import { useLocation, useNavigate } from "react-router-dom";
+import { FC } from "react";
 import {
   CurrencyIcon,
   FormattedDate,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./order-item.module.css";
-
-import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
-import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 import { TIngredient, TOrderItem } from "../../utils/types";
 import { getStatusDisplay } from "../../utils/order-utils";
-import { useLocation, useNavigate } from "react-router-dom";
+import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 import { setOrder } from "../../services/slices/order-info-slice";
 
 type TOrder = {
@@ -17,7 +16,6 @@ type TOrder = {
 };
 
 const OrderItem: FC<TOrder> = ({ order }) => {
-
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const location = useLocation();
@@ -38,13 +36,13 @@ const OrderItem: FC<TOrder> = ({ order }) => {
     return previousValue + item.price;
   }, 0);
 
-
   const onOpen = () => {
-    console.log(order);
     dispatch(setOrder(order));
-    navigate(`/orders/${order.number}`, {
-      state: { background: location },
-    });
+    const newPath = location.pathname.includes("/profile")
+      ? `/profile/orders-history/${order.number}`
+      : `/orders/${order.number}`;
+
+    navigate(newPath, { state: { background: location } });
   };
 
   return (
@@ -56,7 +54,6 @@ const OrderItem: FC<TOrder> = ({ order }) => {
           date={new Date(order.createdAt)}
         />
       </div>
-
       <h2 className="text text_type_main-medium mt-6">{order.name}</h2>
       <p
         className="text text_type_main-default mt-2"
@@ -65,7 +62,7 @@ const OrderItem: FC<TOrder> = ({ order }) => {
         }
       >
         {getStatusDisplay(order.status)}
-      </p> 
+      </p>
 
       <div className={`${styles.row} ${styles.row_img} mt-6`}>
         <ul className={styles.img_list}>

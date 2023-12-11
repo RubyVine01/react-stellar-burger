@@ -6,6 +6,6 @@ export const fetchOrderDetails = createAsyncThunk(
   "orderInfo/getDetails",
   async (number: string) => {
     const urlOrderNum = `${baseURL}/orders/${number}`;
-    return request(urlOrderNum).then((res) => res.data);
+    return request(urlOrderNum).then((res) => res.orders[0]);
   }
 );

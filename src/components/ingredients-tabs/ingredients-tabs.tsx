@@ -4,10 +4,13 @@ import { FC } from "react";
 
 type TIngredientsTabsProps = {
   current: "bun" | "sauce" | "main";
-  scrollToRef: (ref: 'bun' | 'sauce' | 'main') => void;
-}
+  scrollToRef: (ref: "bun" | "sauce" | "main") => void;
+};
 
-const IngredientsTabs: FC<TIngredientsTabsProps> = ({ current, scrollToRef }) =>{
+const IngredientsTabs: FC<TIngredientsTabsProps> = ({
+  current,
+  scrollToRef,
+}) => {
   return (
     <div className={`${styles.tabs} pt-5`}>
       <Tab
@@ -33,7 +36,6 @@ const IngredientsTabs: FC<TIngredientsTabsProps> = ({ current, scrollToRef }) =>
       </Tab>
     </div>
   );
-}
-
+};
 
 export default IngredientsTabs;

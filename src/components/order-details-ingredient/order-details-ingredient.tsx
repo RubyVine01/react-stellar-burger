@@ -11,15 +11,11 @@ export type TUniqueOrderItem = TIngredient & {
 
 type TIngredientsItemProps = {
   ingredient: TUniqueOrderItem;
-  index: number;
 };
 
-const OrderDetailsIngredient: FC<TIngredientsItemProps> = ({
-  ingredient,
-  index,
-}) => {
+const OrderDetailsIngredient: FC<TIngredientsItemProps> = ({ ingredient }) => {
   return (
-    <li className={styles.list_item} key={index}>
+    <li className={styles.list_item}>
       <div className={styles.img_conteiner}>
         <img
           className={styles.image}
