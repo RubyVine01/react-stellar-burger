@@ -29,12 +29,10 @@ export const socketMiddleware = (
         socket = new WebSocket(`${url}`);
       }
 
-      if (type === wsDisconnect) {
-        if (socket) {
-          console.log("ws disconnect");
-          socket.close(1000, `Websocket closed`);
-          socket = null;
-        }
+      if (type === wsDisconnect && socket) {
+        console.log("ws disconnect");
+        socket.close(1000, `Websocket closed`);
+        socket = null;
       }
 
       if (socket) {

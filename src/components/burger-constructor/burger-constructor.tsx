@@ -52,7 +52,7 @@ const BurgerConstructor: FC = () => {
   const user = useAppSelector(getUser);
 
   const ingrList = allCart.map((item) => item._id);
-  const totolPrice = allCart.reduce((previousValue, item) => {
+  const totalPrice = allCart.reduce((previousValue, item) => {
     return previousValue + item.price;
   }, 0);
 
@@ -150,7 +150,7 @@ const BurgerConstructor: FC = () => {
         </ul>
 
         <div className={`${styles.order_price} pr-10`}>
-          <span className="text_type_digits-medium">{totolPrice}</span>
+          <span className="text_type_digits-medium">{totalPrice}</span>
           <img src={CurrencyIconLarge} alt="Валюта" />
         </div>
         <Button

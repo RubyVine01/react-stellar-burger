@@ -1,6 +1,6 @@
 import styles from "./order-item.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import {
   CurrencyIcon,
   FormattedDate,
@@ -32,9 +32,9 @@ const OrderItem: FC<TOrder> = ({ order }) => {
     })
     .filter((ingredient) => ingredient !== undefined) as TIngredient[];
 
-  const totolPrice = orderIngredients.reduce((previousValue, item) => {
-    return previousValue + item.price;
-  }, 0);
+  const totalPrice = useMemo(() => {
+    return orderIngredients.reduce((sum, item) => sum + item.price, 0);
+  }, [orderIngredients]);
 
   const onOpen = () => {
     dispatch(setOrder(order));
@@ -66,7 +66,7 @@ const OrderItem: FC<TOrder> = ({ order }) => {
 
       <div className={`${styles.row} ${styles.row_img} mt-6`}>
         <ul className={styles.img_list}>
-          {orderIngredients.slice(0, 6).map((ingridient, index) => (
+          {orderIngredients.slice(0, 6).map((ingredient, index) => (
             <li
               className={styles.img_item}
               key={index}
@@ -77,21 +77,21 @@ const OrderItem: FC<TOrder> = ({ order }) => {
             >
               <img
                 className={styles.image}
-                src={ingridient?.image_mobile}
-                alt={ingridient?.name}
+                src={ingredient?.image_mobile}
+                alt={ingredient?.name}
               />
-              {orderIngredients.length > 6 && index === 5 ? (
+              {orderIngredients.length > 6 && index === 5 && (
                 <div className={styles.overlay}>
                   <span className="text text_type_main-default">{`+${
                     orderIngredients.length - 6
                   }`}</span>
                 </div>
-              ) : null}
+              )}
             </li>
           ))}
         </ul>
         <div className={styles.price}>
-          <span className="text_type_digits-default">{totolPrice}</span>
+          <span className="text_type_digits-default">{totalPrice}</span>
           <CurrencyIcon type="primary" />
         </div>
       </div>

@@ -34,7 +34,7 @@ const OrderDetails: FC = () => {
   const order = useAppSelector(getOrderInfo);
 
   const uniqueOrderIngredients = useAppSelector(getUniqueOrderIngredients);
-  const totolPrice = useAppSelector(getTotalPrice);
+  const totalPrice = useAppSelector(getTotalPrice);
 
   useEffect(() => {
     if (number && !background) {
@@ -75,7 +75,7 @@ const OrderDetails: FC = () => {
           date={new Date(order.createdAt)}
         />
         <div className={styles.price}>
-          <span className="text_type_digits-default">{totolPrice}</span>
+          <span className="text_type_digits-default">{totalPrice}</span>
           <CurrencyIcon type="primary" />
         </div>
       </div>

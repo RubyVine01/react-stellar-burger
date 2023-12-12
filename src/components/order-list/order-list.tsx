@@ -12,7 +12,13 @@ const OrderList: FC = () => {
       {!orders ? (
         <p className={`text text_type_main-medium mt-2}`}>Загрузка данных...</p>
       ) : (
-        orders.map((order) => <OrderItem order={order} key={order.number} />)
+        orders
+          .slice()
+          .sort(
+            (a, b) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          )
+          .map((order) => <OrderItem order={order} key={order.number} />)
       )}
     </section>
   );
