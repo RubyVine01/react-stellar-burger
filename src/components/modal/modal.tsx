@@ -8,7 +8,7 @@ import ModalOverlay from "../modal-overlay/modal-overlay";
 
 type TModalProps = {
   children: ReactNode;
-  title: string;
+  title?: string;
   onClose: () => void;
 };
 

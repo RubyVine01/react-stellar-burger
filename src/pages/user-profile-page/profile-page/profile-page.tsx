@@ -16,10 +16,9 @@ import {
 } from "../../../services/selectors/user-selector";
 import { fetchUpdateUser } from "../../../services/thunks/user-thunk";
 import { useForm } from "../../../hooks/useForm";
-import { TUser } from "../../../utils/types";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
 
-const  UserProfile: FC = () => {
+const UserProfile: FC = () => {
   const dispatch = useAppDispatch();
 
   const isError = useAppSelector(getErrorUpdateUser);
@@ -48,19 +47,21 @@ const  UserProfile: FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-     //@ts-ignore
+    //@ts-ignore
     dispatch(fetchUpdateUser({ name: values.name, email: values.email }));
   };
 
   const handleCancel = () => {
-    setValues({ ...values, name: user.name, email: user.email });
+    if (user) {
+      setValues({ ...values, name: user.name, email: user.email });
+    }
   };
 
   useEffect(() => {
     if (user) {
       setValues({ ...values, name: user.name, email: user.email });
     }
-  }, [user]);
+  }, [user]); //  All dependencies declared
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -103,7 +104,7 @@ const  UserProfile: FC = () => {
         </p>
       )}
 
-      {values.email !== user.email || values.name !== user.name ? (
+      {values.email !== user?.email || values.name !== user?.name ? (
         <div className={styles.btn_place}>
           <Button
             htmlType="button"
@@ -121,6 +122,6 @@ const  UserProfile: FC = () => {
       ) : null}
     </form>
   );
-}
+};
 
 export default UserProfile;

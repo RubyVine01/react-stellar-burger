@@ -3,4 +3,6 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  width: 844px;
+  max-height: calc(100vh - 150px); /* 150px- header и отступы*/
 }

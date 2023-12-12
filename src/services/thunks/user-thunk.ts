@@ -2,14 +2,20 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseURL } from "../../utils/const";
 import { request } from "../../utils/api";
 import { setAuthChecked, setUser } from "../slices/user-slice";
+import { AppDispatch } from "../store";
 
 // register/post
+type TFetchRegister = {
+  email: string;
+  password: string;
+  name: string;
+};
 
-const urRegister = `${baseURL}/auth/register`;
+const urRegister: Readonly<string> = `${baseURL}/auth/register`;
 
 export const fetchRegister = createAsyncThunk(
   "register/post",
-  async ({ email, password, name }) => {
+  async ({ email, password, name }: TFetchRegister) => {
     const data = await request(urRegister, {
       method: "POST",
       headers: {
@@ -28,12 +34,16 @@ export const fetchRegister = createAsyncThunk(
 );
 
 // login/post
+type TFetchLogin = {
+  email: string;
+  password: string;
+};
 
-const urlLogin = `${baseURL}/auth/login`;
+const urlLogin: Readonly<string> = `${baseURL}/auth/login`;
 
 export const fetchLogin = createAsyncThunk(
   "login/post",
-  async ({ email, password }) => {
+  async ({ email, password }: TFetchLogin) => {
     const data = await request(urlLogin, {
       method: "POST",
       headers: {
@@ -54,7 +64,7 @@ export const fetchLogin = createAsyncThunk(
 
 // logout/post
 
-const urlLogout = `${baseURL}/auth/logout`;
+const urlLogout: Readonly<string> = `${baseURL}/auth/logout`;
 
 export const fetchLogout = createAsyncThunk("logout/post", async () => {
   await request(urlLogout, {
@@ -71,15 +81,19 @@ export const fetchLogout = createAsyncThunk("logout/post", async () => {
 });
 
 // updateUser/patch
+type TFetchUpdateUser = {
+  email: string;
+  name: string;
+};
 
 export const fetchUpdateUser = createAsyncThunk(
   "updateUser/patch",
-  async ({ name, email }) => {
+  async ({ name, email }: TFetchUpdateUser) => {
     const res = await fetchWithRefresh(urlUser, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
-        authorization: localStorage.getItem("accessToken"),
+        authorization: localStorage.getItem("accessToken") as string,
       },
       body: JSON.stringify({
         name: name,
@@ -91,11 +105,16 @@ export const fetchUpdateUser = createAsyncThunk(
 );
 
 // token/post updateUser
+type TFetchRefreshToken = {
+  success: boolean;
+  accessToken: string;
+  refreshToken: string;
+};
 
-const urlToken = `${baseURL}/auth/token`;
+const urlToken: Readonly<string> = `${baseURL}/auth/token`;
 
-export const fetchRefreshToken = () => {
-  request(urlToken, {
+export const fetchRefreshToken = async (): Promise<TFetchRefreshToken> => {
+  return await request(urlToken, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -106,10 +125,14 @@ export const fetchRefreshToken = () => {
   });
 };
 
-const fetchWithRefresh = async (url, options) => {
+type TRequestOptions = RequestInit & {
+  headers: Record<string, string>;
+};
+
+const fetchWithRefresh = async (url: string, options: TRequestOptions) => {
   try {
     return await request(url, options);
-  } catch (err) {
+  } catch (err: any) {
     if (err.message === "jwt expired") {
       const refreshData = await fetchRefreshToken();
       if (!refreshData.success) {
@@ -128,12 +151,12 @@ const fetchWithRefresh = async (url, options) => {
 const urlUser = `${baseURL}/auth/user`;
 
 export const fetchGetUser = () => {
-  return (dispatch) => {
+  return (dispatch: AppDispatch) => {
     return fetchWithRefresh(urlUser, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: localStorage.getItem("accessToken"),
+        authorization: localStorage.getItem("accessToken") as string,
       },
     }).then((res) => {
       if (res.success) {
@@ -146,10 +169,10 @@ export const fetchGetUser = () => {
 };
 
 export const checkUserAuth = () => {
-  return (dispatch) => {
+  return (dispatch: AppDispatch) => {
     if (localStorage.getItem("accessToken")) {
       dispatch(fetchGetUser())
-        .catch((error) => {
+        .catch(() => {
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
           dispatch(setUser(null));

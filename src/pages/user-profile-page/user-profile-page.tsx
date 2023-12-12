@@ -28,7 +28,7 @@ const UserProfilePage: FC = () => {
           <NavLink to="/profile" className={linkClassName} end>
             Профиль
           </NavLink>
-          <NavLink to="order-history" className={linkClassName}>
+          <NavLink to="orders-history" className={linkClassName}>
             История заказов
           </NavLink>
           <NavLink to="/" className={linkClassName} onClick={logout}>

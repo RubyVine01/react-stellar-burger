@@ -1,12 +1,30 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, SerializedError, createSlice } from "@reduxjs/toolkit";
 import {
   fetchLogin,
   fetchLogout,
   fetchRegister,
   fetchUpdateUser,
 } from "../thunks/user-thunk";
+import { TUser } from "../../utils/types";
 
-const initialState = {
+type TUserProfileeSlice = {
+  user: TUser | null;
+  isAuthChecked: boolean;
+  isLoading: boolean;
+  error: boolean;
+  errorMessage: string;
+  isLoadingRegister: boolean;
+  errorRegister: boolean;
+  errorMessageRegister: string;
+  isLoadingLogin: boolean;
+  errorLogin: boolean;
+  errorMessageLogin: string;
+  isLoadingUpdateUser: boolean;
+  errorUpdateUser: boolean;
+  errorMessageUpdateUser: string;
+};
+
+const initialState: TUserProfileeSlice = {
   user: null,
   isAuthChecked: false,
   isLoading: false,
@@ -48,22 +66,29 @@ const userProfileSlice = createSlice({
   extraReducers: (builder) => {
     builder
       // регистрация
-      .addCase(fetchRegister.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isLoadingRegister = false;
-        state.errorRegister = false;
-      })
+      .addCase(
+        fetchRegister.fulfilled,
+        (state, action: PayloadAction<TUser>) => {
+          state.user = action.payload;
+          state.isLoadingRegister = false;
+          state.errorRegister = false;
+        }
+      )
       .addCase(fetchRegister.pending, (state) => {
         state.isLoadingRegister = true;
         state.errorRegister = false;
       })
-      .addCase(fetchRegister.rejected, (state, action) => {
-        state.isLoadingRegister = false;
-        state.errorRegister = true;
-        state.errorMessageRegister = action.error.message;
-      })
+      .addCase(
+        fetchRegister.rejected,
+        (state, action: { error: SerializedError }) => {
+          state.isLoadingRegister = false;
+          state.errorRegister = true;
+          state.errorMessageRegister =
+            action.error.message || "Произошла неизвестная ошибка";
+        }
+      )
       // авторизация
-      .addCase(fetchLogin.fulfilled, (state, action) => {
+      .addCase(fetchLogin.fulfilled, (state, action: PayloadAction<TUser>) => {
         state.user = action.payload;
         state.isLoadingLogin = false;
         state.errorLogin = false;
@@ -72,26 +97,37 @@ const userProfileSlice = createSlice({
         state.isLoadingLogin = true;
         state.errorLogin = false;
       })
-      .addCase(fetchLogin.rejected, (state, action) => {
-        state.isLoadingLogin = false;
-        state.errorLogin = true;
-        state.errorMessageLogin = action.error.message;
-      })
+      .addCase(
+        fetchLogin.rejected,
+        (state, action: { error: SerializedError }) => {
+          state.isLoadingLogin = false;
+          state.errorLogin = true;
+          state.errorMessageLogin =
+            action.error.message || "Произошла неизвестная ошибка";
+        }
+      )
       // обновление данных пользователя
-      .addCase(fetchUpdateUser.fulfilled, (state, action) => {
-        state.user = action.payload;
-        state.isLoadingUpdateUser = false;
-        state.errorUpdateUser = false;
-      })
+      .addCase(
+        fetchUpdateUser.fulfilled,
+        (state, action: PayloadAction<TUser>) => {
+          state.user = action.payload;
+          state.isLoadingUpdateUser = false;
+          state.errorUpdateUser = false;
+        }
+      )
       .addCase(fetchUpdateUser.pending, (state) => {
         state.isLoadingUpdateUser = true;
         state.errorUpdateUser = false;
       })
-      .addCase(fetchUpdateUser.rejected, (state, action) => {
-        state.isLoadingUpdateUser = false;
-        state.errorUpdateUser = true;
-        state.errorMessageUpdateUser = action.error.message;
-      })
+      .addCase(
+        fetchUpdateUser.rejected,
+        (state, action: { error: SerializedError }) => {
+          state.isLoadingUpdateUser = false;
+          state.errorUpdateUser = true;
+          state.errorMessageUpdateUser =
+            action.error.message || "Произошла неизвестная ошибка";
+        }
+      )
       // выход из профиля
       .addCase(fetchLogout.fulfilled, (state) => {
         state.user = null;
@@ -116,5 +152,6 @@ const userProfileSlice = createSlice({
   },
 });
 
-export const { setAuthChecked, setUser, clearErrorLogin, clearErrorRegister } = userProfileSlice.actions;
+export const { setAuthChecked, setUser, clearErrorLogin, clearErrorRegister } =
+  userProfileSlice.actions;
 export default userProfileSlice.reducer;

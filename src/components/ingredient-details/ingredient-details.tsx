@@ -3,7 +3,7 @@ import styles from "./ingredient-details.module.css";
 import { FC } from "react";
 import { useLocation, useParams } from "react-router-dom";
 
-import { getIngredientDetails } from "../../services/selectors/ingredient-details-selector.js";
+import { getIngredientDetails } from "../../services/selectors/ingredient-details-selector";
 import { getIngredients } from "../../services/selectors/ingredients-data-selector";
 import { useAppSelector } from "../../hooks/hooks";
 

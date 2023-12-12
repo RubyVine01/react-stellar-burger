@@ -7,7 +7,6 @@ import {
   getIsAuthChecked,
   getUser,
 } from "../../services/selectors/user-selector";
-import { TUser } from "../../utils/types";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 type TProtectedRouteProps = {

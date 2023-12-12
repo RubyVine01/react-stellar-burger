@@ -14,8 +14,9 @@ import {
   ConstructorElement,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modal/modal";
-import OrderDetails from "../order-details/order-details";
+
 import FillingItem from "../filling-item/filling-item";
+import CreatedOrderDetails from "../created-order-details/created-order-details";
 
 // Services
 import {
@@ -32,7 +33,7 @@ import {
   clearCart,
 } from "../../services/slices/burger-constructor-slice";
 import { closeModal, openModal } from "../../services/slices/modal-slice";
-import { fetchOrder } from "../../services/thunks/order-details-thunk";
+import { fetchCreateOrder } from "../../services/thunks/created-order-details-thunk";
 import { getUser } from "../../services/selectors/user-selector";
 import { TIngredient } from "../../utils/types";
 
@@ -51,7 +52,7 @@ const BurgerConstructor: FC = () => {
   const user = useAppSelector(getUser);
 
   const ingrList = allCart.map((item) => item._id);
-  const totolPrice = allCart.reduce((previousValue, item) => {
+  const totalPrice = allCart.reduce((previousValue, item) => {
     return previousValue + item.price;
   }, 0);
 
@@ -66,8 +67,7 @@ const BurgerConstructor: FC = () => {
   const handleOpenOrderModal = () => {
     if (user) {
       dispatch(openModal("order"));
-      //@ts-ignore
-      dispatch(fetchOrder(ingrList));
+      dispatch(fetchCreateOrder(ingrList));
       dispatch(clearCart());
     } else {
       navigate("/login");
@@ -150,7 +150,7 @@ const BurgerConstructor: FC = () => {
         </ul>
 
         <div className={`${styles.order_price} pr-10`}>
-          <span className="text_type_digits-medium">{totolPrice}</span>
+          <span className="text_type_digits-medium">{totalPrice}</span>
           <img src={CurrencyIconLarge} alt="Валюта" />
         </div>
         <Button
@@ -166,7 +166,7 @@ const BurgerConstructor: FC = () => {
 
       {isOpen && modalType === "order" && (
         <Modal title="" onClose={onCloseOrderModal}>
-          <OrderDetails />
+          <CreatedOrderDetails />
         </Modal>
       )}
     </>

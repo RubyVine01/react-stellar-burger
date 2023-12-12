@@ -1,10 +1,10 @@
 .content {
   display: flex;
-  height: calc(100vh - 88px);
+  height: calc(100vh - 88px); /* 88px- header*/
   flex-direction: row;
   column-gap: 60px;
   margin: auto;
-  padding-top: 120px;
+
   width: 1280px;
 }
 
@@ -17,6 +17,7 @@
 }
 
 .navigation_part {
+  padding-top: 120px;
   display: flex;
   flex-direction: column;
   width: 320px;

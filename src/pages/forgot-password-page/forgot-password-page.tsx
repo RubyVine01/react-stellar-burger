@@ -33,7 +33,6 @@ const ForgotPasswordPage: FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isEmailValid) {
-      //@ts-ignore
       dispatch(fetchResetCode(values.email));
     }
   };
