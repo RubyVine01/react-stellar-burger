@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { TOrders } from "../../utils/types";
+import { TOrders } from "../../../utils/types";
 
 type TOrdersSlice = {
   wsOpen: boolean;

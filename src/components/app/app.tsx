@@ -31,9 +31,9 @@ import OrderDetails from "../order-details/order-details";
 
 // Services
 import { fetchIngredients } from "../../services/thunks/ingredients-data-thunk";
-import { closeModal } from "../../services/slices/modal-slice";
-import { deleteIngredientDetails } from "../../services/slices/ingredient-details-slice";
-import { deleteOrder } from "../../services/slices/order-info-slice";
+import { closeModal } from "../../services/slices/modal-slice/modal-slice";
+import { deleteIngredientDetails } from "../../services/slices/ingredient-details-slice/ingredient-details-slice";
+import { deleteOrder } from "../../services/slices/order-info-slice/order-info-slice";
 
 // Hooks
 import { useAppDispatch } from "../../hooks/hooks";

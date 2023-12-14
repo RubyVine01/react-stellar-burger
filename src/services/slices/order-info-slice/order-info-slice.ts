@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
-import { TOrderItem } from "../../utils/types";
-import { fetchOrderDetails } from "../thunks/get-order-details-thunk";
+import { TOrderItem } from "../../../utils/types";
+import { fetchOrderDetails } from "../../thunks/get-order-details-thunk";
 
 type TOrderInfoSlice = {
   orderInfo: TOrderItem | null;

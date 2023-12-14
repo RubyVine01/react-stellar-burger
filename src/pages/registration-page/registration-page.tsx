@@ -18,7 +18,7 @@ import {
 } from "../../services/selectors/user-selector";
 import { useForm } from "../../hooks/useForm";
 import { validateEmail, validatePassword } from "../../utils/validate";
-import { clearErrorRegister } from "../../services/slices/user-slice";
+import { clearErrorRegister } from "../../services/slices/user-slice/user-slice";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 const RegistrationPage: FC = () => {

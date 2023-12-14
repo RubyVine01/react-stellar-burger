@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { baseURL } from "../../utils/const";
 import { request } from "../../utils/api";
-import { setAuthChecked, setUser } from "../slices/user-slice";
+import { setAuthChecked, setUser } from "../slices/user-slice/user-slice";
 import { AppDispatch } from "../store";
 
 // register/post

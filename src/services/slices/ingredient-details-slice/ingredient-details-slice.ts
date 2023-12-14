@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TIngredient } from "../../utils/types";
+import { TIngredient } from "../../../utils/types";
 
 type TIngredientDetailsSlice = {
   ingredientDetails: TIngredient | null;

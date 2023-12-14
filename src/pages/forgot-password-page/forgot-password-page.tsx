@@ -13,7 +13,7 @@ import {
   getIsLoading,
   getStatusSentCode,
 } from "../../services/selectors/forgot-password-selector";
-import { setResetPasswordAllowed } from "../../services/slices/reset-password-slice";
+import { setResetPasswordAllowed } from "../../services/slices/reset-password-slice/reset-password-slice";
 import { useForm } from "../../hooks/useForm";
 import { validateEmail } from "../../utils/validate";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";

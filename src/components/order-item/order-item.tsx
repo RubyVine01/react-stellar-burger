@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { TIngredient, TOrderItem } from "../../utils/types";
 import { getStatusDisplay } from "../../utils/order-utils";
 import { getIngredients } from "../../services/selectors/ingredients-data-selector";
-import { setOrder } from "../../services/slices/order-info-slice";
+import { setOrder } from "../../services/slices/order-info-slice/order-info-slice";
 
 type TOrder = {
   order: TOrderItem;

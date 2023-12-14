@@ -4,8 +4,8 @@ import {
   fetchLogout,
   fetchRegister,
   fetchUpdateUser,
-} from "../thunks/user-thunk";
-import { TUser } from "../../utils/types";
+} from "../../thunks/user-thunk";
+import { TUser } from "../../../utils/types";
 
 type TUserProfileeSlice = {
   user: TUser | null;

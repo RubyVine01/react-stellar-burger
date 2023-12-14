@@ -3,17 +3,17 @@ import {
   configureStore,
   getDefaultMiddleware,
 } from "@reduxjs/toolkit";
-import ingredientsReducer from "./slices/ingredients-data-slice";
-import ingredientDetailsReducer from "./slices/ingredient-details-slice";
-import modalReducer from "./slices/modal-slice";
-import createdOrderReducer from "./slices/created-order-details-slice";
-import constructorReducer from "./slices/burger-constructor-slice";
-import forgotPasswordReducer from "./slices/forgot-password-slice";
-import resetPasswordReducer from "./slices/reset-password-slice";
-import userProfileReducer from "./slices/user-slice";
-import orderInfoReducer from "./slices/order-info-slice";
+import ingredientsReducer from "./slices/ingredients-data-slice/ingredients-data-slice";
+import ingredientDetailsReducer from "./slices/ingredient-details-slice/ingredient-details-slice";
+import modalReducer from "./slices/modal-slice/modal-slice";
+import createdOrderReducer from "./slices/created-order-details-slice/created-order-details-slice";
+import constructorReducer from "./slices/burger-constructor-slice/burger-constructor-slice";
+import forgotPasswordReducer from "./slices/forgot-password-slice/forgot-password-slice";
+import resetPasswordReducer from "./slices/reset-password-slice/reset-password-slice";
+import userProfileReducer from "./slices/user-slice/user-slice";
+import orderInfoReducer from "./slices/order-info-slice/order-info-slice";
 import { socketMiddleware } from "./middleware/socket-middleware";
-import { orderReducer } from "./slices/orders-slice";
+import { orderReducer } from "./slices/orders-slice/orders-slice";
 
 const wsActions = {
   wsConnect: "orders/setWebsocketConnect",

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { fetchIngredients } from "../thunks/ingredients-data-thunk";
-import { TIngredient } from "../../utils/types";
+import { fetchIngredients } from "../../thunks/ingredients-data-thunk";
+import { TIngredient } from "../../../utils/types";
 
 type TIngredientsDataSlice = {
   ingredientArray: TIngredient[] | [];

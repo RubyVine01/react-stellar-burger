@@ -31,8 +31,8 @@ import {
 import {
   addToCart,
   clearCart,
-} from "../../services/slices/burger-constructor-slice";
-import { closeModal, openModal } from "../../services/slices/modal-slice";
+} from "../../services/slices/burger-constructor-slice/burger-constructor-slice";
+import { closeModal, openModal } from "../../services/slices/modal-slice/modal-slice";
 import { fetchCreateOrder } from "../../services/thunks/created-order-details-thunk";
 import { getUser } from "../../services/selectors/user-selector";
 import { TIngredient } from "../../utils/types";

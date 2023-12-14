@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { fetchCreateOrder } from "../thunks/created-order-details-thunk";
-import { TCreatedOrder } from "../../utils/types";
+import { fetchCreateOrder } from "../../thunks/created-order-details-thunk";
+import { TCreatedOrder } from "../../../utils/types";
 
 type TOrderDetailsSlice = {
   orderDetails: TCreatedOrder | null;

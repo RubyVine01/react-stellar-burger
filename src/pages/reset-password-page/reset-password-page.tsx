@@ -15,7 +15,7 @@ import {
   getError,
   getIsLoading,
 } from "../../services/selectors/reset-password-selector";
-import { setResetPasswordAllowed } from "../../services/slices/reset-password-slice";
+import { setResetPasswordAllowed } from "../../services/slices/reset-password-slice/reset-password-slice";
 import { validatePassword } from "../../utils/validate";
 import { useForm } from "../../hooks/useForm";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
