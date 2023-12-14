@@ -6,7 +6,7 @@ type TCartConstructorSlice = {
   cartBun: TFillingItem | null;
 };
 
-const initialState: TCartConstructorSlice = {
+export const initialState: TCartConstructorSlice = {
   cartList: [],
   cartBun: null,
 };
