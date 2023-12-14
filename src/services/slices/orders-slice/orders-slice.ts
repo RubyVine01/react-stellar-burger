@@ -22,7 +22,7 @@ const ordersSlice = createSlice({
   reducers: {
     setWebsocketOpen: (state, action: PayloadAction<boolean>) => {
       state.wsOpen = action.payload;
-      state.wsError = null;
+      state.wsError = null; 
     },
     setWebsocketClose: (state) => {
       state.wsOpen = false;
@@ -45,6 +45,7 @@ const ordersSlice = createSlice({
     },
     setWebsocketGetOrders: (state, action: PayloadAction<TOrders>) => {
       state.orders = action.payload;
+      console.log(state.orders);
     },
   },
 });

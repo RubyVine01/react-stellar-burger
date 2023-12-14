@@ -24,7 +24,6 @@ const ingredientsDataSlice = createSlice({
         fetchIngredients.fulfilled,
         (state, action: PayloadAction<TIngredient[]>) => {
           state.ingredientArray = action.payload;
-          console.log(state.ingredientArray);
           state.isLoading = false;
           state.error = false;
         }

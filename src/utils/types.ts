@@ -39,6 +39,8 @@ export type TOrderItem = {
   createdAt: string;
   updatedAt: string;
   number: number;
+  owner?: string;
+  __v?: number;
 };
 
 export type TOrders = {
