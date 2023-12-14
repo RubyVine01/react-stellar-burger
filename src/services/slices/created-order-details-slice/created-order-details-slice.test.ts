@@ -1,8 +1,9 @@
+import { fetchCreateOrder } from "../../thunks/created-order-details-thunk";
 import createdOrderReducer, {
   initialState,
 } from "./created-order-details-slice";
 
-const fakeRes = {
+const fakeResSuccess = {
   success: true,
   name: "Флюоресцентный space бургер",
   order: {
@@ -76,10 +77,10 @@ describe("Test createdOrderSlice", () => {
     ).toEqual(initialState);
   });
 
-  test("Обработка fetchCreateOrder.pending", () => {
+  it("Обработка fetchCreateOrder.pending", () => {
     expect(
       createdOrderReducer(initialState, {
-        type: "order/post/pending",
+        type: fetchCreateOrder.pending.type,
       })
     ).toEqual({
       ...initialState,
@@ -88,24 +89,24 @@ describe("Test createdOrderSlice", () => {
     });
   });
 
-  test("Обработка fetchCreateOrder.fulfilled", () => {
+  it("Обработка fetchCreateOrder.fulfilled", () => {
     expect(
       createdOrderReducer(initialState, {
-        type: "order/post/fulfilled",
-        payload: fakeRes,
+        type: fetchCreateOrder.fulfilled.type,
+        payload: fakeResSuccess,
       })
     ).toEqual({
       ...initialState,
-      orderDetails: fakeRes,
+      orderDetails: fakeResSuccess,
       isLoading: false,
       error: false,
     });
   });
 
-  test("Обработка fetchCreateOrder.rejected", () => {
+  it("Обработка fetchCreateOrder.rejected", () => {
     expect(
       createdOrderReducer(initialState, {
-        type: "order/post/rejected",
+        type: fetchCreateOrder.rejected.type,
       })
     ).toEqual({
       ...initialState,

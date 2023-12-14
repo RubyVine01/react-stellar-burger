@@ -24,22 +24,6 @@ const fakeIngredient: TFillingItem = {
   uid: "some-unique-id",
 };
 
-const fakeIngredientBun: TFillingItem = {
-  _id: "some-id",
-  name: "Ingredient",
-  type: "bun",
-  proteins: 10,
-  fat: 10,
-  carbohydrates: 10,
-  calories: 10,
-  price: 100,
-  image: "some-url",
-  image_mobile: "some-url",
-  image_large: "some-url",
-  __v: 0,
-  uid: "some-unique-id",
-};
-
 describe("Test constructorSlice", () => {
   it("Проверка начального состояния", () => {
     expect(constructorReducer(undefined, { type: "unknown" })).toEqual(
@@ -49,10 +33,13 @@ describe("Test constructorSlice", () => {
 
   it("Добавление ингредиента с типом bun в конструктор", () => {
     expect(
-      constructorReducer(initialState, addToCart(fakeIngredientBun))
+      constructorReducer(
+        initialState,
+        addToCart({ ...fakeIngredient, type: "bun" })
+      )
     ).toEqual({
       ...initialState,
-      cartBun: fakeIngredientBun,
+      cartBun: { ...fakeIngredient, type: "bun" },
     });
   });
 
@@ -103,7 +90,10 @@ describe("Test constructorSlice", () => {
   it("Удаление всех ингредиентов из конструктора ", () => {
     const fakeState = {
       ...initialState,
-      cartList: [fakeIngredientBun, { ...fakeIngredient, uid: "another-uid" }],
+      cartList: [
+        { ...fakeIngredient, type: "bun" },
+        { ...fakeIngredient, uid: "another-uid" },
+      ],
     };
     expect(constructorReducer(fakeState, clearCart())).toEqual(initialState);
   });

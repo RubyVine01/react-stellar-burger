@@ -8,7 +8,7 @@ type TForgotPasswordSlice = {
   error: boolean;
 };
 
-const initialState: TForgotPasswordSlice = {
+export const initialState: TForgotPasswordSlice = {
   fetchRes: null,
   isLoading: false,
   error: false,

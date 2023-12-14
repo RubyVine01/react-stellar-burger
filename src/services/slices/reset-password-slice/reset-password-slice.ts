@@ -9,7 +9,7 @@ type TResetPasswordSlice = {
   resetPasswordAllowed: boolean;
 };
 
-const initialState: TResetPasswordSlice = {
+export const initialState: TResetPasswordSlice = {
   fetchRes: null,
   isLoading: false,
   error: false,
@@ -29,7 +29,7 @@ const resetPasswordSlice = createSlice({
       .addCase(
         fetchСonfirmNewPassword.fulfilled,
         (state, action: PayloadAction<FetchResponse>) => {
-          state.fetchRes = action.payload;
+          state.fetchRes = action.payload; 
           state.isLoading = false;
           state.error = false;
         }
