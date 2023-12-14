@@ -5,12 +5,12 @@ type TIngredientDetailsSlice = {
   ingredientDetails: TIngredient | null;
 };
 
-const initialState: TIngredientDetailsSlice = {
+export const initialState: TIngredientDetailsSlice = {
   ingredientDetails: null,
 };
 
 const ingredientDetailsSlice = createSlice({
-  name: "ingredientDetails",
+  name: "ingredientDetails", 
   initialState,
   reducers: {
     setIngredientDetails: (state, action) => {
