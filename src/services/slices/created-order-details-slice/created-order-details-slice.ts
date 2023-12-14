@@ -8,7 +8,7 @@ type TOrderDetailsSlice = {
   error: boolean;
 };
 
-const initialState: TOrderDetailsSlice = {
+export const initialState: TOrderDetailsSlice = {
   orderDetails: null,
   isLoading: false,
   error: false,
