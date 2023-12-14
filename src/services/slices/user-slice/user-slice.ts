@@ -24,7 +24,7 @@ type TUserProfileeSlice = {
   errorMessageUpdateUser: string;
 };
 
-const initialState: TUserProfileeSlice = {
+export const initialState: TUserProfileeSlice = {
   user: null,
   isAuthChecked: false,
   isLoading: false,
@@ -75,6 +75,7 @@ const userProfileSlice = createSlice({
         }
       )
       .addCase(fetchRegister.pending, (state) => {
+        console.log("сработала проверка");
         state.isLoadingRegister = true;
         state.errorRegister = false;
       })
@@ -104,6 +105,7 @@ const userProfileSlice = createSlice({
           state.errorLogin = true;
           state.errorMessageLogin =
             action.error.message || "Произошла неизвестная ошибка";
+          console.log();
         }
       )
       // обновление данных пользователя
@@ -134,21 +136,16 @@ const userProfileSlice = createSlice({
         state.isLoading = false;
         state.error = false;
       })
-      .addMatcher(
-        (action) => action.type.endsWith("/pending"),
-        (state) => {
-          state.isLoading = true;
-          state.error = false;
-        }
-      )
-      .addMatcher(
-        (action) => action.type.endsWith("/rejected"),
-        (state, action) => {
-          state.isLoading = false;
-          state.error = true;
-          state.errorMessage = action.error.message;
-        }
-      );
+      .addCase(fetchLogout.pending, (state) => {
+        state.isLoading = true;
+        state.error = false;
+      })
+      .addCase(fetchLogout.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = true;
+        state.errorMessage =
+          action.error.message || "Произошла неизвестная ошибка";
+      });
   },
 });
 
