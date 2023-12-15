@@ -29,7 +29,7 @@ const IngredientsSet: FC<TIngredientsSetProps> = ({
           })
           .map((ingredient: TIngredient) => {
             return (
-              <IngredientsItem key={ingredient._id} ingredient={ingredient}   />
+              <IngredientsItem key={ingredient._id} ingredient={ingredient} />
             );
           })}
       </ul>

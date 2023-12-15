@@ -98,7 +98,10 @@ const BurgerConstructor: FC = () => {
             </div>
           ) : (
             <>
-              <li className={`${styles.element} pr-2`}  data-test="constructor-item">
+              <li
+                className={`${styles.element} pr-2`}
+                data-test="constructor-item"
+              >
                 {!bun ? (
                   <div
                     className={`${styles.empty_element} ${styles.empty_element_top}`}

@@ -10,7 +10,7 @@ export const initialState: TIngredientDetailsSlice = {
 };
 
 const ingredientDetailsSlice = createSlice({
-  name: "ingredientDetails", 
+  name: "ingredientDetails",
   initialState,
   reducers: {
     setIngredientDetails: (state, action) => {

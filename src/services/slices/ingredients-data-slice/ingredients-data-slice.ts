@@ -7,7 +7,7 @@ type TIngredientsDataSlice = {
   isLoading: boolean;
   error: boolean;
 };
- 
+
 export const initialState: TIngredientsDataSlice = {
   ingredientArray: [],
   isLoading: false,

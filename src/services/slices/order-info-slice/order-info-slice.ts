@@ -21,7 +21,7 @@ export const orderInfoSlice = createSlice({
   reducers: {
     setOrder: (state, action) => {
       state.orderInfo = action.payload;
-      console.log(state.orderInfo );
+      console.log(state.orderInfo);
     },
     deleteOrder: (state) => {
       state.orderInfo = null;

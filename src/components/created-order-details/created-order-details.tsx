@@ -27,7 +27,9 @@ const CreatedOrderDetails: FC = () => {
         </p>
       ) : (
         <>
-          <p className={`text text_type_digits-large`} data-test="order-number">{order?.order.number}</p>
+          <p className={`text text_type_digits-large`} data-test="order-number">
+            {order?.order.number}
+          </p>
           <p className={`text text_type_main-medium pt-8`}>
             идентификатор заказа
           </p>

@@ -29,7 +29,7 @@ const resetPasswordSlice = createSlice({
       .addCase(
         fetchСonfirmNewPassword.fulfilled,
         (state, action: PayloadAction<FetchResponse>) => {
-          state.fetchRes = action.payload; 
+          state.fetchRes = action.payload;
           state.isLoading = false;
           state.error = false;
         }

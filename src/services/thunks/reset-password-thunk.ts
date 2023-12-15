@@ -16,7 +16,7 @@ const options = (password: string, token: string) => {
     body: JSON.stringify({ password, token }),
   };
 };
- 
+
 export const fetchСonfirmNewPassword = createAsyncThunk(
   "сonfirmResetCode/post",
   async ({ password, token }: TFetchСonfirmNewPassword) => {

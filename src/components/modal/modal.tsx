@@ -33,7 +33,11 @@ const Modal: FC<TModalProps> = ({ children, title, onClose }) => {
       <div className={`${styles.modal} pr-10 pl-10`} data-test="modal">
         <div className={`${styles.modal_head} `}>
           <h2 className={`text text_type_main-large `}>{title}</h2>
-          <button className={styles.btn_close} onClick={onClose} data-test="button-close">
+          <button
+            className={styles.btn_close}
+            onClick={onClose}
+            data-test="button-close"
+          >
             <CloseIcon type="primary" />
           </button>
         </div>
