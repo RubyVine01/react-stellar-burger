@@ -39,7 +39,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-cy": "cypress open",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && scp -r ./build/* vprokofeva-admin@84.201.135.93:/home/vprokofeva-admin/stellar-frontend" 
+
   },
   "eslintConfig": {
     "extends": [
