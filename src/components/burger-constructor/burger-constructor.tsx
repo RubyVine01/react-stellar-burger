@@ -32,7 +32,10 @@ import {
   addToCart,
   clearCart,
 } from "../../services/slices/burger-constructor-slice/burger-constructor-slice";
-import { closeModal, openModal } from "../../services/slices/modal-slice/modal-slice";
+import {
+  closeModal,
+  openModal,
+} from "../../services/slices/modal-slice/modal-slice";
 import { fetchCreateOrder } from "../../services/thunks/created-order-details-thunk";
 import { getUser } from "../../services/selectors/user-selector";
 import { TIngredient } from "../../utils/types";
@@ -81,7 +84,11 @@ const BurgerConstructor: FC = () => {
   return (
     <>
       <section className={styles.burger_constructor}>
-        <ul className={`${styles.ingredient_list} mr-4`} ref={dropRef}>
+        <ul
+          className={`${styles.ingredient_list} mr-4`}
+          ref={dropRef}
+          data-test="constructor-list"
+        >
           {!(allCart.length > 0) ? (
             <div className={`${styles.start_place} mt-4 mr-16`}>
               <p className={`text_type_main-medium ml-2 mr-2`}>
@@ -91,7 +98,7 @@ const BurgerConstructor: FC = () => {
             </div>
           ) : (
             <>
-              <li className={`${styles.element} pr-2`}>
+              <li className={`${styles.element} pr-2`}  data-test="constructor-item">
                 {!bun ? (
                   <div
                     className={`${styles.empty_element} ${styles.empty_element_top}`}

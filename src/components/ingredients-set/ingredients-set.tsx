@@ -22,14 +22,14 @@ const IngredientsSet: FC<TIngredientsSetProps> = ({
       <h2 className={`text text_type_main-medium pb-6`} ref={persRef}>
         {headline}
       </h2>
-      <ul className={styles.item_box}>
+      <ul className={styles.item_box} data-test="ingredient-list">
         {ingredients
           .filter((ingredient: TIngredient) => {
             return ingredient.type === type;
           })
           .map((ingredient: TIngredient) => {
             return (
-              <IngredientsItem key={ingredient._id} ingredient={ingredient} />
+              <IngredientsItem key={ingredient._id} ingredient={ingredient}   />
             );
           })}
       </ul>

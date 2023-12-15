@@ -43,7 +43,7 @@ const IngredientsItem: FC<TIngredientsItemProps> = ({ ingredient }) => {
 
   return (
     <>
-      <li className={styles.card} ref={dragRef} onClick={onOpen}>
+      <li className={styles.card} ref={dragRef} onClick={onOpen} data-test="ingredient-item">
         <DragPreviewImage connect={preview} src={ingredient.image} />
         <img
           className={styles.image}
