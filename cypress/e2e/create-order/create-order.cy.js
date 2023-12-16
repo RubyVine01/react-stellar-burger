@@ -1,6 +1,4 @@
-const baseURL = "https://norma.nomoreparties.space/api";
-const testUrl = "http://localhost:3000/";
-
+import { baseURL } from "../../../src/utils/const";
 const constructorList = "[data-test=constructor-list]";
 const constructorItem = "[data-test=constructor-item]";
 
@@ -14,7 +12,7 @@ const orderNumber = "[data-test=order-number]";
 describe("Create order", () => {
   it("Create order", () => {
     cy.viewport(1920, 1080);
-    cy.visit(testUrl);
+    cy.visit("/");
     cy.get(constructorList).should("exist");
     cy.get(constructorItem).should("not.exist");
     cy.get(ingredientList).should("exist");
@@ -25,14 +23,15 @@ describe("Create order", () => {
     cy.get(constructorList).trigger("drop");
     cy.get(ingredient).eq(10).trigger("dragstart");
     cy.get(constructorList).trigger("drop");
-    cy.get("button").contains("Оформить заказ").click();
+    cy.get("button").contains("Оформить заказ").as("orderButton");
+    cy.get("@orderButton").click();
     cy.location().should((location) => {
       expect(location.pathname).to.eq("/login");
     });
     cy.get("[type=email]").type("test12@gmail.com");
     cy.get("[type=password]").type("test12");
     cy.get("button").contains("Войти").click();
-    cy.get("button").contains("Оформить заказ").click();
+    cy.get("@orderButton").click();
     cy.intercept(`${baseURL}/orders`).as("getOrder");
     cy.wait("@getOrder");
     cy.get(modal).should("exist");

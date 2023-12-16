@@ -1,3 +1,4 @@
+import { fakeError, fakeUser } from "../../../utils/test-const";
 import { TUser } from "../../../utils/types";
 import {
   fetchLogin,
@@ -12,13 +13,6 @@ import userProfileReducer, {
   clearErrorLogin,
   clearErrorRegister,
 } from "./user-slice";
-
-const fakeUser: TUser = {
-  email: "user@example.com",
-  name: "Test User",
-};
-
-const fakeError = "Some-error";
 
 describe("Test userProfileReducer", () => {
   it("Обработка начального значения", () => {

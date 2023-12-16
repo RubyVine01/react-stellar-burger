@@ -37,10 +37,10 @@ const OrderDetails: FC = () => {
   const totalPrice = useAppSelector(getTotalPrice);
 
   useEffect(() => {
-    if (number && !background) {
+    if ((number && !background) || (number && !order)) {
       dispatch(fetchOrderDetails(number));
     }
-  }, [number, background, dispatch]);
+  }, [number, background, order, dispatch]);
 
   if (!order) {
     return (

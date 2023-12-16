@@ -1,3 +1,4 @@
+import { fakeFillingIngredient } from "./../../../utils/test-const";
 import constructorReducer, {
   addToCart,
   deleteFromCart,
@@ -5,24 +6,6 @@ import constructorReducer, {
   clearCart,
   initialState,
 } from "./burger-constructor-slice";
-
-import { TFillingItem } from "../../../utils/types";
-
-const fakeIngredient: TFillingItem = {
-  _id: "some-id",
-  name: "Ingredient",
-  type: "sauce",
-  proteins: 10,
-  fat: 10,
-  carbohydrates: 10,
-  calories: 10,
-  price: 100,
-  image: "some-url",
-  image_mobile: "some-url",
-  image_large: "some-url",
-  __v: 0,
-  uid: "some-unique-id",
-};
 
 describe("Test constructorSlice", () => {
   it("Проверка начального состояния", () => {
@@ -35,33 +18,39 @@ describe("Test constructorSlice", () => {
     expect(
       constructorReducer(
         initialState,
-        addToCart({ ...fakeIngredient, type: "bun" })
+        addToCart({ ...fakeFillingIngredient, type: "bun" })
       )
     ).toEqual({
       ...initialState,
-      cartBun: { ...fakeIngredient, type: "bun" },
+      cartBun: { ...fakeFillingIngredient, type: "bun" },
     });
   });
 
   it("Добавление ингредиента с типом !bun в конструктор", () => {
-    expect(constructorReducer(initialState, addToCart(fakeIngredient))).toEqual(
-      {
-        ...initialState,
-        cartList: [...initialState.cartList, fakeIngredient],
-      }
-    );
+    expect(
+      constructorReducer(initialState, addToCart(fakeFillingIngredient))
+    ).toEqual({
+      ...initialState,
+      cartList: [...initialState.cartList, fakeFillingIngredient],
+    });
   });
 
   it("Удаление ингредиента с типом !bun из конструктора", () => {
     const fakeState = {
       ...initialState,
-      cartList: [fakeIngredient, { ...fakeIngredient, uid: "another-uid" }],
+      cartList: [
+        fakeFillingIngredient,
+        { ...fakeFillingIngredient, uid: "another-uid" },
+      ],
     };
     expect(
-      constructorReducer(fakeState, deleteFromCart({ uid: fakeIngredient.uid }))
+      constructorReducer(
+        fakeState,
+        deleteFromCart({ uid: fakeFillingIngredient.uid })
+      )
     ).toEqual({
       ...fakeState,
-      cartList: [{ ...fakeIngredient, uid: "another-uid" }],
+      cartList: [{ ...fakeFillingIngredient, uid: "another-uid" }],
     });
   });
 
@@ -69,12 +58,12 @@ describe("Test constructorSlice", () => {
     const fakeState = {
       ...initialState,
       cartList: [
-        fakeIngredient,
-        { ...fakeIngredient, uid: "another-uid" },
-        { ...fakeIngredient, uid: "yet-another-uid" },
+        fakeFillingIngredient,
+        { ...fakeFillingIngredient, uid: "another-uid" },
+        { ...fakeFillingIngredient, uid: "yet-another-uid" },
       ],
     };
-    const ingredient = { ...fakeIngredient, uid: "yet-another-uid" };
+    const ingredient = { ...fakeFillingIngredient, uid: "yet-another-uid" };
 
     expect(
       constructorReducer(
@@ -91,8 +80,8 @@ describe("Test constructorSlice", () => {
     const fakeState = {
       ...initialState,
       cartList: [
-        { ...fakeIngredient, type: "bun" },
-        { ...fakeIngredient, uid: "another-uid" },
+        { ...fakeFillingIngredient, type: "bun" },
+        { ...fakeFillingIngredient, uid: "another-uid" },
       ],
     };
     expect(constructorReducer(fakeState, clearCart())).toEqual(initialState);

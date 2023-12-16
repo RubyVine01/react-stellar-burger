@@ -1,10 +1,6 @@
+import { fakeResSuccess } from "../../../utils/test-const";
 import { fetchResetCode } from "../../thunks/forgot-password-thunk";
 import forgotPasswordReducer, { initialState } from "./forgot-password-slice";
-
-const fakeResSuccess = {
-  success: true,
-  message: "some-message",
-};
 
 describe("Test forgotPasswordSlice", () => {
   it("Обработка начального значения", () => {

@@ -1,13 +1,9 @@
+import { fakeResSuccess } from "../../../utils/test-const";
 import { fetchСonfirmNewPassword } from "../../thunks/reset-password-thunk";
 import resetPasswordReducer, {
   initialState,
   setResetPasswordAllowed,
 } from "./reset-password-slice";
-
-const fakeResSuccess = {
-  success: true,
-  message: "some-message",
-};
 
 describe("Test resetPasswordSlice", () => {
   it("Обработка начального значения", () => {
