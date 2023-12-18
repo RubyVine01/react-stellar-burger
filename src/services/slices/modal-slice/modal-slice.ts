@@ -5,7 +5,7 @@ type TModalSlice = {
   modalType: string | null;
 };
 
-const initialState: TModalSlice = {
+export const initialState: TModalSlice = {
   isOpen: false,
   modalType: null,
 };

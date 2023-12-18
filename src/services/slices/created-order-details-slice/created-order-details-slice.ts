@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { fetchCreateOrder } from "../thunks/created-order-details-thunk";
-import { TCreatedOrder } from "../../utils/types";
+import { fetchCreateOrder } from "../../thunks/created-order-details-thunk";
+import { TCreatedOrder } from "../../../utils/types";
 
 type TOrderDetailsSlice = {
   orderDetails: TCreatedOrder | null;
@@ -8,7 +8,7 @@ type TOrderDetailsSlice = {
   error: boolean;
 };
 
-const initialState: TOrderDetailsSlice = {
+export const initialState: TOrderDetailsSlice = {
   orderDetails: null,
   isLoading: false,
   error: false,

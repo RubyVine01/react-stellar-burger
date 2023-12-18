@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TIngredient } from "../../utils/types";
+import { TIngredient } from "../../../utils/types";
 
 type TIngredientDetailsSlice = {
   ingredientDetails: TIngredient | null;
 };
 
-const initialState: TIngredientDetailsSlice = {
+export const initialState: TIngredientDetailsSlice = {
   ingredientDetails: null,
 };
 

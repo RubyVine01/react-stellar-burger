@@ -1,7 +1,7 @@
 import { ReactElement, useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
-import { setAuthChecked } from "../../services/slices/user-slice";
+import { setAuthChecked } from "../../services/slices/user-slice/user-slice";
 import { checkUserAuth } from "../../services/thunks/user-thunk";
 import {
   getIsAuthChecked,

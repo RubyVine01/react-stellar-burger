@@ -4,7 +4,7 @@ import OrderList from "../../../components/order-list/order-list";
 import {
   setWebsocketConnect,
   setWebsocketDisconnect,
-} from "../../../services/slices/orders-slice";
+} from "../../../services/slices/orders-slice/orders-slice";
 import { useAppDispatch } from "../../../hooks/hooks";
 import { useLocation } from "react-router-dom";
 import { wssUrl } from "../../../utils/const";

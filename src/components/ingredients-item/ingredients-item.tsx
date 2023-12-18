@@ -9,7 +9,7 @@ import {
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { setIngredientDetails } from "../../services/slices/ingredient-details-slice";
+import { setIngredientDetails } from "../../services/slices/ingredient-details-slice/ingredient-details-slice";
 import { getAllCart } from "../../services/selectors/burger-constructor-selector";
 import { TIngredient } from "../../utils/types";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
@@ -43,7 +43,12 @@ const IngredientsItem: FC<TIngredientsItemProps> = ({ ingredient }) => {
 
   return (
     <>
-      <li className={styles.card} ref={dragRef} onClick={onOpen}>
+      <li
+        className={styles.card}
+        ref={dragRef}
+        onClick={onOpen}
+        data-test="ingredient-item"
+      >
         <DragPreviewImage connect={preview} src={ingredient.image} />
         <img
           className={styles.image}

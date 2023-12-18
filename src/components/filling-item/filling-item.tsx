@@ -12,7 +12,7 @@ import { getCartList } from "../../services/selectors/burger-constructor-selecto
 import {
   deleteFromCart,
   sortCart,
-} from "../../services/slices/burger-constructor-slice";
+} from "../../services/slices/burger-constructor-slice/burger-constructor-slice";
 import { TFillingItem } from "../../utils/types";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 

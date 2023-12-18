@@ -9,7 +9,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import { fetchLogin } from "../../services/thunks/user-thunk";
-import { clearErrorLogin } from "../../services/slices/user-slice";
+import { clearErrorLogin } from "../../services/slices/user-slice/user-slice";
 import {
   getErrorLogin,
   getErrorMessageLogin,

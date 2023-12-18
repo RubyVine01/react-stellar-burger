@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { TOrders } from "../../utils/types";
+import { TOrders } from "../../../utils/types";
 
 type TOrdersSlice = {
   wsOpen: boolean;
@@ -45,6 +45,7 @@ const ordersSlice = createSlice({
     },
     setWebsocketGetOrders: (state, action: PayloadAction<TOrders>) => {
       state.orders = action.payload;
+      console.log(state.orders);
     },
   },
 });
