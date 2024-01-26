@@ -1,7 +1,7 @@
 # Проект: Stellar Burger 
 
 ## Link
-https://stellar-burger.vprokofeva.nomoredomainsmonster.ru/
+https://rubyvine01.github.io/react-stellar-burger/
 
 ### Обзор
 * Интро
